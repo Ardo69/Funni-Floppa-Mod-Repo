@@ -1,0 +1,5 @@
+Value1: tag + properties exam: iconP1.visible
+Value2: value exam: number or false
+
+made by laztrix
+reason : idk but its so easy than i had to code xD
