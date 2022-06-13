@@ -119,7 +119,7 @@ class MasterEditorMenu extends MusicBeatState
 				case 'Character Editor':
 					LoadingState.loadAndSwitchState(new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
 				case 'Gamejolt':
-					FlxG.switchState(new GameJoltLogin());
+					MusicBeatState.switchState(new GameJoltLogin());
 				case 'Week Editor':
 					MusicBeatState.switchState(new WeekEditorState());
 				case 'Menu Character Editor':
