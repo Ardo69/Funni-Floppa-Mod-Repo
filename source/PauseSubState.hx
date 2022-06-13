@@ -1,5 +1,6 @@
 package;
 
+import options.OptionsState;
 import Controls.Control;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -14,13 +15,14 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
+import flash.system.System;
 
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
 	var menuItems:Array<String> = [];
-	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Exit to menu'];
+	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Options', 'Exit to menu', 'Close Game'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 
@@ -230,6 +232,8 @@ class PauseSubState extends MusicBeatSubstate
 					practiceText.visible = PlayState.instance.practiceMode;
 				case "Restart Song":
 					restartSong();
+				case 'Options':
+					FlxG.switchState(new OptionsState());
 				case "Leave Charting Mode":
 					restartSong();
 					PlayState.chartingMode = false;
@@ -269,6 +273,8 @@ class PauseSubState extends MusicBeatSubstate
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
+				case 'Close Game':
+					System.exit(0);
 			}
 		}
 	}
