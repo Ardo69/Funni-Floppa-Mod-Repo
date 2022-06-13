@@ -35,8 +35,8 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
-import GameJolt.GameJoltAPI;
-import GameJolt;
+import GameJoltState.GameJoltAPI;
+import GameJoltState;
 
 using StringTools;
 typedef TitleData =
