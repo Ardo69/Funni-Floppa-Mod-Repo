@@ -707,7 +707,7 @@ class PlayState extends MusicBeatState
 			case 'house':
 				    var consistentPosition:Array<Float> = [-600, -300];
 					var resizeBG:Float = 0.7;
-					defaultCamZoom = 1.2;
+					defaultCamZoom = 1.05;
 					
 					var midGround:BGSprite = new BGSprite('stages/house', consistentPosition[0], consistentPosition[1]);
 					midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
@@ -4558,7 +4558,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null) {
-		var skin:String = 'noteSplashes';
+		var skin:String = 'poopsplashes';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 
 		var hue:Float = ClientPrefs.arrowHSV[data % 4][0] / 360;
