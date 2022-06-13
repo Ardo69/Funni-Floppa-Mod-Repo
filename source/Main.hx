@@ -10,7 +10,7 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
-import GameJoltState; //this is important
+import GameJolt; //this is important
 
 class Main extends Sprite
 {
