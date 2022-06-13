@@ -12,6 +12,13 @@
         "onStartCountdown",
         "onSongStart",
         "onEndSong",
-        "onResume"
+        "onResume",
+        "addAnimationByPrefix",
+        "addLuaSprite",
+        "makeAnimatedLuaSprite",
+        "objectPlayAnimation",
+        "setObjectCamera",
+        "setBlendMode",
+        "setObjectOrder"
     ]
 }
