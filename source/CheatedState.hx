@@ -25,6 +25,7 @@ class CheatedState extends FlxState
     public function jumpscare(bruh:FlxTimer = null)
     {
         sus.loadGraphic(Paths.image("jumpscare", "shared"));
+        FlxG.sound.play(Paths.sound("jumptest", "preload"), 1, false);
         new FlxTimer().start(0.6, closeGame);
     }
     public function closeGame(time:FlxTimer = null)

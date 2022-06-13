@@ -3188,15 +3188,6 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
-	if (FlxG.keys.justPressed.SEVEN)
-		{
-			switch (curSong.toLowerCase())
-			{
-				case 'tutorial':
-					FlxG.switchState(new CheatedState());
-			}
-		}
-
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
 		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead)
