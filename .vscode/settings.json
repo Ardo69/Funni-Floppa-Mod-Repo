@@ -1,0 +1,17 @@
+{
+    "Lua.diagnostics.globals": [
+        "Function_Continue",
+        "onCreate",
+        "onCreatePost",
+        "onDestroy",
+        "onBeatHit",
+        "onStepHit",
+        "onUpdatePost",
+        "onUpdate",
+        "onCountdownTick",
+        "onStartCountdown",
+        "onSongStart",
+        "onEndSong",
+        "onResume"
+    ]
+}
