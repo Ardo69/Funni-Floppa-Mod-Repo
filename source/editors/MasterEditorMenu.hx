@@ -1,5 +1,7 @@
 package editors;
 
+import GameJolt;
+import GameJolt.GameJoltAPI;
 #if desktop
 import Discord.DiscordClient;
 #end
