@@ -337,20 +337,15 @@ class GameJoltInfo extends FlxSubState
      * Random quotes I got from other people. Nothing more, nothing less. Just for funny.
      */
     public static var textArray:Array<String> = [
-        "I should probably push my commits...",
-        "Where is my apple cider?",
-        "Mario be like wahoo!",
-        "[Funny IP address joke]",
-        "I love Camellia mod",
-        "I forgot to remove the IP grabber...",
-        "Play Post Mortem Mixup",
-        "*Spontaniously combusts*",
-        "Holofunk is awesome",
-        "What you know about rollin down in the deep",
-        "This isn't an NFT. Crazy right?",
-        "no not the null reference :(",
-        "Thank you BrightFyre for your help :)",
-        "Thank you Firubii for the notification code :)"
+        "Remember kids, do drugs.",
+        "I shoud eat that can of beans...",
+        "The balls harden...",
+        "One you pop, the fun don't stop.",
+        "Hmmm.....",
+        "How do i declare war on france?",
+        "D'OH!",
+        "go check out generic marble game.",
+
     ];
 }
 
