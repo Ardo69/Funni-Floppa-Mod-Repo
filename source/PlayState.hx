@@ -704,6 +704,16 @@ class PlayState extends MusicBeatState
 					add(bgGirls);
 				}
 
+			case 'house':
+				    var consistentPosition:Array<Float> = [-600, -300];
+					var resizeBG:Float = 0.7;
+					defaultCamZoom = 0.7;
+					
+					var midGround:BGSprite = new BGSprite('stages/house', consistentPosition[0], consistentPosition[1]);
+					midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
+					midGround.updateHitbox();
+					add(midGround);
+
 			case 'schoolEvil': //Week 6 - Thorns
 				GameOverSubstate.deathSoundName = 'fnf_loss_sfx-pixel';
 				GameOverSubstate.loopSoundName = 'gameOver-pixel';
