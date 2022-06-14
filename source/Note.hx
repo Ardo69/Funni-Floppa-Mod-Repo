@@ -157,9 +157,9 @@ class Note extends FlxSprite
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
 					if(isSustainNote) {
-						hitHealth = 0.23;
+						hitHealth = 0.1;
 					} else {
-						hitHealth = 0.23;
+						hitHealth = 0.1;
 					}
 				case 'No Animation':
 					noAnimation = true;
