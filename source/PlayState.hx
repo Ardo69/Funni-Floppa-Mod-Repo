@@ -59,6 +59,7 @@ import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
 import Conductor.Rating;
+import GameJolt.GameJoltAPI;
 #if sys
 import sys.FileSystem;
 #end
@@ -3752,7 +3753,7 @@ class PlayState extends MusicBeatState
 		if(achievementObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
+			var achieve:String = checkForAchievement(['extras_passed', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
 				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
 				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
 
@@ -5040,29 +5041,28 @@ class PlayState extends MusicBeatState
 		for (i in 0...achievesToCheck.length) {
 			var achievementName:String = achievesToCheck[i];
 			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled) {
-				var unlock:Bool = false;
+				var unlock:Bool = true; //change this to false later!
 				switch(achievementName)
 				{
-					case 'week1_nomiss' | 'week2_nomiss' | 'week3_nomiss' | 'week4_nomiss' | 'week5_nomiss' | 'week6_nomiss' | 'week7_nomiss':
-						if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
+					case 'extras_passed':
+						if(isStoryMode && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
 						{
 							var weekName:String = WeekData.getWeekFileName();
 							switch(weekName) //I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
 							{
-								case 'week1':
-									if(achievementName == 'week1_nomiss') unlock = true;
-								case 'week2':
-									if(achievementName == 'week2_nomiss') unlock = true;
-								case 'week3':
-									if(achievementName == 'week3_nomiss') unlock = true;
-								case 'week4':
-									if(achievementName == 'week4_nomiss') unlock = true;
-								case 'week5':
-									if(achievementName == 'week5_nomiss') unlock = true;
-								case 'week6':
-									if(achievementName == 'week6_nomiss') unlock = true;
-								case 'week7':
-									if(achievementName == 'week7_nomiss') unlock = true;
+								case 'extras':
+									if(achievementName == 'extras_passed') unlock = true;
+									GameJoltAPI.getTrophy(164950);
+								/* GameJoltAPI.getTrophy(164479);
+									GameJoltAPI.getTrophy(164477);
+									GameJoltAPI.getTrophy(164517);
+									GameJoltAPI.getTrophy(164520);
+									GameJoltAPI.getTrophy(164516);
+									GameJoltAPI.getTrophy(164756);
+									GameJoltAPI.getTrophy(164518);
+									GameJoltAPI.getTrophy(164479);
+									GameJoltAPI.getTrophy(164519);
+								*/
 							}
 						}
 					case 'ur_bad':
