@@ -204,13 +204,17 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
 	{
 		if (userLogin)
 		{
-			GJApi.addTrophy(trophyID, function(data:Map<String, String>)
+			GJApi.addTrophy(trophyID, function(data)
 			{
 				trace(data);
 				var bool:Bool = false;
 				if (data.exists("message"))
 					bool = true;
-				Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Unlocked a new trophy" + (bool ? "... again?" : "!"),
+				Main.gjToastManager.createToast(GameJoltInfo.imagePath,
+					"Unlocked a new trophy - "
+					+ GameJoltInfo.getTrophyName(Std.int(data.get("id")))
+					+ " - "
+					+ (bool ? "... again?" : "!"),
 					"Thank you for testing this out!\nCheck out Vs. King, it's cool", true);
 			});
 		}
@@ -337,6 +341,17 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
 
 class GameJoltInfo extends FlxSubState
 {
+	static var trophyNames:Map<Int, String> = [164950 => "extras_passed"];
+
+	public static function getTrophyName(id:Int)
+	{
+		var trophyName = trophyNames.get(id);
+
+		if (trophyName == null)
+			trophyName = "Unknown";
+		return trophyName;
+	}
+
 	/**
 	 * Variable to change which state to go to by hitting ESCAPE or the CONTINUE buttons.
 	 */
@@ -655,7 +670,7 @@ class GameJoltLogin extends MusicBeatSubstate
 	}
 }
 
-/* The toast things, pulled from Hololive Funkin
+/*The toast things, pulled from Hololive Funkin
  * Thank you Firubii for the code for this!
  * https://twitter.com/firubiii
  * https://github.com/firubii
