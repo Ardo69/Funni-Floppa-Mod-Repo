@@ -3873,7 +3873,7 @@ class PlayState extends MusicBeatState
 			// Rating FC
 			ratingFC = "";
 			if (sicks > 0)
-				ratingFC = "SFC";
+				ratingFC = "MFC";
 			if (goods > 0)
 				ratingFC = "GFC";
 			if (bads > 0 || shits > 0)
@@ -3925,56 +3925,6 @@ class PlayState extends MusicBeatState
 									if(achievementName == 'extra_passed') unlock = true;
 									GameJoltAPI.getTrophy(164948);
 							}
-						}
-					case 'ur_bad':
-						if (ratingPercent < 0.2 && !practiceMode)
-						{
-							unlock = true;
-						}
-					case 'ur_good':
-						if (ratingPercent >= 1 && !usedPractice)
-						{
-							unlock = true;
-						}
-					case 'roadkill_enthusiast':
-						if (Achievements.henchmenDeath >= 100)
-						{
-							unlock = true;
-						}
-					case 'oversinging':
-						if (boyfriend.holdTimer >= 10 && !usedPractice)
-						{
-							unlock = true;
-						}
-					case 'hype':
-						if (!boyfriendIdled && !usedPractice)
-						{
-							unlock = true;
-						}
-					case 'two_keys':
-						if (!usedPractice)
-						{
-							var howManyPresses:Int = 0;
-							for (j in 0...keysPressed.length)
-							{
-								if (keysPressed[j])
-									howManyPresses++;
-							}
-
-							if (howManyPresses <= 2)
-							{
-								unlock = true;
-							}
-						}
-					case 'toastie':
-						if (/*ClientPrefs.framerate <= 60 &&*/ ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing && !ClientPrefs.imagesPersist)
-						{
-							unlock = true;
-						}
-					case 'debugger':
-						if (Paths.formatToSongPath(SONG.song) == 'test' && !usedPractice)
-						{
-							unlock = true;
 						}
 				}
 
