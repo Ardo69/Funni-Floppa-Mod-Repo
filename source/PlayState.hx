@@ -3899,18 +3899,18 @@ class PlayState extends MusicBeatState
 		{
 			var achievementName:String = achievesToCheck[i];
 			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled) {
-				var unlock:Bool = true; //change this to false later!
+				var unlock:Bool = false;
 				switch(achievementName)
 				{
-					case 'extras_passed':
-						if(isStoryMode && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
+					case 'extras_passed' | 'extra_passed':
+						if(isStoryMode && CoolUtil.difficultyString() == 'HARD' && !usedPractice)
 						{
 							var weekName:String = WeekData.getWeekFileName();
 							switch (weekName) // I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
 							{
 								case 'extras':
 									if(achievementName == 'extras_passed') unlock = true;
-									GameJoltAPI.getTrophy(164950);
+									GameJoltAPI.getTrophy(164519);
 								/* GameJoltAPI.getTrophy(164479);
 									GameJoltAPI.getTrophy(164477);
 									GameJoltAPI.getTrophy(164517);
@@ -3921,6 +3921,9 @@ class PlayState extends MusicBeatState
 									GameJoltAPI.getTrophy(164479);
 									GameJoltAPI.getTrophy(164519);
 								*/
+								case 'extra':
+									if(achievementName == 'extra_passed') unlock = true;
+									GameJoltAPI.getTrophy(164948);
 							}
 						}
 					case 'ur_bad':

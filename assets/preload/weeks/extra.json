@@ -1,21 +1,12 @@
 {
 	"songs": [
 		[
-			"floppasition",
+			"players-fate",
 			"floppa",
 			[
 				146,
 				113,
 				253
-			]
-		],
-		[
-			"flopparchy",
-			"floppa",
-			[
-				0,
-				0,
-				0
 			]
 		]
 	],
@@ -35,7 +26,7 @@
 		113,
 		253
 	],
-	"hideStoryMode": true,
+	"hideStoryMode": false,
 	"weekBefore": "tutorial",
 	"startUnlocked": true
 }
