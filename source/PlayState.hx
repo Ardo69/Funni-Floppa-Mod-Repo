@@ -59,6 +59,7 @@ import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
 import Conductor.Rating;
+import GameJolt.GameJoltAPI;
 #if sys
 import sys.FileSystem;
 #end
@@ -5053,6 +5054,15 @@ class PlayState extends MusicBeatState
 									if(achievementName == 'week1_nomiss') unlock = true;
 								case 'week2':
 									if(achievementName == 'week2_nomiss') unlock = true;
+									GameJoltAPI.getTrophy(164479);
+									GameJoltAPI.getTrophy(164477);
+									GameJoltAPI.getTrophy(164517);
+									GameJoltAPI.getTrophy(164520);
+									GameJoltAPI.getTrophy(164516);
+									GameJoltAPI.getTrophy(164756);
+									GameJoltAPI.getTrophy(164518);
+									GameJoltAPI.getTrophy(164479);
+									GameJoltAPI.getTrophy(164519);
 								case 'week3':
 									if(achievementName == 'week3_nomiss') unlock = true;
 								case 'week4':
