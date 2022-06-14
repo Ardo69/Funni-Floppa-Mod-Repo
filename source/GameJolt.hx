@@ -3,7 +3,7 @@
 	I will be editing the API for this, meaning you have to download a git:
 	haxelib git tentools https://github.com/TentaRJ/tentools.git
 	You need to download and rebuild SysTools, I think you only need it for Windows but just get it *just in case*:
-	haxelib git systools https://github.com/haya3218/systools.git
+	haxelib git systools https://github.com/haya3218/systools
 	haxelib run lime rebuild systools [windows, mac, linux]
 	SETUP (GameJolt):
 	To add your game's keys, you will need to make a file in the source folder named GJKeys.hx (filepath: ../source/GJKeys.hx)
@@ -42,8 +42,6 @@
 	GameJoltAPI.getTrophy(trophyID);
 	Each trophy has an ID attached to it. Use that to give a trophy. It could be used for something like a week clear...
 	Hope this helps! -tenta
-
-	turi ip ip ip
  */
 
 package;
@@ -657,7 +655,7 @@ class GameJoltLogin extends MusicBeatSubstate
 	}
 }
 
-/*The toast things, pulled from Hololive Funkin
+/* The toast things, pulled from Hololive Funkin
  * Thank you Firubii for the code for this!
  * https://twitter.com/firubiii
  * https://github.com/firubii
