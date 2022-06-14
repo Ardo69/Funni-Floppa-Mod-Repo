@@ -2734,7 +2734,9 @@ class PlayState extends MusicBeatState
 		if (achievementObj != null)
 		{
 			return;
-		} else {
+		}
+		else
+		{
 			var achieve:String = checkForAchievement(['extras_passed', 'extra_passed']);
 
 			if (achieve != null)
@@ -3120,7 +3122,7 @@ class PlayState extends MusicBeatState
 							sortedNotesList.push(daNote);
 							// notesDatas.push(daNote.noteData);
 						}
-						canMiss = true;
+						//	canMiss = true;
 					}
 				});
 				sortedNotesList.sort((a, b) -> Std.int(a.strumTime - b.strumTime));
@@ -3896,31 +3898,34 @@ class PlayState extends MusicBeatState
 		for (i in 0...achievesToCheck.length)
 		{
 			var achievementName:String = achievesToCheck[i];
-			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled) {
+			if (!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled)
+			{
 				var unlock:Bool = false;
-				switch(achievementName)
+				switch (achievementName)
 				{
 					case 'extras_passed' | 'extra_passed':
-						if(isStoryMode && CoolUtil.difficultyString() == 'HARD' && !usedPractice)
+						if (isStoryMode && CoolUtil.difficultyString() == 'HARD' && !usedPractice)
 						{
 							var weekName:String = WeekData.getWeekFileName();
 							switch (weekName) // I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
 							{
 								case 'extras':
-									if(achievementName == 'extras_passed') unlock = true;
+									if (achievementName == 'extras_passed')
+										unlock = true;
 									GameJoltAPI.getTrophy(164519);
 								/* GameJoltAPI.getTrophy(164479);
-									GameJoltAPI.getTrophy(164477);
-									GameJoltAPI.getTrophy(164517);
-									GameJoltAPI.getTrophy(164520);
-									GameJoltAPI.getTrophy(164516);
-									GameJoltAPI.getTrophy(164756);
-									GameJoltAPI.getTrophy(164518);
-									GameJoltAPI.getTrophy(164479);
-									GameJoltAPI.getTrophy(164519);
-								*/
+								GameJoltAPI.getTrophy(164477);
+								GameJoltAPI.getTrophy(164517);
+								GameJoltAPI.getTrophy(164520);
+								GameJoltAPI.getTrophy(164516);
+								GameJoltAPI.getTrophy(164756);
+								GameJoltAPI.getTrophy(164518);
+								GameJoltAPI.getTrophy(164479);
+								GameJoltAPI.getTrophy(164519);
+							 */
 								case 'extra':
-									if(achievementName == 'extra_passed') unlock = true;
+									if (achievementName == 'extra_passed')
+										unlock = true;
 									GameJoltAPI.getTrophy(164948);
 							}
 						}
