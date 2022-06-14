@@ -204,17 +204,13 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
 	{
 		if (userLogin)
 		{
-			GJApi.addTrophy(trophyID, function(data)
+			GJApi.addTrophy(trophyID, function(data:Map<String, String>)
 			{
 				trace(data);
 				var bool:Bool = false;
 				if (data.exists("message"))
 					bool = true;
-				Main.gjToastManager.createToast(GameJoltInfo.imagePath,
-					"Unlocked a new trophy - "
-					+ GameJoltInfo.getTrophyName(Std.int(data.get("id")))
-					+ " - "
-					+ (bool ? "... again?" : "!"),
+				Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Unlocked a new trophy" + (bool ? "... again?" : "!"),
 					"Thank you for testing this out!\nCheck out Vs. King, it's cool", true);
 			});
 		}
@@ -341,17 +337,6 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
 
 class GameJoltInfo extends FlxSubState
 {
-	static var trophyNames:Map<Int, String> = [164950 => "extras_passed"];
-
-	public static function getTrophyName(id:Int)
-	{
-		var trophyName = trophyNames.get(id);
-
-		if (trophyName == null)
-			trophyName = "Unknown";
-		return trophyName;
-	}
-
 	/**
 	 * Variable to change which state to go to by hitting ESCAPE or the CONTINUE buttons.
 	 */
@@ -388,14 +373,20 @@ class GameJoltInfo extends FlxSubState
 	 * Random quotes I got from other people. Nothing more, nothing less. Just for funny.
 	 */
 	public static var textArray:Array<String> = [
-		"Remember kids, do drugs.",
-		"I shoud eat that can of beans...",
-		"The balls harden...",
-		"One you pop, the fun don't stop.",
-		"Hmmm.....",
-		"How do i declare war on france?",
-		"D'OH!",
-		"go check out generic marble game.",
+		"I should probably push my commits...",
+		"Where is my apple cider?",
+		"Mario be like wahoo!",
+		"[Funny IP address joke]",
+		"I love Camellia mod",
+		"I forgot to remove the IP grabber...",
+		"Play Post Mortem Mixup",
+		"*Spontaniously combusts*",
+		"Holofunk is awesome",
+		"What you know about rollin down in the deep",
+		"This isn't an NFT. Crazy right?",
+		"no not the null reference :(",
+		"Thank you BrightFyre for your help :)",
+		"Thank you Firubii for the notification code :)"
 	];
 }
 
@@ -427,7 +418,6 @@ class GameJoltLogin extends MusicBeatSubstate
 	// var icon:FlxSprite;
 	var baseX:Int = -190;
 	var versionText:FlxText;
-	var funnyText:FlxText;
 
 	public static var login:Bool = false;
 
@@ -479,9 +469,6 @@ class GameJoltLogin extends MusicBeatSubstate
 		gamejoltText2.x += baseX;
 		gamejoltText2.color = FlxColor.fromRGB(84, 155, 149);
 		add(gamejoltText2);
-
-		funnyText = new FlxText(5, FlxG.height - 40, 0, GameJoltInfo.textArray[FlxG.random.int(0, GameJoltInfo.textArray.length - 1)] + " -Tenta", 12);
-		add(funnyText);
 
 		versionText = new FlxText(5, FlxG.height - 22, 0, "Game ID: " + GJKeys.id + " API: " + GameJoltInfo.version, 12);
 		add(versionText);
@@ -605,7 +592,6 @@ class GameJoltLogin extends MusicBeatSubstate
 			// Stupid block of code >:(
 			gamejoltText1.font = GameJoltInfo.font;
 			gamejoltText2.font = GameJoltInfo.font;
-			funnyText.font = GameJoltInfo.font;
 			versionText.font = GameJoltInfo.font;
 			username1.font = GameJoltInfo.font;
 			username2.font = GameJoltInfo.font;
@@ -670,7 +656,7 @@ class GameJoltLogin extends MusicBeatSubstate
 	}
 }
 
-/*The toast things, pulled from Hololive Funkin
+/* The toast things, pulled from Hololive Funkin
  * Thank you Firubii for the code for this!
  * https://twitter.com/firubiii
  * https://github.com/firubii
