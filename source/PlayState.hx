@@ -455,6 +455,16 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+
+			case 'funnistage':
+				var consistentPosition:Array<Float> = [-600, -300];
+				var resizeBG:Float = 0.7;
+				defaultCamZoom = 1.1 ;
+					
+				var midGround:BGSprite = new BGSprite('badurbad', consistentPosition[0], consistentPosition[1]);
+				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
+				midGround.updateHitbox();
+				add(midGround);
 		}
 
 		if (isPixelStage)

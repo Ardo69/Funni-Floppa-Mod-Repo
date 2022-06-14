@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="laneUnderlays.png">
+	<!-- Created with Adobe Animate version 20.5.0.29329 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Blue0000" x="0" y="0" width="480" height="752"/>
+	<SubTexture name="Blue0001" x="500" y="0" width="480" height="752"/>
+	<SubTexture name="Blue0002" x="1000" y="0" width="480" height="752"/>
+	<SubTexture name="Blue0003" x="2000" y="772" width="480" height="752"/>
+	<SubTexture name="Green0000" x="1500" y="0" width="480" height="752"/>
+	<SubTexture name="Green0001" x="2000" y="0" width="480" height="752"/>
+	<SubTexture name="Green0002" x="2500" y="0" width="480" height="752"/>
+	<SubTexture name="Green0003" x="2000" y="772" width="480" height="752"/>
+	<SubTexture name="Idle0000" x="2000" y="772" width="480" height="752"/>
+	<SubTexture name="Purple0000" x="3000" y="0" width="480" height="752"/>
+	<SubTexture name="Purple0001" x="3500" y="0" width="480" height="752"/>
+	<SubTexture name="Purple0002" x="0" y="772" width="480" height="752"/>
+	<SubTexture name="Purple0003" x="2000" y="772" width="480" height="752"/>
+	<SubTexture name="Red0000" x="500" y="772" width="480" height="752"/>
+	<SubTexture name="Red0001" x="1000" y="772" width="480" height="752"/>
+	<SubTexture name="Red0002" x="1500" y="772" width="480" height="752"/>
+	<SubTexture name="Red0003" x="2000" y="772" width="480" height="752"/>
+</TextureAtlas>

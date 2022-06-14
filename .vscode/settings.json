@@ -19,6 +19,18 @@
         "objectPlayAnimation",
         "setObjectCamera",
         "setBlendMode",
-        "setObjectOrder"
+        "setObjectOrder",
+        "setProperty",
+        "doTweenAlpha",
+        "makeLuaSprite",
+        "precacheImage",
+        "getProperty",
+        "curStep",
+        "defaultCamZoom",
+        "setScrollFactor",
+        "scaleObject",
+        "middlescroll",
+        "getPropertyFromGroup",
+        "goodNoteHit"
     ]
 }
