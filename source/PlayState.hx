@@ -2747,7 +2747,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			var achieve:String = checkForAchievement(['extras_passed', 'extra_passed']);
+			var achieve:String = checkForAchievement(['extras_passed', 'extra_passed',  'frien']);
 
 			if (achieve != null)
 			{
@@ -3913,7 +3913,7 @@ class PlayState extends MusicBeatState
 				var unlock:Bool = false;
 				switch (achievementName)
 				{
-					case 'extras_passed' | 'extra_passed':
+					case 'extras_passed' | 'extra_passed' | 'frien':
 						if (isStoryMode && CoolUtil.difficultyString() == 'HARD' && !usedPractice)
 						{
 							var weekName:String = WeekData.getWeekFileName();
@@ -3937,6 +3937,11 @@ class PlayState extends MusicBeatState
 									if (achievementName == 'extra_passed')
 										unlock = true;
 									GameJoltAPI.getTrophy(164948);
+
+								case 'him':
+									if (achievementName == 'frien')
+										unlock = true;
+									GameJoltAPI.getTrophy(164970);
 							}
 						}
 				}
