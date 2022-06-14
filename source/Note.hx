@@ -145,9 +145,9 @@ class Note extends FlxSprite
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
 					if(isSustainNote) {
-						missHealth = 0.6;
+						missHealth = 1;
 					} else {
-						missHealth = 0.6;
+						missHealth = 1;
 					}
 					hitCausesMiss = true;
 				case 'Parry note':
