@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				79,
+				49
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "bob_idle"
+		},
+		{
+			"offsets": [
+				85,
+				50
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "bob_DOWN"
+		},
+		{
+			"offsets": [
+				81,
+				49
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "bob_LEFT"
+		},
+		{
+			"offsets": [
+				73,
+				49
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "bob_RIGHT"
+		},
+		{
+			"offsets": [
+				80,
+				61
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "bob_UP"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/ardo",
+	"position": [
+		0,
+		240
+	],
+	"healthicon": "floppa",
+	"flip_x": true,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		-300,
+		-80
+	],
+	"sing_duration": 4,
+	"scale": 1
+}
