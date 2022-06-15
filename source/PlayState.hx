@@ -2930,6 +2930,10 @@ class PlayState extends MusicBeatState
 		var coolText:FlxText = new FlxText(0, 0, 0, placement, 32);
 		coolText.screenCenter();
 		coolText.x = FlxG.width * 0.35;
+
+		var bruhText:FlxText = new FlxText(0, 0, 0, placement, 32);
+		bruhText.screenCenter();
+		bruhText.x = FlxG.width * 0.35;
 		//
 
 		var rating:FlxSprite = new FlxSprite();
@@ -2985,7 +2989,7 @@ class PlayState extends MusicBeatState
 		rating.cameras = [camHUD];
 		rating.screenCenter();
 		rating.x = coolText.x - 40;
-		rating.y -= 60;
+		rating.y -= 90;
 		rating.acceleration.y = 550;
 		rating.velocity.y -= FlxG.random.int(140, 175);
 		rating.velocity.x -= FlxG.random.int(0, 10);
@@ -3002,6 +3006,7 @@ class PlayState extends MusicBeatState
 		comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
 		comboSpr.x += ClientPrefs.comboOffset[0];
 		comboSpr.y -= ClientPrefs.comboOffset[1];
+		add(comboSpr);
 
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
 		insert(members.indexOf(strumLineNotes), rating);
@@ -3038,8 +3043,8 @@ class PlayState extends MusicBeatState
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
 			numScore.cameras = [camHUD];
 			numScore.screenCenter();
-			numScore.x = coolText.x + (43 * daLoop) - 90;
-			numScore.y += 80;
+			numScore.x = bruhText.x - 60 + (43 * daLoop) - 90;
+			numScore.y -= bruhText.y - 335;
 
 			numScore.x += ClientPrefs.comboOffset[2];
 			numScore.y -= ClientPrefs.comboOffset[3];
@@ -3079,6 +3084,7 @@ class PlayState extends MusicBeatState
 	 */
 
 		coolText.text = Std.string(seperatedScore);
+		bruhText.text = Std.string(seperatedScore);
 		// add(coolText);
 
 		FlxTween.tween(rating, {alpha: 0}, 0.2, {
@@ -3089,6 +3095,7 @@ class PlayState extends MusicBeatState
 			onComplete: function(tween:FlxTween)
 			{
 				coolText.destroy();
+				bruhText.destroy();
 				comboSpr.destroy();
 
 				rating.destroy();

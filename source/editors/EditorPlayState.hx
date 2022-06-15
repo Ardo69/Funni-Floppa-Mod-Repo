@@ -822,6 +822,10 @@ class EditorPlayState extends MusicBeatState
 		var coolText:FlxText = new FlxText(0, 0, 0, placement, 32);
 		coolText.x = COMBO_X;
 		coolText.y = COMBO_Y;
+
+		var bruhText:FlxText = new FlxText(0, 0, 0, placement, 32);
+		bruhText.x = COMBO_X;
+		bruhText.y = COMBO_Y;
 		//
 
 		var rating:FlxSprite = new FlxSprite();
@@ -881,6 +885,7 @@ class EditorPlayState extends MusicBeatState
 		comboSpr.visible = !ClientPrefs.hideHud;
 		comboSpr.x += ClientPrefs.comboOffset[0];
 		comboSpr.y -= ClientPrefs.comboOffset[1];
+		add(comboSpr);
 
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
 		comboGroup.add(rating);
@@ -916,8 +921,8 @@ class EditorPlayState extends MusicBeatState
 		{
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
 			numScore.screenCenter();
-			numScore.x = coolText.x + (43 * daLoop) - 90;
-			numScore.y += 80;
+			numScore.x -= bruhText.x + (43 * daLoop) - 90;
+			numScore.y -= bruhText.y;
 
 			numScore.x += ClientPrefs.comboOffset[2];
 			numScore.y -= ClientPrefs.comboOffset[3];
@@ -957,6 +962,7 @@ class EditorPlayState extends MusicBeatState
 		 */
 
 		coolText.text = Std.string(seperatedScore);
+		bruhText.text = Std.string(seperatedScore);
 		// comboGroup.add(coolText);
 
 		FlxTween.tween(rating, {alpha: 0}, 0.2, {
@@ -967,6 +973,7 @@ class EditorPlayState extends MusicBeatState
 			onComplete: function(tween:FlxTween)
 			{
 				coolText.destroy();
+				bruhText.destroy();
 				comboSpr.destroy();
 
 				rating.destroy();

@@ -26,6 +26,7 @@ class NoteOffsetState extends MusicBeatState
 	public var camOther:FlxCamera;
 
 	var coolText:FlxText;
+	var bruhText:FlxText;
 	var rating:FlxSprite;
 	var comboNums:FlxSpriteGroup;
 	var dumbTexts:FlxTypedGroup<FlxText>;
@@ -102,6 +103,10 @@ class NoteOffsetState extends MusicBeatState
 		coolText = new FlxText(0, 0, 0, '', 32);
 		coolText.screenCenter();
 		coolText.x = FlxG.width * 0.35;
+
+		bruhText = new FlxText(0, 0, 0, '', 32);
+		bruhText.screenCenter();
+		bruhText.x = FlxG.width * 0.35;
 
 		rating = new FlxSprite().loadGraphic(Paths.image('sick'));
 		rating.cameras = [camHUD];
@@ -412,6 +417,15 @@ class NoteOffsetState extends MusicBeatState
 
 		comboNums.screenCenter();
 		comboNums.x = coolText.x - 90 + ClientPrefs.comboOffset[2];
+		comboNums.y += 80 - ClientPrefs.comboOffset[3];
+		reloadTexts();
+
+		rating.screenCenter();
+		rating.x = bruhText.x - 40 + ClientPrefs.comboOffset[0];
+		rating.y -= 60 + ClientPrefs.comboOffset[1];
+
+		comboNums.screenCenter();
+		comboNums.x = bruhText.x - 90 + ClientPrefs.comboOffset[2];
 		comboNums.y += 80 - ClientPrefs.comboOffset[3];
 		reloadTexts();
 	}

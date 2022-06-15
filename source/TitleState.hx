@@ -432,6 +432,12 @@ class TitleState extends MusicBeatState
 			coolText.y += (textGroup.length * 60) + 200 + offset;
 			credGroup.add(coolText);
 			textGroup.add(coolText);
+
+			var bruhText:Alphabet = new Alphabet(0, 0, text, true, false);
+			bruhText.screenCenter(X);
+			bruhText.y += (textGroup.length * 60) + 200 + offset;
+			credGroup.add(bruhText);
+			textGroup.add(bruhText);
 		}
 	}
 
