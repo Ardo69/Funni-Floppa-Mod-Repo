@@ -88,6 +88,7 @@ class TitleState extends MusicBeatState
 	{
 		GameJoltAPI.connect();
         GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
+		
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 

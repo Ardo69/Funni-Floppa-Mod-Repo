@@ -47,6 +47,7 @@
 package;
 
 // GameJolt things
+import options.BaseOptionsMenu;
 import flixel.addons.ui.FlxUIState;
 import haxe.iterators.StringIterator;
 import tentools.api.FlxGameJolt as GJApi;
@@ -340,13 +341,14 @@ class GameJoltInfo extends FlxSubState
 	/**
 	 * Variable to change which state to go to by hitting ESCAPE or the CONTINUE buttons.
 	 */
-	public static var changeState:FlxUIState = new MainMenuState();
+	public static var changeState:FlxUIState = new options.OptionsState();
 
 	/**
 	 * Inline variable to change the font for the GameJolt API elements.
 	 * @param font You can change the font by doing **Paths.font([Name of your font file])** or by listing your file path.
 	 * If *null*, will default to the normal font.
 	 */
+	// public static var font:String = Paths.font("flop.ttf"); /* Example: Paths.font("vcr.ttf"); */
 	public static var font:String = null; /* Example: Paths.font("vcr.ttf"); */
 
 	/**
