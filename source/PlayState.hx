@@ -456,6 +456,16 @@ class PlayState extends MusicBeatState
 				midGround.updateHitbox();
 				add(midGround);
 
+			case 'ardocovers':
+				var consistentPosition:Array<Float> = [-600, -300];
+				var resizeBG:Float = 0.7;
+				defaultCamZoom = 1.1;
+
+				var midGround:BGSprite = new BGSprite('stages/house', consistentPosition[0], consistentPosition[1]);
+				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
+				midGround.updateHitbox();
+				add(midGround);
+
 			case 'funnistage':
 				var consistentPosition:Array<Float> = [-600, -300];
 				var resizeBG:Float = 0.7;
@@ -1887,6 +1897,13 @@ class PlayState extends MusicBeatState
 		if (ratingName != '?')
 			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
 
+		switch (SONG.song.toLowerCase()) {
+			case 'unknown-crapping':
+			scoreTxt.text = 'Combo Breaks: ' + songMisses + ' // Acc: ' + ratingName;
+		if (ratingName != '?')
+			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
+		}
+
 		if (botplayTxt.visible)
 		{
 			botplaySine += 180 * elapsed;
@@ -3006,7 +3023,7 @@ class PlayState extends MusicBeatState
 		comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
 		comboSpr.x += ClientPrefs.comboOffset[0];
 		comboSpr.y -= ClientPrefs.comboOffset[1];
-		// add(comboSpr);  //ADD BACK LATER!
+		add(comboSpr);  //ADD BACK LATER!
 
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
 		insert(members.indexOf(strumLineNotes), rating);
@@ -3139,7 +3156,7 @@ class PlayState extends MusicBeatState
 							sortedNotesList.push(daNote);
 							// notesDatas.push(daNote.noteData);
 						}
-						//	canMiss = true;
+							canMiss = true;
 					}
 				});
 				sortedNotesList.sort((a, b) -> Std.int(a.strumTime - b.strumTime));
