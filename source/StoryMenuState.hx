@@ -17,6 +17,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
 import flixel.graphics.FlxGraphic;
+import flixel.addons.display.FlxBackdrop;
 import WeekData;
 
 using StringTools;
@@ -165,11 +166,48 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.antialiasing = ClientPrefs.globalAntialiasing;
 		//difficultySelectors.add(rightArrow);
 
-		add(bgYellow);
+		var barTop = new FlxSprite();
+		barTop.makeGraphic(FlxG.width + 512, 455, 0xFFA2946F);
+		barTop.y = -400;
+		barTop.antialiasing = ClientPrefs.globalAntialiasing;
+		// barTop.angle = 15;
+		add(barTop);
+
+		var barBottom = new FlxSprite();
+		barBottom.makeGraphic(FlxG.width + 512, 455, 0xFFA2946F);
+		barBottom.y = 650;
+		barBottom.antialiasing = ClientPrefs.globalAntialiasing;
+		// barBottom.x = -100;
+		// barBottom.angle = 15;
+		add(barBottom);
+
+		var flopBottom = new FlxBackdrop(Paths.image("flop"), 0, 0, true, false, 5, 0);
+		// flopBottom.y = barBottom.y + flopBottom.height + 5;
+		flopBottom.screenCenter();
+		flopBottom.scale.set(0.6, 0.6);
+		flopBottom.updateHitbox();
+		// flopBottom.angle = 15;
+		flopBottom.velocity.set(100, 0);
+		flopBottom.antialiasing = ClientPrefs.globalAntialiasing;
+		flopBottom.y = 600;
+		add(flopBottom);
+
+		var flopTop = new FlxBackdrop(Paths.image("flop"), 0, 0, true, false, 5, 0);
+		// flopTop.y = barBottom.y + flopTop.height + 5;
+		flopTop.screenCenter();
+		flopTop.scale.set(0.6, 0.6);
+		flopTop.updateHitbox();
+		// flopTop.angle = 15;
+		flopTop.velocity.set(-100, 0);
+		flopTop.y = 55;
+		flopTop.antialiasing = ClientPrefs.globalAntialiasing;
+		add(flopTop);
+
+		//add(bgYellow);
 		add(bgSprite);
 		add(grpWeekCharacters);
 
-		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 425).loadGraphic(Paths.image('Menu_Tracks'));
+		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 235).loadGraphic(Paths.image('Menu_Tracks'));
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
 		add(tracksSprite);
 

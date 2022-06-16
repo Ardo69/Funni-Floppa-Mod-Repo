@@ -385,7 +385,7 @@ class TitleState extends MusicBeatState
 					}
 					else
 					{
-						MusicBeatState.switchState(new MainMenuState());
+						MusicBeatState.switchState(new OpeningState());
 					}
 					closedState = true;
 				});
