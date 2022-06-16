@@ -31,6 +31,9 @@
         "scaleObject",
         "middlescroll",
         "getPropertyFromGroup",
-        "goodNoteHit"
+        "goodNoteHit",
+        "mustHitSection",
+        "triggerEvent",
+        "gfSection"
     ]
 }
