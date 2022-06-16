@@ -14,6 +14,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
+import flixel.addons.display.FlxBackdrop;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
@@ -143,12 +144,12 @@ class FreeplayState extends MusicBeatState
 		}
 		WeekData.setDirectoryFromWeek();
 
-		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
+		scoreText = new FlxText(FlxG.width * 0.7, 100, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 
-		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0xFF000000);
+		scoreBG = new FlxSprite(scoreText.x - 10, 10).makeGraphic(1, 66, 0xFF000000);
 		scoreBG.alpha = 0.6;
-		add(scoreBG);
+		//add(scoreBG);
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
 		diffText.font = scoreText.font;
@@ -191,6 +192,44 @@ class FreeplayState extends MusicBeatState
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		textBG.alpha = 0.6;
 		add(textBG);
+
+		var barTop = new FlxSprite();
+		barTop.makeGraphic(FlxG.width + 512, 455, 0xFFA2946F);
+		barTop.y = -400;
+		barTop.antialiasing = ClientPrefs.globalAntialiasing;
+		// barTop.angle = 15;
+		add(barTop);
+
+		var barBottom = new FlxSprite();
+		barBottom.makeGraphic(FlxG.width + 512, 455, 0xFFA2946F);
+		barBottom.y = 650;
+		barBottom.antialiasing = ClientPrefs.globalAntialiasing;
+		// barBottom.x = -100;
+		// barBottom.angle = 15;
+		add(barBottom);
+
+		var flopBottom = new FlxBackdrop(Paths.image("flop"), 0, 0, true, false, 5, 0);
+		// flopBottom.y = barBottom.y + flopBottom.height + 5;
+		flopBottom.screenCenter();
+		flopBottom.scale.set(0.6, 0.6);
+		flopBottom.updateHitbox();
+		// flopBottom.angle = 15;
+		flopBottom.velocity.set(100, 0);
+		flopBottom.antialiasing = ClientPrefs.globalAntialiasing;
+		flopBottom.y = 600;
+		add(flopBottom);
+
+		var flopTop = new FlxBackdrop(Paths.image("flop"), 0, 0, true, false, 5, 0);
+		// flopTop.y = barBottom.y + flopTop.height + 5;
+		flopTop.screenCenter();
+		flopTop.scale.set(0.6, 0.6);
+		flopTop.updateHitbox();
+		// flopTop.angle = 15;
+		flopTop.velocity.set(-100, 0);
+		flopTop.y = 55;
+		flopTop.antialiasing = ClientPrefs.globalAntialiasing;
+		add(flopTop);
+
 
 		#if PRELOAD_ALL
 		var leText:String = "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
