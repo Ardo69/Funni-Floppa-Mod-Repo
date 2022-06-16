@@ -1893,12 +1893,12 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Points: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ' + ratingName;
+		scoreTxt.text = 'Points: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: ' + ratingName;
 		if (ratingName != '?')
 			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
 
 		switch (SONG.song.toLowerCase()) {
-			case 'unknown-crapping':
+			case 'unknown-crapping | monochrome':
 			scoreTxt.text = 'Combo Breaks: ' + songMisses + ' // Acc: ' + ratingName;
 		if (ratingName != '?')
 			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
