@@ -1898,7 +1898,7 @@ class PlayState extends MusicBeatState
 			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
 
 		switch (SONG.song.toLowerCase()) {
-			case 'unknown-crapping | monochrome':
+			case 'unknown-crapping' | 'monochrome':
 			scoreTxt.text = 'Combo Breaks: ' + songMisses + ' // Acc: ' + ratingName;
 		if (ratingName != '?')
 			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
