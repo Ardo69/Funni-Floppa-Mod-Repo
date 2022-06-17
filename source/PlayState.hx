@@ -2089,7 +2089,6 @@ class PlayState extends MusicBeatState
 				if (!cpuControlled)
 				{
 					keyShit();
-					System.exit(0);
 				}
 				else if (boyfriend.holdTimer > Conductor.stepCrochet * 0.0011 * boyfriend.singDuration
 					&& boyfriend.animation.curAnim.name.startsWith('sing')
