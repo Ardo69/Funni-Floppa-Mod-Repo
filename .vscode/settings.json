@@ -38,6 +38,12 @@
         "isStoryMode",
         "seenCutscene",
         "startVideo",
-        "Function_Stop"
+        "Function_Stop",
+        "getPropertyFromClass",
+        "runTimer",
+        "setPropertyFromGroup",
+        "removeLuaSprite",
+        "onTimerCompleted",
+        "spawnCustomSplash"
     ]
 }
