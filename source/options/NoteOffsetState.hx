@@ -29,6 +29,7 @@ class NoteOffsetState extends MusicBeatState
 	var bruhText:FlxText;
 	var rating:FlxSprite;
 	var comboNums:FlxSpriteGroup;
+	var comboSpr:FlxSprite;
 	var dumbTexts:FlxTypedGroup<FlxText>;
 
 	var barPercent:Float = 0;
@@ -119,6 +120,13 @@ class NoteOffsetState extends MusicBeatState
 		comboNums = new FlxSpriteGroup();
 		comboNums.cameras = [camHUD];
 		add(comboNums);
+
+		comboSpr = new FlxSprite().loadGraphic(Paths.image('combo'));
+		comboSpr.cameras = [camHUD];
+		comboSpr.setGraphicSize(Std.int(rating.width * 0.7));
+		comboSpr.updateHitbox();
+		comboSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		add(comboSpr);
 
 		var seperatedScore:Array<Int> = [];
 		for (i in 0...3)
@@ -415,6 +423,10 @@ class NoteOffsetState extends MusicBeatState
 		rating.x = coolText.x - 40 + ClientPrefs.comboOffset[0];
 		rating.y -= 60 + ClientPrefs.comboOffset[1];
 
+		comboSpr.x = coolText.x;
+		comboSpr.x += ClientPrefs.comboOffset[0];
+		comboSpr.y -= ClientPrefs.comboOffset[1];
+
 		comboNums.screenCenter();
 		comboNums.x = coolText.x - 90 + ClientPrefs.comboOffset[2];
 		comboNums.y += 80 - ClientPrefs.comboOffset[3];
@@ -473,6 +485,7 @@ class NoteOffsetState extends MusicBeatState
 		rating.visible = onComboMenu;
 		comboNums.visible = onComboMenu;
 		dumbTexts.visible = onComboMenu;
+		comboSpr.visible = onComboMenu;
 		
 		timeBarBG.visible = !onComboMenu;
 		timeBar.visible = !onComboMenu;

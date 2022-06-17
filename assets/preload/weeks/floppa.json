@@ -1,0 +1,27 @@
+{
+	"storyName": "the floppa",
+	"difficulties": "",
+	"hideFreeplay": false,
+	"weekBackground": "floppa",
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"floppa",
+		"gf",
+		"bf"
+	],
+	"songs": [
+		[
+			"floppin",
+			"floppa",
+			[
+				145,
+				100,
+				0
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"hiddenUntilUnlocked": false,
+	"weekName": "Floppa"
+}

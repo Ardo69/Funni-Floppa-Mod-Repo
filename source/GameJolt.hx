@@ -415,7 +415,7 @@ class GameJoltLogin extends MusicBeatSubstate
 	// var trophy:FlxBar;
 	// var trophyText:FlxText;
 	// var missTrophyText:FlxText;
-	public static var charBop:FlxSprite;
+	// public static var charBop:FlxSprite;
 
 	// var icon:FlxSprite;
 	var baseX:Int = -190;
@@ -452,14 +452,14 @@ class GameJoltLogin extends MusicBeatSubstate
 		bg.alpha = 0.25;
 		add(bg);
 
-		charBop = new FlxSprite(FlxG.width - 400, 250);
-		charBop.frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
-		charBop.animation.addByPrefix('idle', 'BF idle dance', 24, false);
-		charBop.animation.addByPrefix('loggedin', 'BF HEY', 24, false);
-		charBop.setGraphicSize(Std.int(charBop.width * 1.4));
-		charBop.antialiasing = true;
-		charBop.flipX = false;
-		add(charBop);
+		// charBop = new FlxSprite(FlxG.width - 400, 250);
+		// charBop.frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
+		// charBop.animation.addByPrefix('idle', 'BF idle dance', 24, false);
+		// charBop.animation.addByPrefix('loggedin', 'BF HEY', 24, false);
+		// charBop.setGraphicSize(Std.int(charBop.width * 1.4));
+		// charBop.antialiasing = true;
+		// charBop.flipX = false;
+		// add(charBop);
 
 		gamejoltText1 = new FlxText(0, 25, 0, "GameJolt + FNF Integration", 16);
 		gamejoltText1.screenCenter(X);
@@ -646,7 +646,7 @@ class GameJoltLogin extends MusicBeatSubstate
 	override function beatHit()
 	{
 		super.beatHit();
-		charBop.animation.play((GameJoltAPI.getStatus() ? "loggedin" : "idle"));
+		// charBop.animation.play((GameJoltAPI.getStatus() ? "loggedin" : "idle"));
 	}
 
 	function openLink(url:String)

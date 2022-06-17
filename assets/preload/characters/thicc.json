@@ -3,13 +3,57 @@
 		{
 			"offsets": [
 				0,
-				-3
+				-9
 			],
 			"loop": false,
-			"anim": "cheer",
+			"anim": "danceLeft",
 			"fps": 24,
-			"name": "GF Cheer",
-			"indices": []
+			"name": "GF Dancing Beat",
+			"indices": [
+				30,
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14
+			]
+		},
+		{
+			"offsets": [
+				0,
+				-9
+			],
+			"loop": false,
+			"anim": "danceRight",
+			"fps": 24,
+			"name": "GF Dancing Beat",
+			"indices": [
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29
+			]
 		},
 		{
 			"offsets": [
@@ -82,61 +126,6 @@
 		},
 		{
 			"offsets": [
-				0,
-				-9
-			],
-			"loop": false,
-			"anim": "danceLeft",
-			"fps": 24,
-			"name": "GF Dancing Beat",
-			"indices": [
-				30,
-				0,
-				1,
-				2,
-				3,
-				4,
-				5,
-				6,
-				7,
-				8,
-				9,
-				10,
-				11,
-				12,
-				13,
-				14
-			]
-		},
-		{
-			"offsets": [
-				0,
-				-9
-			],
-			"loop": false,
-			"anim": "danceRight",
-			"fps": 24,
-			"name": "GF Dancing Beat",
-			"indices": [
-				15,
-				16,
-				17,
-				18,
-				19,
-				20,
-				21,
-				22,
-				23,
-				24,
-				25,
-				26,
-				27,
-				28,
-				29
-			]
-		},
-		{
-			"offsets": [
 				45,
 				-8
 			],
@@ -184,6 +173,17 @@
 			"anim": "scared",
 			"fps": 24,
 			"name": "GF FEAR",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				-3
+			],
+			"loop": false,
+			"anim": "cheer",
+			"fps": 24,
+			"name": "GF Cheer",
 			"indices": []
 		}
 	],
