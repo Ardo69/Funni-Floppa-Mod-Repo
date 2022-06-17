@@ -550,9 +550,12 @@ class PlayState extends MusicBeatState
 		var gfVersion:String = SONG.gfVersion;
 		if (gfVersion == null || gfVersion.length < 1)
 		{
-			gfVersion = "gf";
+			gfVersion = "thicc";
 			SONG.gfVersion = gfVersion; // Fix for the Chart Editor
 		}
+
+		if (gfVersion == "thicc" && ClientPrefs.unThickenGF)
+			gfVersion = "gf";
 
 		if (!stageData.hide_girlfriend)
 		{

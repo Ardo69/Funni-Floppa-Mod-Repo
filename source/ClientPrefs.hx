@@ -86,6 +86,8 @@ class ClientPrefs {
 	];
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
 
+	public static var unThickenGF:Bool = false;
+
 	public static function loadDefaultKeys() {
 		defaultKeys = keyBinds.copy();
 		//trace(defaultKeys);
@@ -126,6 +128,7 @@ class ClientPrefs {
 		FlxG.save.data.controllerMode = controllerMode;
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.pauseMusic = pauseMusic;
+		FlxG.save.data.unThickenGF = unThickenGF;
 	
 		FlxG.save.flush();
 
@@ -252,6 +255,10 @@ class ClientPrefs {
 		if (FlxG.save.data.mute != null)
 		{
 			FlxG.sound.muted = FlxG.save.data.mute;
+		}
+
+		if (FlxG.save.data.unThickenGF != null) {
+			unThickenGF = FlxG.save.data.unThickenGF;
 		}
 
 		var save:FlxSave = new FlxSave();
