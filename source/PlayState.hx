@@ -3947,26 +3947,15 @@ class PlayState extends MusicBeatState
 								case 'extras':
 									if (achievementName == 'extras_passed')
 										unlock = true;
-									GameJoltAPI.getTrophy(164519);
-								/* GameJoltAPI.getTrophy(164479);
-								GameJoltAPI.getTrophy(164477);
-								GameJoltAPI.getTrophy(164517);
-								GameJoltAPI.getTrophy(164520);
-								GameJoltAPI.getTrophy(164516);
-								GameJoltAPI.getTrophy(164756);
-								GameJoltAPI.getTrophy(164518);
-								GameJoltAPI.getTrophy(164479);
-								GameJoltAPI.getTrophy(164519);
-							 */
+									GameJoltAPI.getTrophy(165207);
 								case 'extra':
 									if (achievementName == 'extra_passed')
 										unlock = true;
-									GameJoltAPI.getTrophy(164948);
-
+									GameJoltAPI.getTrophy(164208);
 								case 'him':
 									if (achievementName == 'frien')
 										unlock = true;
-									GameJoltAPI.getTrophy(164970);
+									GameJoltAPI.getTrophy(165209);
 							}
 						}
 				}
