@@ -100,7 +100,11 @@ class CreditsState extends MusicBeatState
 			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",						'https://twitter.com/ninja_muffin99',	'F73838'],
 			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",							'https://twitter.com/PhantomArcade3K',	'FFBB1B'],
 			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",							'https://twitter.com/evilsk8r',			'53E52C'],
-			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",							'https://twitter.com/kawaisprite',		'6475F3']
+			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",							'https://twitter.com/kawaisprite',		'6475F3'],
+			[''],
+			["Raise A Funky Floppa Team"],
+			['ardo',    'ardo',     "The owner and the side coder",     'https://www.youtube.com/channel/UCQgUiJpyjkqWmk8KtZ4nvHw',  'FF0000'],
+			['plank',   'plank',    "The co-owner, the main coder, musician and the artist of the mod(I didn't force him lol)",    'BA8C63']
 		];
 		
 		for(i in pisspoop){

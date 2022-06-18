@@ -43,7 +43,7 @@ class OptionsState extends MusicBeatState
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 
 	private static var curSelected:Int = 0;
-	public static var menuBG:FlxSprite;
+	public static var menuDesat:FlxSprite;
 
 	function openSelectedSubstate(label:String)
 	{
