@@ -1,27 +1,41 @@
 {
-	"storyName": "the floppa",
-	"difficulties": "",
-	"hideFreeplay": false,
-	"weekBackground": "floppa",
-	"weekBefore": "tutorial",
-	"startUnlocked": true,
-	"weekCharacters": [
-		"floppa",
-		"gf",
-		"bf"
-	],
 	"songs": [
 		[
 			"floppin",
 			"floppa",
 			[
-				145,
-				100,
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"flop-dont-stop",
+			"floppa",
+			[
+				0,
+				0,
 				0
 			]
 		]
 	],
-	"hideStoryMode": false,
 	"hiddenUntilUnlocked": false,
-	"weekName": "Floppa"
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"difficulties": "Hard",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "FLOPPIN",
+	"weekName": "floppa",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "",
+	"startUnlocked": true
 }

@@ -191,7 +191,7 @@ class StoryMenuState extends MusicBeatState
 		flopLeft.updateHitbox();
 		// flopTop.angle = 15;
 		flopLeft.velocity.set(0, 100);
-		flopLeft.x = 227 + 50;
+		flopLeft.x = 345 + 0;
 		flopLeft.antialiasing = ClientPrefs.globalAntialiasing;
 		add(flopLeft);
 
@@ -210,7 +210,7 @@ class StoryMenuState extends MusicBeatState
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
 		add(tracksSprite);
 
-		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
+		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 50, 0, "", 32);
 		txtTracklist.alignment = CENTER;
 		txtTracklist.font = rankText.font;
 		txtTracklist.color = 0xFFe55777;
