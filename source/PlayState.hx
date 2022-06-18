@@ -581,7 +581,7 @@ class PlayState extends MusicBeatState
 			camPos.x += gf.getGraphicMidpoint().x + gf.cameraPosition[0];
 			camPos.y += gf.getGraphicMidpoint().y + gf.cameraPosition[1];
 		}
-		if (dad.curCharacter.startsWith('gf'))
+		if (dad.curCharacter.startsWith('gf') || dad.curCharacter.startsWith('thicc'))
 		{
 			dad.setPosition(GF_X, GF_Y);
 			if (gf != null)
@@ -2625,9 +2625,8 @@ class PlayState extends MusicBeatState
 
 		if (gf != null && SONG.notes[id].gfSection)
 		{
-			camFollow.set(gf.getMidpoint().x, gf.getMidpoint().y);
-			camFollow.x += gf.cameraPosition[0] + girlfriendCameraOffset[0];
-			camFollow.y += gf.cameraPosition[1] + girlfriendCameraOffset[1];
+			// camFollow.set(gf.getMidpoint().x + gf.camCeraPosition[0] + girlfriendCameraOffset[0], gf.getMidpoint().y + gf.cameraPosition[1] + girlfriendCameraOffset[1]);
+			camFollow.set(gf.x + gf.cameraPosition[0] + girlfriendCameraOffset[0], gf.y + gf.cameraPosition[1] + girlfriendCameraOffset[1]);
 			tweenCamIn();
 			callOnLuas('onMoveCamera', ['gf']);
 			return;
@@ -2662,7 +2661,8 @@ class PlayState extends MusicBeatState
 			camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
 			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
 
-			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1)
+			// if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1)
+			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && gf.curCharacter == "thicc" && cameraTwn == null && FlxG.camera.zoom != 1)
 			{
 				cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1}, (Conductor.stepCrochet * 4 / 1000), {
 					ease: FlxEase.elasticInOut,
@@ -2677,9 +2677,10 @@ class PlayState extends MusicBeatState
 
 	function tweenCamIn()
 	{
-		if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1.3)
+		// if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1.3)
+		if (Paths.formatToSongPath(SONG.song) == 'tutorial' && gf.curCharacter == "thicc" && cameraTwn == null && FlxG.camera.zoom != 1.3)
 		{
-			cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1.3}, (Conductor.stepCrochet * 4 / 1000), {
+			cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1.5}, (Conductor.stepCrochet * 4 / 1000), {
 				ease: FlxEase.elasticInOut,
 				onComplete: function(twn:FlxTween)
 				{

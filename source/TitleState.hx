@@ -342,9 +342,6 @@ class TitleState extends MusicBeatState
 		#end
 
 		if (bg != null) {
-			bg.scale.x = 0.7 + Math.sin(maxElapsed / 50) * 0.3;
-			bg.scale.y = 0.7 + Math.sin(maxElapsed / 70) * 0.4;
-			bg.updateHitbox();
 			bg.screenCenter();
 		}
 

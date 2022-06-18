@@ -1,5 +1,7 @@
 package options;
 
+import flixel.addons.plugin.FlxMouseControl;
+import flixel.addons.display.FlxExtendedSprite;
 import haxe.crypto.Base64;
 import flixel.util.FlxStringUtil;
 import flixel.tweens.FlxEase;
@@ -29,9 +31,9 @@ class NoteOffsetState extends MusicBeatState
 
 	var coolText:FlxText;
 	var bruhText:FlxText;
-	var rating:FlxSprite;
+	var rating:FlxExtendedSprite;
 	var comboNums:FlxSpriteGroup;
-	var comboSpr:FlxSprite;
+	var comboSpr:FlxExtendedSprite;
 	var dumbTexts:FlxTypedGroup<FlxText>;
 
 	var barPercent:Float = 0;
@@ -113,10 +115,15 @@ class NoteOffsetState extends MusicBeatState
 		bruhText.screenCenter();
 		bruhText.x = FlxG.width * 0.35;
 
-		rating = new FlxSprite().loadGraphic(Paths.image('sick'));
+		// FlxG.plugins.add(new FlxMouseControl());
+
+		rating = new FlxExtendedSprite();
+		rating.loadGraphic(Paths.image('sick'));
 		rating.cameras = [camHUD];
 		rating.setGraphicSize(Std.int(rating.width * 0.7));
 		rating.updateHitbox();
+		// FlxMouseControl.addToStack(rating);
+		// rating.enableMouseDrag();
 		rating.antialiasing = ClientPrefs.globalAntialiasing;
 
 		add(rating);
@@ -125,11 +132,14 @@ class NoteOffsetState extends MusicBeatState
 		comboNums.cameras = [camHUD];
 		add(comboNums);
 
-		comboSpr = new FlxSprite().loadGraphic(Paths.image('combo'));
+		comboSpr = new FlxExtendedSprite();
+		comboSpr.loadGraphic(Paths.image('combo'));
 		comboSpr.cameras = [camHUD];
 		comboSpr.setGraphicSize(Std.int(rating.width * 0.7));
 		comboSpr.updateHitbox();
 		comboSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		// FlxMouseControl.addToStack(rating);
+		// comboSpr.enableMouseDrag();
 		add(comboSpr);
 
 		var seperatedScore:Array<Int> = [];
@@ -155,7 +165,7 @@ class NoteOffsetState extends MusicBeatState
 		add(dumbTexts);
 		createTexts();
 
-		repositionCombo();
+		// repositionCombo();
 
 		// Note delay stuff
 
@@ -219,7 +229,7 @@ class NoteOffsetState extends MusicBeatState
 
 	var holdTime:Float = 0;
 	var onComboMenu:Bool = true;
-	var holdingObjectType:Null<Bool> = null;
+	var holdingObjectType:Null<Int> = null;
 
 	var startMousePos:FlxPoint = new FlxPoint();
 	var startComboOffset:FlxPoint = new FlxPoint();
@@ -271,7 +281,7 @@ class NoteOffsetState extends MusicBeatState
 						}
 					}
 				}
-				repositionCombo();
+				// repositionCombo();
 			}
 
 			// probably there's a better way to do this but, oh well.
@@ -284,7 +294,7 @@ class NoteOffsetState extends MusicBeatState
 					&& startMousePos.y - comboNums.y >= 0
 					&& startMousePos.y - comboNums.y <= comboNums.height)
 				{
-					holdingObjectType = true;
+					holdingObjectType = 0;
 					startComboOffset.x = ClientPrefs.comboOffset[2];
 					startComboOffset.y = ClientPrefs.comboOffset[3];
 					// trace('yo bro');
@@ -294,9 +304,19 @@ class NoteOffsetState extends MusicBeatState
 					&& startMousePos.y - rating.y >= 0
 					&& startMousePos.y - rating.y <= rating.height)
 				{
-					holdingObjectType = false;
+					holdingObjectType = 2;
 					startComboOffset.x = ClientPrefs.comboOffset[0];
 					startComboOffset.y = ClientPrefs.comboOffset[1];
+					// trace('heya');
+				}
+				else if (startMousePos.x - comboSpr.x >= 0
+					&& startMousePos.x - comboSpr.x <= comboSpr.width
+					&& startMousePos.y - comboSpr.y >= 0
+					&& startMousePos.y - comboSpr.y <= comboSpr.height)
+				{
+					holdingObjectType = 4;
+					startComboOffset.x = ClientPrefs.comboOffset[4];
+					startComboOffset.y = ClientPrefs.comboOffset[5];
 					// trace('heya');
 				}
 			}
@@ -311,7 +331,7 @@ class NoteOffsetState extends MusicBeatState
 				if (FlxG.mouse.justMoved)
 				{
 					var mousePos:FlxPoint = FlxG.mouse.getScreenPosition(camHUD);
-					var addNum:Int = holdingObjectType ? 2 : 0;
+					var addNum:Int = holdingObjectType;
 					ClientPrefs.comboOffset[addNum + 0] = Math.round((mousePos.x - startMousePos.x) + startComboOffset.x);
 					ClientPrefs.comboOffset[addNum + 1] = -Math.round((mousePos.y - startMousePos.y) - startComboOffset.y);
 					repositionCombo();
@@ -410,6 +430,7 @@ class NoteOffsetState extends MusicBeatState
 
 		if (curBeat % 4 == 2)
 		{
+			gf.playAnim("duck");
 			FlxG.camera.zoom = 1.15;
 
 			if (zoomTween != null)
@@ -445,9 +466,8 @@ class NoteOffsetState extends MusicBeatState
 		rating.x = coolText.x - 40 + ClientPrefs.comboOffset[0];
 		rating.y -= 60 + ClientPrefs.comboOffset[1];
 
-		comboSpr.x = coolText.x;
-		comboSpr.x += ClientPrefs.comboOffset[0];
-		comboSpr.y -= ClientPrefs.comboOffset[1];
+		// comboSpr.x += ClientPrefs.comboOffset[0];
+		// comboSpr.y -= ClientPrefs.comboOffset[1];
 
 		comboNums.screenCenter();
 		comboNums.x = coolText.x - 90 + ClientPrefs.comboOffset[2];
@@ -455,18 +475,22 @@ class NoteOffsetState extends MusicBeatState
 		reloadTexts();
 
 		rating.screenCenter();
-		rating.x = bruhText.x - 40 + ClientPrefs.comboOffset[0];
+		rating.x = coolText.x - 40 + ClientPrefs.comboOffset[0];
 		rating.y -= 60 + ClientPrefs.comboOffset[1];
 
-		comboNums.screenCenter();
-		comboNums.x = bruhText.x - 90 + ClientPrefs.comboOffset[2];
-		comboNums.y += 80 - ClientPrefs.comboOffset[3];
+		// rating.screenCenter();
+		// rating.x = bruhText.x - 40 + ClientPrefs.comboOffset[0];
+		// rating.y -= 60 + ClientPrefs.comboOffset[1];
+
+		// comboNums.screenCenter();
+		// comboNums.x = bruhText.x - 90 + ClientPrefs.comboOffset[2];
+		// comboNums.y += 80 - ClientPrefs.comboOffset[3];
 		reloadTexts();
 	}
 
 	function createTexts()
 	{
-		for (i in 0...4)
+		for (i in 0...6)
 		{
 			var text:FlxText = new FlxText(10, 48 + (i * 30), 0, '', 24);
 			text.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -496,6 +520,11 @@ class NoteOffsetState extends MusicBeatState
 					dumbTexts.members[i].text = 'Numbers Offset:';
 				case 3:
 					dumbTexts.members[i].text = '[' + ClientPrefs.comboOffset[2] + ', ' + ClientPrefs.comboOffset[3] + ']';
+				case 4:
+					dumbTexts.members[i].text = 'Combo Offset:';
+				case 5:
+					dumbTexts.members[i].text = '[' + ClientPrefs.comboOffset[4] + ', ' + ClientPrefs.comboOffset[5] + ']';
+
 			}
 		}
 	}
