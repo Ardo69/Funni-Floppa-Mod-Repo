@@ -80,7 +80,7 @@ class TitleState extends MusicBeatState
 
 	var mustUpdate:Bool = false;
 
-	var titleJSON:TitleData;
+	//var titleJSON:TitleData;
 
 	public static var updateVersion:String = '';
 
@@ -208,8 +208,8 @@ class TitleState extends MusicBeatState
 			}
 		}
 
-		Conductor.changeBPM(titleJSON.bpm);
-		persistentUpdate = true;
+		//Conductor.changeBPM(titleJSON.bpm);
+		//persistentUpdate = true;
 
 		bg = new FlxSprite();
 
