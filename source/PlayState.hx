@@ -2270,15 +2270,27 @@ class PlayState extends MusicBeatState
 
 	function openChartEditor()
 	{
-		persistentUpdate = false;
-		paused = true;
-		cancelMusicFadeTween();
-		MusicBeatState.switchState(new ChartingState());
-		chartingMode = true;
+		switch (curSong.toLowerCase())
+		{
+			case 'players-fate' | 'unknown-crapping' | 'monochrome' | 'knockout' | 'floppasition' | 'flopparchy':
+				persistentUpdate = false;
+		        paused = true;
+		        cancelMusicFadeTween();
+		        MusicBeatState.switchState(new CheatedState());
+		        chartingMode = true;
 
-		#if desktop
-		DiscordClient.changePresence("Chart Editor", null, null, true);
-		#end
+			default:
+				persistentUpdate = false;
+		        paused = true;
+		        cancelMusicFadeTween();
+		        MusicBeatState.switchState(new ChartingState());
+		        chartingMode = true;
+
+			#if desktop
+		    DiscordClient.changePresence("Chart Editor", null, null, true);
+		    #end
+
+		}
 	}
 
 	public var isDead:Bool = false; // Don't mess with this on Lua!!!
