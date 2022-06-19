@@ -817,11 +817,18 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
+
 		var daSong:String = Paths.formatToSongPath(curSong);
 		if (isStoryMode && !seenCutscene)
 		{
-			startCountdown();
+			switch (daSong)
+			{
+				case 'floppin':
+					startVideo('first');
 
+				default:
+					startCountdown();
+			}
 			seenCutscene = true;
 		}
 		else
@@ -829,9 +836,10 @@ class PlayState extends MusicBeatState
 			startCountdown();
 		}
 		RecalculateRating();
+
 		// PRECACHING MISS SOUNDS BECAUSE I THINK THEY CAN LAG PEOPLE AND FUCK THEM UP IDK HOW HAXE WORKS
 		if (ClientPrefs.hitsoundVolume > 0)
-			precacheList.set('hitsound', 'sound');
+		precacheList.set('hitsound', 'sound');
 		precacheList.set('missnote1', 'sound');
 		precacheList.set('missnote2', 'sound');
 		precacheList.set('missnote3', 'sound');
