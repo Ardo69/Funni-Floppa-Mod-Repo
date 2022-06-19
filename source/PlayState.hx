@@ -566,11 +566,19 @@ class PlayState extends MusicBeatState
 			startCharacterLua(gf.curCharacter);
 		}
 
-		dad = new Character(0, 0, SONG.player2);
+		var dadChar = SONG.player2;
+
+		if (dadChar == "thicc" && ClientPrefs.unThickenGF) dadChar = "gf";
+
+		var bfChar = SONG.player1;
+
+		if (bfChar == "thicc" && ClientPrefs.unThickenGF) bfChar = "gf";
+
+		dad = new Character(0, 0, dadChar);
 		startCharacterPos(dad, true);
 		dadGroup.add(dad);
 		startCharacterLua(dad.curCharacter);
-		boyfriend = new Boyfriend(0, 0, SONG.player1);
+		boyfriend = new Boyfriend(0, 0, bfChar);
 		startCharacterPos(boyfriend);
 		boyfriendGroup.add(boyfriend);
 		startCharacterLua(boyfriend.curCharacter);
@@ -587,6 +595,14 @@ class PlayState extends MusicBeatState
 			if (gf != null)
 				gf.visible = false;
 		}
+
+		if (boyfriend.curCharacter.startsWith('gf') || boyfriend.curCharacter.startsWith('thicc'))
+		{
+			boyfriend.setPosition(GF_X, GF_Y);
+			if (gf != null)
+				gf.visible = false;
+		}
+
 		var file:String = Paths.json(songName + '/dialogue'); // Checks for json/Psych Engine dialogue
 
 		if (OpenFlAssets.exists(file))
@@ -2276,7 +2292,7 @@ class PlayState extends MusicBeatState
 				persistentUpdate = false;
 		        paused = true;
 		        cancelMusicFadeTween();
-		        MusicBeatState.switchState(new CheatedState());
+		        MusicBeatState.switchState(new JumpscareState());
 		        chartingMode = true;
 
 			default:
