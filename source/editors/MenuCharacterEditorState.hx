@@ -56,13 +56,20 @@ class MenuCharacterEditorState extends MusicBeatState
 		grpWeekCharacters = new FlxTypedGroup<MenuCharacter>();
 		for (char in 0...3)
 		{
-			var weekCharacterThing:MenuCharacter = new MenuCharacter((FlxG.width * 0.25) * (1 + char) - 150, defaultCharacters[char]);
-			weekCharacterThing.y += 70;
+			var weekCharacterThing:MenuCharacter = new MenuCharacter(0, defaultCharacters[char]);
+			weekCharacterThing.y = (FlxG.height * 0.25) * (1 + char) - 150;
+			weekCharacterThing.x = 10;
 			weekCharacterThing.alpha = 0.2;
 			grpWeekCharacters.add(weekCharacterThing);
 		}
 
-		add(new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51));
+		var barLeft = new FlxSprite();
+		barLeft.makeGraphic(455, FlxG.height, 0xFFA2946F);
+		barLeft.x = 0;
+		barLeft.antialiasing = ClientPrefs.globalAntialiasing;
+		add(barLeft);
+
+		// add(new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51));
 		add(grpWeekCharacters);
 
 		txtOffsets = new FlxText(20, 10, 0, "[0, 0]", 32);

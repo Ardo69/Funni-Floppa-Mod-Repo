@@ -2,9 +2,10 @@
 	"idle_anim": "BF idle dance white",
 	"confirm_anim": "BF HEY!!",
 	"position": [
-		11,
-		10
+		-1,
+		31
 	],
-	"scale": 0.8,
+	"scale": 0.5,
+	"flipX": true,
 	"image": "Menu_BF"
 }
