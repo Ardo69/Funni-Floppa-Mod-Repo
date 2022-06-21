@@ -145,7 +145,7 @@ class StoryMenuState extends MusicBeatState
 			var weekCharacterThing:MenuCharacter = new MenuCharacter(0, charName);
 			// weekCharacterThing.scale.set(0.5,0.5);
 			weekCharacterThing.updateHitbox();
-			weekCharacterThing.x = 455 / 2 - weekCharacterThing.width / 2;
+			weekCharacterThing.x = 455 / 2 - weekCharacterThing.width / 2 * (1 + char) - 180;
 			weekCharacterThing.y = (FlxG.height * 0.25) * (1 + char) - 150;
 			grpWeekCharacters.add(weekCharacterThing);
 		}
@@ -187,13 +187,13 @@ class StoryMenuState extends MusicBeatState
 		flopRight.updateHitbox();
 		// flopTop.angle = 15;
 		flopRight.velocity.set(0, 100);
-		flopRight.x = FlxG.width - 227 - 12;
+		flopRight.x = FlxG.width - 186 - 12;
 		flopRight.antialiasing = ClientPrefs.globalAntialiasing;
 		add(flopRight);
 
 		var barRight = new FlxSprite();
 		barRight.makeGraphic(227, FlxG.height, 0xFFA2946F);
-		barRight.x = FlxG.width - 227;
+		barRight.x = FlxG.width - 300;
 		barRight.antialiasing = ClientPrefs.globalAntialiasing;
 		// barRight.angle = 90;
 		add(barRight);
@@ -205,12 +205,12 @@ class StoryMenuState extends MusicBeatState
 		flopLeft.updateHitbox();
 		// flopTop.angle = 15;
 		flopLeft.velocity.set(0, -100);
-		flopLeft.x = 455 + 12;
+		flopLeft.x = 300 + 12;
 		flopLeft.antialiasing = ClientPrefs.globalAntialiasing;
 		add(flopLeft);
 
 		var barLeft = new FlxSprite();
-		barLeft.makeGraphic(455, FlxG.height, 0xFFA2946F);
+		barLeft.makeGraphic(300, FlxG.height, 0xFFA2946F);
 		barLeft.x = 0;
 		barLeft.antialiasing = ClientPrefs.globalAntialiasing;
 		// barRight.angle = 90;
@@ -220,11 +220,11 @@ class StoryMenuState extends MusicBeatState
 		//add(bgSprite);
 		add(grpWeekCharacters);
 
-		var tracksSprite:FlxSprite = new FlxSprite(1070, 56 + 235).loadGraphic(Paths.image('Menu_Tracks'));
+		var tracksSprite:FlxSprite = new FlxSprite(967, 56 + 235).loadGraphic(Paths.image('Menu_Tracks'));
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
 		add(tracksSprite);
 
-		txtTracklist = new FlxText(1070, tracksSprite.y + 50, 0, "", 32);
+		txtTracklist = new FlxText(967, tracksSprite.y + 50, 0, "", 32);
 		txtTracklist.setFormat(Paths.font("flop.ttf"), 32, FlxColor.BLACK, RIGHT, OUTLINE, FlxColor.WHITE);
 		txtTracklist.borderStyle = FlxTextBorderStyle.OUTLINE;
 		txtTracklist.borderSize = 2;
