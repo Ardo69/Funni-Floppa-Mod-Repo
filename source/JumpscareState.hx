@@ -4,9 +4,9 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.*;
 import flixel.util.FlxTimer;
 import flash.system.System;
+import flixel.FlxG;
 
 class JumpscareState extends FlxState
 {
@@ -18,6 +18,10 @@ class JumpscareState extends FlxState
     }
     override public function create()
     {
+
+        FlxG.sound.playMusic(Paths.music("jumpscareMusic"));
+		Paths.sound("boom");
+
         super.create();
 
         var bg = new FlxSprite(0,0);
@@ -28,7 +32,8 @@ class JumpscareState extends FlxState
         character.scale.set(0, 0);
         add(character);
 
-        FlxTween.tween(character, {"scale.x": 2.5, "scale.y": 2.5}, 10, {ease: FlxEase.circInOut});
+        FlxTween.tween(character, {"scale.x": 2.5, "scale.y": 2.5}, 10, {ease: FlxEase.linear});
+        
 
         new FlxTimer().start(10, jumpscare);
     }
@@ -43,6 +48,9 @@ class JumpscareState extends FlxState
         var bgFront = new FlxSprite(0,0);
         bgFront.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         add(bgFront);
+
+        FlxG.sound.music.stop(); // stop, stop, moldy he's dead
+        FlxG.sound.play(Paths.sound("boom"));
         new FlxTimer().start(0.6, closeGame);
     }
     public function closeGame(time:FlxTimer = null)

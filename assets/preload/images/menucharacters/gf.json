@@ -2,9 +2,10 @@
 	"confirm_anim": "M GF Idle",
 	"idle_anim": "GF Dancing Beat WHITE",
 	"position": [
-		90,
-		147
+		140,
+		137
 	],
-	"scale": 0.55,
-	"image": "Menu_GF"
+	"scale": 0.4,
+	"image": "Menu_GF",
+	"flipX": false
 }
