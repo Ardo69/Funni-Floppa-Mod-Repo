@@ -125,12 +125,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				reloadBoyfriend();
 			}
-
-			if (optionsArray[i].showGirlfriend && girlfriend == null)
-			{
-				reloadGirlfriend();
-			}
-
+			
 			updateTextFrom(optionsArray[i]);
 		}
 
@@ -401,26 +396,6 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		boyfriend.dance();
 		insert(1, boyfriend);
 		boyfriend.visible = wasVisible;
-	}
-
-	public function reloadGirlfriend()
-	{
-		var wasVisible:Bool = false;
-		if (girlfriend != null)
-		{
-			wasVisible = girlfriend.visible;
-			girlfriend.kill();
-			remove(girlfriend);
-			girlfriend.destroy();
-		}
-
-		girlfriend = new Character(820, 100, (ClientPrefs.unThickenGF ? 'gf' : 'thicc'), false);
-		// girlfriend = new Character(0, 0, (ClientPrefs.unThickenGF ? 'gf' : 'thicc'), true);
-		girlfriend.setGraphicSize(Std.int(girlfriend.width * 0.75));
-		girlfriend.updateHitbox();
-		girlfriend.dance();
-		insert(2, girlfriend);
-		girlfriend.visible = wasVisible;
 	}
 
 	function reloadCheckboxes()

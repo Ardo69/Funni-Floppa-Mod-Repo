@@ -549,16 +549,6 @@ class PlayState extends MusicBeatState
 			luaArray.push(new FunkinLua(luaFile));
 		#end
 
-		var gfVersion:String = SONG.gfVersion;
-		if (gfVersion == null || gfVersion.length < 1)
-		{
-			gfVersion = "thicc";
-			SONG.gfVersion = gfVersion; // Fix for the Chart Editor
-		}
-
-		if (gfVersion == "thicc" && ClientPrefs.unThickenGF)
-			gfVersion = "gf";
-
 		if (!stageData.hide_girlfriend)
 		{
 			gf = new Character(0, 0, gfVersion);
@@ -570,11 +560,7 @@ class PlayState extends MusicBeatState
 
 		var dadChar = SONG.player2;
 
-		if (dadChar == "thicc" && ClientPrefs.unThickenGF) dadChar = "gf";
-
 		var bfChar = SONG.player1;
-
-		if (bfChar == "thicc" && ClientPrefs.unThickenGF) bfChar = "gf";
 
 		dad = new Character(0, 0, dadChar);
 		startCharacterPos(dad, true);
@@ -591,14 +577,14 @@ class PlayState extends MusicBeatState
 			camPos.x += gf.getGraphicMidpoint().x + gf.cameraPosition[0];
 			camPos.y += gf.getGraphicMidpoint().y + gf.cameraPosition[1];
 		}
-		if (dad.curCharacter.startsWith('gf') || dad.curCharacter.startsWith('thicc'))
+		if (dad.curCharacter.startsWith('gf'))
 		{
 			dad.setPosition(GF_X, GF_Y);
 			if (gf != null)
 				gf.visible = false;
 		}
 
-		if (boyfriend.curCharacter.startsWith('gf') || boyfriend.curCharacter.startsWith('thicc'))
+		if (boyfriend.curCharacter.startsWith('gf'))
 		{
 			boyfriend.setPosition(GF_X, GF_Y);
 			if (gf != null)
@@ -1029,6 +1015,8 @@ class PlayState extends MusicBeatState
 		}
 		#end
 	}
+
+	var gfVersion:String = SONG.gfVersion;
 
 	public function getLuaObject(tag:String, text:Bool = true):FlxSprite
 	{
@@ -2714,7 +2702,7 @@ class PlayState extends MusicBeatState
 			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
 
 			// if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1)
-			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && gf.curCharacter == "thicc" && cameraTwn == null && FlxG.camera.zoom != 1)
+			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && gf.curCharacter == "gf" && cameraTwn == null && FlxG.camera.zoom != 1)
 			{
 				cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1}, (Conductor.stepCrochet * 4 / 1000), {
 					ease: FlxEase.elasticInOut,
@@ -2730,7 +2718,7 @@ class PlayState extends MusicBeatState
 	function tweenCamIn()
 	{
 		// if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1.3)
-		if (Paths.formatToSongPath(SONG.song) == 'tutorial' && gf.curCharacter == "thicc" && cameraTwn == null && FlxG.camera.zoom != 1.3)
+		if (Paths.formatToSongPath(SONG.song) == 'tutorial' && gf.curCharacter == "gf" && cameraTwn == null && FlxG.camera.zoom != 1.3)
 		{
 			cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1.5}, (Conductor.stepCrochet * 4 / 1000), {
 				ease: FlxEase.elasticInOut,

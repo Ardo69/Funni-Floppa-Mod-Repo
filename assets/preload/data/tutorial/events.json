@@ -3,7 +3,7 @@
 		"speed": 1,
 		"stage": "house",
 		"player1": "bf",
-		"player2": "thicc",
+		"player2": "gf",
 		"events": [
 			[
 				18000,
@@ -29,7 +29,7 @@
 		"notes": [],
 		"splashSkin": "noteSplashes",
 		"validScore": false,
-		"gfVersion": "thicc",
+		"gfVersion": "gf",
 		"bpm": 100,
 		"arrowSkin": "",
 		"needsVoices": true,

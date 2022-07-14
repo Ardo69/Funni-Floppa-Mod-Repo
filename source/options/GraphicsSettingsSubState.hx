@@ -31,8 +31,6 @@ using StringTools;
 
 class GraphicsSettingsSubState extends BaseOptionsMenu
 {
-	var thiccOption:Option;
-
 	public function new()
 	{
 		title = 'Graphics';
@@ -54,16 +52,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.showBoyfriend = true;
 		option.onChange = onChangeAntiAliasing; //Changing onChange is only needed if you want to make a special interaction after it changes the value
 		addOption(option);
-
-		thiccOption = new Option('Unthicken Girlfriend',
-			(ClientPrefs.unThickenGF ? 'Do it.' : 'Don\'t do it.'),
-			'unThickenGF',
-			'bool',
-			false);
-		thiccOption.showGirlfriend = true;
-		thiccOption.onChange = onChangeThicken; //Changing onChange is only needed if you want to make a special interaction after it changes the value
-		addOption(thiccOption);
-
 
 		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
@@ -103,13 +91,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			}
 		}
 	}
-
-	function onChangeThicken()
-		{
-			reloadGirlfriend();
-			descText.text = (ClientPrefs.unThickenGF ? 'You monster.' : 'Thank god.');
-			thiccOption.description = (ClientPrefs.unThickenGF ? 'Do it.' : 'Don\'t do it.');
-		}
 
 	function onChangeFramerate()
 	{

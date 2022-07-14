@@ -140,8 +140,6 @@ class StoryMenuState extends MusicBeatState
 		for (char in 0...3)
 		{
 			var charName = charArray[char];
-			if (charName == "thicc" && ClientPrefs.unThickenGF)
-				charName = "gf";
 			var weekCharacterThing:MenuCharacter = new MenuCharacter(0, charName);
 			// weekCharacterThing.scale.set(0.5,0.5);
 			weekCharacterThing.updateHitbox();

@@ -341,7 +341,7 @@ class Character extends FlxSprite
 		else
 			offset.set(0, 0);
 
-		if (curCharacter.startsWith('gf') || curCharacter.startsWith('thicc'))
+		if (curCharacter.startsWith('gf'))
 		{
 			if (AnimName == 'singLEFT')
 			{

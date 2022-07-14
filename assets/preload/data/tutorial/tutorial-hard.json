@@ -1,7 +1,7 @@
 {
 	"song": {
 		"player1": "bf",
-		"gfVersion": "thicc",
+		"gfVersion": "gf",
 		"notes": [
 			{
 				"sectionNotes": [],
@@ -912,7 +912,7 @@
 			}
 		],
 		"events": [],
-		"player2": "thicc",
+		"player2": "gf",
 		"splashSkin": "noteSplashes",
 		"song": "Tutorial",
 		"needsVoices": true,
