@@ -344,8 +344,7 @@ class TitleState extends MusicBeatState
 		if (bg != null) {
 			bg.screenCenter();
 		}
-
-
+		
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
 		if (gamepad != null)
