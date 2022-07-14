@@ -145,9 +145,9 @@ class Note extends FlxSprite
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
 					if(isSustainNote) {
-						missHealth = 1;
+						missHealth = 0.6;
 					} else {
-						missHealth = 1;
+						missHealth = 0.6;
 					}
 					hitCausesMiss = true;
 				case 'Parry note':
@@ -157,9 +157,9 @@ class Note extends FlxSprite
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
 					if(isSustainNote) {
-						hitHealth = 0.1;
+						hitHealth = 0.23;
 					} else {
-						hitHealth = 0.1;
+						hitHealth = 0.23;
 					}
 				case 'No Animation':
 					noAnimation = true;
