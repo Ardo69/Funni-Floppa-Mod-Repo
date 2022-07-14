@@ -1,32 +1,31 @@
 {
-	"songs": [
-		[
-			"players-fate",
-			"floppa",
-			[
-				146,
-				113,
-				253
-			]
-		]
-	],
-	"hiddenUntilUnlocked": false,
-	"hideFreeplay": false,
-	"weekBackground": "",
-	"difficulties": "Hard",
-	"weekCharacters": [
-		"flop",
-		"",
-		"bf"
-	],
-	"storyName": "player's fate",
-	"weekName": "extras",
-	"freeplayColor": [
-		146,
-		113,
-		253
-	],
-	"hideStoryMode": false,
-	"weekBefore": "tutorial",
-	"startUnlocked": true
+    "songs": [
+        [
+            "players-fate",
+            "floppa", [
+                146,
+                113,
+                253
+            ]
+        ]
+    ],
+    "hiddenUntilUnlocked": false,
+    "hideFreeplay": false,
+    "weekBackground": "",
+    "difficulties": "Hard",
+    "weekCharacters": [
+        "flop",
+        "",
+        "bf"
+    ],
+    "storyName": "player's fate",
+    "weekName": "extra",
+    "freeplayColor": [
+        146,
+        113,
+        253
+    ],
+    "hideStoryMode": false,
+    "weekBefore": "tutorial",
+    "startUnlocked": true
 }

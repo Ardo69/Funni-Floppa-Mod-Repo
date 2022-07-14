@@ -2810,7 +2810,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			var achieve:String = checkForAchievement(['extras_passed', 'extra_passed',  'frien']);
+			var achieve:String = checkForAchievement(['floppin', 'extras_passed', 'extra_passed',  'frien']);
 
 			if (achieve != null)
 			{
@@ -3982,12 +3982,16 @@ class PlayState extends MusicBeatState
 				var unlock:Bool = false;
 				switch (achievementName)
 				{
-					case 'extras_passed' | 'extra_passed' | 'frien':
+					case 'floppin', 'extras_passed' | 'extra_passed' | 'frien':
 						if (isStoryMode && CoolUtil.difficultyString() == 'HARD' && !usedPractice)
 						{
 							var weekName:String = WeekData.getWeekFileName();
 							switch (weekName) // I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
 							{
+								case 'floppa':
+									if (achievementName == 'floppin')
+										unlock = true;
+									GameJoltAPI.getTrophy(167434);
 								case 'extras':
 									if (achievementName == 'extras_passed')
 										unlock = true;
