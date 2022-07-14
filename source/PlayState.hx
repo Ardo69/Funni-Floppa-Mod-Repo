@@ -172,6 +172,8 @@ class PlayState extends MusicBeatState
 
 	var songPercent:Float = 0;
 
+	var judgementCounter:FlxText;
+
 	private var timeBarBG:AttachedSprite;
 
 	public var timeBar:FlxBar;
@@ -622,7 +624,7 @@ class PlayState extends MusicBeatState
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
@@ -773,13 +775,13 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		reloadHealthBarColors();
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("sanspro-regular.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "MINOR SKILL ISSUE", 32);
-		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
@@ -788,6 +790,18 @@ class PlayState extends MusicBeatState
 		{
 			botplayTxt.y = timeBarBG.y - 78;
 		}
+
+		judgementCounter = new FlxText(20, 0, 0, "", 20);
+		judgementCounter.setFormat(Paths.font("sanspro-regular.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		judgementCounter.borderSize = 2;
+		judgementCounter.borderQuality = 2;
+		judgementCounter.scrollFactor.set();
+		judgementCounter.screenCenter(Y);
+		judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses + "\ndofjdkfjdkjfdj";
+		add(judgementCounter);
+
+		judgementCounter.cameras = [camHUD];//Judgement Counter
+
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
@@ -1925,6 +1939,8 @@ class PlayState extends MusicBeatState
 		scoreTxt.text = 'Points: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: ' + ratingName;
 		if (ratingName != '?')
 			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
+
+		judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses + "\ndofjdkfjdkjfdj";
 
 		switch (SONG.song.toLowerCase()) {
 			case 'unknown-crapping' | 'monochrome':

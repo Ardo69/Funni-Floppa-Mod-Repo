@@ -30,7 +30,7 @@ class OpeningState extends MusicBeatState
 			\n
 			Press Enter to Continue",
 			32);
-		warnText.setFormat("VCR OSD Mono", 32, FlxColor.BROWN, CENTER);
+		warnText.setFormat("Source Sans Pro Regular", 32, FlxColor.BROWN, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
 	}

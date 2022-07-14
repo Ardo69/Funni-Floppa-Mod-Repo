@@ -63,15 +63,15 @@ class StoryMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
-		scoreText.setFormat("VCR OSD Mono", 32);
+		scoreText.setFormat("Source Sans Pro Bold", 32);
 
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
-		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
+		txtWeekTitle.setFormat("Source Sans Pro Regular", 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.alpha = 0.7;
 
 		var rankText:FlxText = new FlxText(0, 10);
 		rankText.text = 'RANK: GREAT';
-		rankText.setFormat(Paths.font("vcr.ttf"), 32);
+		rankText.setFormat(Paths.font("sanspro-regular.ttf"), 32);
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
 
@@ -225,7 +225,7 @@ class StoryMenuState extends MusicBeatState
 		add(tracksSprite);
 
 		txtTracklist = new FlxText(967, tracksSprite.y + 50, 0, "", 32);
-		txtTracklist.setFormat(Paths.font("flop.ttf"), 32, FlxColor.BLACK, RIGHT, OUTLINE, FlxColor.WHITE);
+		txtTracklist.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.BLACK, RIGHT, OUTLINE, FlxColor.WHITE);
 		txtTracklist.borderStyle = FlxTextBorderStyle.OUTLINE;
 		txtTracklist.borderSize = 2;
 		add(txtTracklist);
