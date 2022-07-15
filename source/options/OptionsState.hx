@@ -38,9 +38,7 @@ class OptionsState extends MusicBeatState
 		'Graphics',
 		'Visuals and UI',
 		'Gameplay',
-		#if GAMEJOLT_API
 		'Gamejolt'
-		#end
 	];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 

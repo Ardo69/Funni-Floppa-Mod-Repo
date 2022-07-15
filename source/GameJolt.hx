@@ -44,7 +44,6 @@
 	Hope this helps! -tenta
  */
 
-#if GAMEJOLT_API
 package;
 
 // GameJolt things
@@ -890,4 +889,3 @@ class Toast extends Sprite
 		y = -height;
 	}
 }
-#end
