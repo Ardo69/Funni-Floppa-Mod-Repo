@@ -140,6 +140,8 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
+
+	<haxedef name="GAMEJOLT_API" /> <!-- comment this out if gamejolt api is no more -->
 	
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>

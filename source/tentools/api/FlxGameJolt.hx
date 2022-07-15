@@ -38,6 +38,8 @@ import flash.Lib;
  		 * var gameid = 1; // Replace "1" with your game ID, visible if you go to http://gamejolt.com/dashboard/ -> Click on your game under "Manage Games" -> Click on "Achievements" in the menu.
  		 * FlxGameJolt.init(gameid, keystring); // Use this if your game is embedded as Flash on GameJolt's site, or run via Quick Play. If
  */
+
+#if GAMEJOLT_API
 class FlxGameJolt
 {
 	/**
@@ -999,3 +1001,4 @@ class FlxGameJolt
 		return false;
 	}
 }
+#end

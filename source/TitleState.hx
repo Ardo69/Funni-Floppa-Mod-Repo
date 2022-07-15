@@ -36,9 +36,11 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
+#if GAMEJOLT_API
 import GameJolt.GameJoltLogin;
 import GameJolt.GameJoltAPI; //important
 import GameJolt; //important 
+#end
 
 using StringTools;
 
@@ -86,8 +88,10 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+		#if GAMEJOLT_API
 		GameJoltAPI.connect();
         GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
+		#end
 		
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
