@@ -219,7 +219,7 @@ class PauseSubState extends MusicBeatSubstate
 				case "Restart Song":
 					restartSong();
 				case 'Options':
-					FlxG.switchState(new OptionsState());
+					MusicBeatState.switchState(new OptionsState());
 				case "Leave Charting Mode":
 					restartSong();
 					PlayState.chartingMode = false;

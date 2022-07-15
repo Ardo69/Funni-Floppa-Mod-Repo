@@ -56,6 +56,6 @@ class JumpscareState extends FlxState
     public function closeGame(time:FlxTimer = null)
     {
         FlxG.openURL("https://www.youtube.com/watch?v=u6tvzG_88sU", "_blank");
-        System.exit(0);
+        MusicBeatState.switchState(new MainMenuState());
     }
 }
