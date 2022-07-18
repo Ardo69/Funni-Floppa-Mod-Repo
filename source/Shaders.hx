@@ -16,22 +16,21 @@ typedef ShaderEffect = {
 class BuildingEffect {
   public var shader:BuildingShader = new BuildingShader();
   public function new(){
-    shader.data.alphaShit.value = [0];
+    shader.alphaShit.value = [0];
   }
   public function addAlpha(alpha:Float){
-    trace(shader.data.alphaShit.value[0]);
-    shader.data.alphaShit.value[0]+=alpha;
+    trace(shader.alphaShit.value[0]);
+    shader.alphaShit.value[0]+=alpha;
   }
   public function setAlpha(alpha:Float){
-    shader.data.alphaShit.value[0]=alpha;
+    shader.alphaShit.value[0]=alpha;
   }
 }
 
 class BuildingShader extends FlxShader
 {
-  public function new(){
-       super("
-    ////pragma header
+  @:glFragmentSource('
+    #pragma header
     uniform float alphaShit;
     void main()
     {
@@ -42,16 +41,17 @@ class BuildingShader extends FlxShader
 
       gl_FragColor = color;
     }
-  ");
-    }
-  //
+  ')
+  public function new()
+  {
+    super();
+  }
 }
 
 class ChromaticAberrationShader extends FlxShader
 {
-	public function new(){
-		super('
-		////pragma header
+	@:glFragmentSource('
+		#pragma header
 
 		uniform float rOffset;
 		uniform float gOffset;
@@ -69,7 +69,10 @@ class ChromaticAberrationShader extends FlxShader
 			//float someshit = col4.r + col4.g + col4.b;
 
 			gl_FragColor = toUse;
-		}');//
+		}')
+	public function new()
+	{
+		super();
 	}
 }
 
@@ -78,16 +81,16 @@ class ChromaticAberrationEffect extends Effect
 	public var shader:ChromaticAberrationShader;
   public function new(offset:Float = 0.00){
 	shader = new ChromaticAberrationShader();
-    shader.data.rOffset.value = [offset];
-    shader.data.gOffset.value = [0.0];
-    shader.data.bOffset.value = [-offset];
+    shader.rOffset.value = [offset];
+    shader.gOffset.value = [0.0];
+    shader.bOffset.value = [-offset];
   }
 	
 	public function setChrome(chromeOffset:Float):Void
 	{
-		shader.data.rOffset.value = [chromeOffset];
-		shader.data.gOffset.value = [0.0];
-		shader.data.bOffset.value = [chromeOffset * -1];
+		shader.rOffset.value = [chromeOffset];
+		shader.gOffset.value = [0.0];
+		shader.bOffset.value = [chromeOffset * -1];
 	}
 
 }
@@ -99,7 +102,7 @@ class ScanlineEffect extends Effect
 	public var shader:Scanline;
 	public function new (lockAlpha){
 		shader = new Scanline();
-		shader.data.lockAlpha.value = [lockAlpha];
+		shader.lockAlpha.value = [lockAlpha];
 	}
 	
 	
@@ -108,8 +111,8 @@ class ScanlineEffect extends Effect
 
 class Scanline extends FlxShader
 {
-	public function new(){super('
-		////pragma header
+	@:glFragmentSource('
+		#pragma header
 		const float scale = 1.0;
 	uniform bool lockAlpha = false;
 		void main()
@@ -123,8 +126,10 @@ class Scanline extends FlxShader
 			}else{
 				gl_FragColor = texture2D(bitmap, openfl_TextureCoordv);
 			}
-		}');
-	//
+		}')
+	public function new()
+	{
+		super();
 	}
 }
 
@@ -133,8 +138,8 @@ class TiltshiftEffect extends Effect{
 	public var shader:Tiltshift;
 	public function new (blurAmount:Float, center:Float){
 		shader = new Tiltshift();
-		shader.data.bluramount.value = [blurAmount];
-		shader.data.center.value = [center];
+		shader.bluramount.value = [blurAmount];
+		shader.center.value = [center];
 	}
 	
 	
@@ -142,8 +147,8 @@ class TiltshiftEffect extends Effect{
 
 class Tiltshift extends FlxShader
 {
-	public function new(){super('
-		////pragma header
+	@:glFragmentSource('
+		#pragma header
 
 		// Modified version of a tilt shift shader from Martin Jonasson (http://grapefrukt.com/)
 		// Read http://notes.underscorediscovery.com/ for context on shaders and this file
@@ -220,8 +225,10 @@ class Tiltshift extends FlxShader
 		 
 			// return the final blurred color
 			gl_FragColor = blurred;
-		}');
-	//
+		}')
+	public function new()
+	{
+		super();
 	}
 }
 class GreyscaleEffect extends Effect{
@@ -235,8 +242,8 @@ class GreyscaleEffect extends Effect{
 	
 }
 class GreyscaleShader extends FlxShader{
-	public function new(){super('
-	////pragma header
+	@:glFragmentSource('
+	#pragma header
 	void main() {
 		vec4 color = texture2D(bitmap, openfl_TextureCoordv);
 		float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
@@ -244,13 +251,14 @@ class GreyscaleShader extends FlxShader{
 	}
 	
 	
-	');//
+	')
 	
-	//
+	public function new(){
+		super();
+	}
 	
 	
 	
-}
 }
 
 
@@ -264,14 +272,14 @@ class GrainEffect extends Effect {
 	public var shader:Grain;
 	public function new (grainsize, lumamount,lockAlpha){
 		shader = new Grain();
-		shader.data.lumamount.value = [lumamount];
-		shader.data.grainsize.value = [grainsize];
-		shader.data.lockAlpha.value = [lockAlpha];
-		shader.data.uTime.value = [FlxG.random.float(0,8)];
+		shader.lumamount.value = [lumamount];
+		shader.grainsize.value = [grainsize];
+		shader.lockAlpha.value = [lockAlpha];
+		shader.uTime.value = [FlxG.random.float(0,8)];
 		PlayState.instance.shaderUpdates.push(update);
 	}
-	public function update(elapsed:Float){
-		shader.data.uTime.value[0] += elapsed;
+	public function update(elapsed){
+		shader.uTime.value[0] += elapsed;
 	}
 	
 	
@@ -282,8 +290,8 @@ class GrainEffect extends Effect {
 
 class Grain extends FlxShader
 {
-	public function new(){super('
-		////pragma header
+	@:glFragmentSource('
+		#pragma header
 
 		/*
 		Film Grain post-process shader v1.1
@@ -427,64 +435,67 @@ class Grain extends FlxShader
 			vec4 texColor = texture2D(bitmap, openfl_TextureCoordv);
 				if (lockAlpha) bitch = texColor.a;
 			gl_FragColor =  vec4(col,bitch);
-		}');//
+		}')
+	public function new()
+	{
+		super();
+	}
 	
 	
-}
 }
 
 class VCRDistortionEffect extends Effect
 {
   public var shader:VCRDistortionShader = new VCRDistortionShader();
   public function new(glitchFactor:Float,distortion:Bool=true,perspectiveOn:Bool=true,vignetteMoving:Bool=true){
-    shader.data.iTime.value = [0];
-    shader.data.vignetteOn.value = [true];
-    shader.data.perspectiveOn.value = [perspectiveOn];
-    shader.data.distortionOn.value = [distortion];
-    shader.data.scanlinesOn.value = [true];
-    shader.data.vignetteMoving.value = [vignetteMoving];
-    shader.data.glitchModifier.value = [glitchFactor];
-    shader.data.iResolution.value = [Lib.current.stage.stageWidth,Lib.current.stage.stageHeight];
+    shader.iTime.value = [0];
+    shader.vignetteOn.value = [true];
+    shader.perspectiveOn.value = [perspectiveOn];
+    shader.distortionOn.value = [distortion];
+    shader.scanlinesOn.value = [true];
+    shader.vignetteMoving.value = [vignetteMoving];
+    shader.glitchModifier.value = [glitchFactor];
+    shader.iResolution.value = [Lib.current.stage.stageWidth,Lib.current.stage.stageHeight];
    // var noise = Assets.getBitmapData(Paths.image("noise2"));
-   // shader.data.noiseTex.input = noise;
+   // shader.noiseTex.input = noise;
    PlayState.instance.shaderUpdates.push(update);
   }
 
   public function update(elapsed:Float){
-    shader.data.iTime.value[0] += elapsed;
-    shader.data.iResolution.value = [Lib.current.stage.stageWidth,Lib.current.stage.stageHeight];
+    shader.iTime.value[0] += elapsed;
+    shader.iResolution.value = [Lib.current.stage.stageWidth,Lib.current.stage.stageHeight];
   }
 
   public function setVignette(state:Bool){
-    shader.data.vignetteOn.value[0] = state;
+    shader.vignetteOn.value[0] = state;
   }
 
   public function setPerspective(state:Bool){
-    shader.data.perspectiveOn.value[0] = state;
+    shader.perspectiveOn.value[0] = state;
   }
 
   public function setGlitchModifier(modifier:Float){
-    shader.data.glitchModifier.value[0] = modifier;
+    shader.glitchModifier.value[0] = modifier;
   }
 
   public function setDistortion(state:Bool){
-    shader.data.distortionOn.value[0] = state;
+    shader.distortionOn.value[0] = state;
   }
 
   public function setScanlines(state:Bool){
-    shader.data.scanlinesOn.value[0] = state;
+    shader.scanlinesOn.value[0] = state;
   }
 
   public function setVignetteMoving(state:Bool){
-    shader.data.vignetteMoving.value[0] = state;
+    shader.vignetteMoving.value[0] = state;
   }
 }
 
 class VCRDistortionShader extends FlxShader // https://www.shadertoy.com/view/ldjGzV and https://www.shadertoy.com/view/Ms23DR and https://www.shadertoy.com/view/MsXGD4 and https://www.shadertoy.com/view/Xtccz4
 {
 
-  public function new(){super('
-    ////pragma header
+  @:glFragmentSource('
+    #pragma header
 
     uniform float iTime;
     uniform bool vignetteOn;
@@ -602,9 +613,11 @@ class VCRDistortionShader extends FlxShader // https://www.shadertoy.com/view/ld
       }
 
     }
-  ');//
-  //
-}
+  ')
+  public function new()
+  {
+    super();
+  }
 }
 
 
@@ -613,10 +626,10 @@ class ThreeDEffect extends Effect{
 	
 	public var shader:ThreeDShader = new ThreeDShader();
 	public function new(xrotation:Float=0,yrotation:Float=0,zrotation:Float=0,depth:Float=0){
-		shader.data.xrot.value = [xrotation];
-		shader.data.yrot.value = [yrotation];
-		shader.data.zrot.value = [zrotation];
-		shader.data.dept.value = [depth];
+		shader.xrot.value = [xrotation];
+		shader.yrot.value = [yrotation];
+		shader.zrot.value = [zrotation];
+		shader.dept.value = [depth];
 	}
 	
 	
@@ -625,8 +638,8 @@ class ThreeDEffect extends Effect{
 //               -naether
 
 class ThreeDShader extends FlxShader{
-	public function new(){super('
-	////pragma header
+	@:glFragmentSource('
+	#pragma header
 	uniform float xrot = 0.0;
 	uniform float yrot = 0.0;
 	uniform float zrot = 0.0;
@@ -697,21 +710,180 @@ void main() {
 }
 
 
-	');//
+	')
 	
-	//
+	public function new(){
+		super();
+	}
 	
-}
 }
 
 //Boing! by ThaeHan
 
+class FuckingTriangleEffect extends Effect{
+	
+	public var shader:FuckingTriangle = new FuckingTriangle();
+	
+	public function new(rotx:Float, roty:Float){
+		shader.rotX.value = [rotx];
+		shader.rotY.value = [roty];
+		
+	}
+	
+}
+
+
+class FuckingTriangle extends FlxShader{
+	
+	@:glFragmentSource('
+	
+	
+			#pragma header
+			
+			const vec3 vertices[18] = vec3[18] (
+			vec3(-0.5, 0.0, -0.5),
+			vec3( 0.5, 0.0, -0.5),
+			vec3(-0.5, 0.0,  0.5),
+			
+			vec3(-0.5, 0.0,  0.5),
+			vec3( 0.5, 0.0, -0.5),
+			vec3( 0.5, 0.0,  0.5),
+			
+			vec3(-0.5, 0.0, -0.5),
+			vec3( 0.5, 0.0, -0.5),
+			vec3( 0.0, 1.0,  0.0),
+			
+			vec3(-0.5, 0.0,  0.5),
+			vec3( 0.5, 0.0,  0.5),
+			vec3( 0.0, 1.0,  0.0),
+			
+			vec3(-0.5, 0.0, -0.5),
+			vec3(-0.5, 0.0,  0.5),
+			vec3( 0.0, 1.0,  0.0),
+			
+			vec3( 0.5, 0.0, -0.5),
+			vec3( 0.5, 0.0,  0.5),
+			vec3( 0.0, 1.0,  0.0)
+		);
+
+		const vec2 texCoords[18] = vec2[18] (
+			vec2(0., 1.),
+			vec2(1., 1.),
+			vec2(0., 0.),
+			
+			vec2(0., 0.),
+			vec2(1., 1.),
+			vec2(1., 0.),
+			
+			vec2(0., 1.),
+			vec2(1., 1.),
+			vec2(.5, 0.),
+			
+			vec2(0., 1.),
+			vec2(1., 1.),
+			vec2(.5, 0.),
+			
+			vec2(0., 1.),
+			vec2(1., 1.),
+			vec2(.5, 0.),
+			
+			vec2(0., 1.),
+			vec2(1., 1.),
+			vec2(.5, 0.)
+		);
+
+		vec4 vertexShader(in vec3 vertex, in mat4 transform) {
+			return transform * vec4(vertex, 1.);
+		}
+
+		vec4 fragmentShader(in vec2 uv) {
+			return flixel_texture2D(bitmap, uv);
+		}
+
+
+		const float fov  = 70.0;
+		const float near = 0.1;
+		const float far  = 10.;
+
+		const vec3 cameraPos = vec3(0., 0.3, 2.);
+
+			uniform float rotX = -25.;
+			uniform float rotY = 45.;
+		vec4 pixel(in vec2 ndc, in float aspect, inout float depth, in int vertexIndex) {
+
+			
+			
+
+			mat4 proj  = perspective(fov, aspect, near, far);
+			mat4 view  = translate(-cameraPos);
+			mat4 model = rotateX(rotX) * rotateY(rotY);
+			
+			mat4 mvp  = proj * view * model;
+
+			vec4 v0 = vertexShader(vertices[vertexIndex  ], mvp);
+			vec4 v1 = vertexShader(vertices[vertexIndex+1], mvp);
+			vec4 v2 = vertexShader(vertices[vertexIndex+2], mvp);
+			
+			vec2 t0 = texCoords[vertexIndex  ] / v0.w; float oow0 = 1. / v0.w;
+			vec2 t1 = texCoords[vertexIndex+1] / v1.w; float oow1 = 1. / v1.w;
+			vec2 t2 = texCoords[vertexIndex+2] / v2.w; float oow2 = 1. / v2.w;
+			
+			v0 /= v0.w;
+			v1 /= v1.w;
+			v2 /= v2.w;
+			
+			vec3 tri = bary(v0.xy, v1.xy, v2.xy, ndc);
+			
+			if(tri.x < 0. || tri.x > 1. || tri.y < 0. || tri.y > 1. || tri.z < 0. || tri.z > 1.) {
+				return vec4(0.);
+			}
+			
+			float triDepth = baryLerp(v0.z, v1.z, v2.z, tri);
+			if(triDepth > depth || triDepth < -1. || triDepth > 1.) {
+				return vec4(0.);
+			}
+			
+			depth = triDepth;
+			
+			float oneOverW = baryLerp(oow0, oow1, oow2, tri);
+			vec2 uv        = uvLerp(t0, t1, t2, tri) / oneOverW;
+			return fragmentShader(uv);
+
+		}
+
+
+void main()
+{
+    vec2 ndc = ((gl_FragCoord.xy * 2.) / openfl_TextureSize.xy) - vec2(1.);
+    float aspect = openfl_TextureSize.x / openfl_TextureSize.y;
+    vec3 outColor = vec3(.4,.6,.9);
+    
+    float depth = 1.0;
+    for(int i = 0; i < 18; i += 3) {
+        vec4 tri = pixel(ndc, aspect, depth, i);
+        outColor = mix(outColor.rgb, tri.rgb, tri.a);
+    }
+    
+    gl_FragColor = vec4(outColor, 1.);
+}
+	
+	
+	
+	')
+	
+	
+	public function new(){
+		super();
+	}
+	
+	
+}
 class BloomEffect extends Effect{
 	
 	public var shader:BloomShader = new BloomShader();
 	public function new(blurSize:Float, intensity:Float){
-		shader.data.blurSize.value = [blurSize];
-		shader.data.intensity.value = [intensity];
+		shader.blurSize.value = [blurSize];
+		shader.intensity.value = [intensity];
 		
 	}
 	
@@ -722,9 +894,9 @@ class BloomEffect extends Effect{
 class BloomShader extends FlxShader{
 	
 	
-	public function new(){super('
+	@:glFragmentSource('
 	
-	////pragma header
+	#pragma header
 	
 	uniform float intensity = 0.35;
 	uniform float blurSize = 1.0/512.0;
@@ -770,14 +942,16 @@ void main()
 }
 	
 	
-	');//
+	')
 	
-	//
+	public function new(){
+		super();
+	}
 	
 	
 }
 
-}
+
 
 
 
@@ -803,16 +977,7 @@ _/__________\_
    |   |  |
    |___|__|
     
-   
-   
-   ________
-__/________\__
-  || 0||0 ||
-  \____w___/
-  _|______|_
-   |__||__|
-   
-   brobgonalll
+
 */
 
 
@@ -830,7 +995,7 @@ class GlitchEffect extends Effect
 
 	public function new(waveSpeed:Float,waveFrequency:Float,waveAmplitude:Float):Void
 	{
-		shader.data.uTime.value = [0];
+		shader.uTime.value = [0];
 		this.waveSpeed = waveSpeed;
 		this.waveFrequency = waveFrequency;
 		this.waveAmplitude = waveAmplitude;
@@ -839,28 +1004,28 @@ class GlitchEffect extends Effect
 
     public function update(elapsed:Float):Void
     {
-        shader.data.uTime.value[0] += elapsed;
+        shader.uTime.value[0] += elapsed;
     }
 
 
     function set_waveSpeed(v:Float):Float
     {
         waveSpeed = v;
-        shader.data.uSpeed.value = [waveSpeed];
+        shader.uSpeed.value = [waveSpeed];
         return v;
     }
     
     function set_waveFrequency(v:Float):Float
     {
         waveFrequency = v;
-        shader.data.uFrequency.value = [waveFrequency];
+        shader.uFrequency.value = [waveFrequency];
         return v;
     }
     
     function set_waveAmplitude(v:Float):Float
     {
         waveAmplitude = v;
-        shader.data.uWaveAmplitude.value = [waveAmplitude];
+        shader.uWaveAmplitude.value = [waveAmplitude];
         return v;
     }
 
@@ -879,34 +1044,34 @@ class DistortBGEffect extends Effect
 		this.waveSpeed = waveSpeed;
 		this.waveFrequency = waveFrequency;
 		this.waveAmplitude = waveAmplitude;
-		shader.data.uTime.value = [0];
+		shader.uTime.value = [0];
 		PlayState.instance.shaderUpdates.push(update);
 	}
 
     public function update(elapsed:Float):Void
     {
-        shader.data.uTime.value[0] += elapsed;
+        shader.uTime.value[0] += elapsed;
     }
 
 
     function set_waveSpeed(v:Float):Float
     {
         waveSpeed = v;
-        shader.data.uSpeed.value = [waveSpeed];
+        shader.uSpeed.value = [waveSpeed];
         return v;
     }
     
     function set_waveFrequency(v:Float):Float
     {
         waveFrequency = v;
-        shader.data.uFrequency.value = [waveFrequency];
+        shader.uFrequency.value = [waveFrequency];
         return v;
     }
     
     function set_waveAmplitude(v:Float):Float
     {
         waveAmplitude = v;
-        shader.data.uWaveAmplitude.value = [waveAmplitude];
+        shader.uWaveAmplitude.value = [waveAmplitude];
         return v;
     }
 
@@ -927,43 +1092,43 @@ class PulseEffect extends Effect
 		this.waveSpeed = waveSpeed;
 		this.waveFrequency = waveFrequency;
 		this.waveAmplitude = waveAmplitude;
-		shader.data.uTime.value = [0];
-        shader.data.uampmul.value = [0];
-        shader.data.uEnabled.value = [false];
+		shader.uTime.value = [0];
+        shader.uampmul.value = [0];
+        shader.uEnabled.value = [false];
 		PlayState.instance.shaderUpdates.push(update);
 	}
 
     public function update(elapsed:Float):Void
     {
-        shader.data.uTime.value[0] += elapsed;
+        shader.uTime.value[0] += elapsed;
     }
 
 
     function set_waveSpeed(v:Float):Float
     {
         waveSpeed = v;
-        shader.data.uSpeed.value = [waveSpeed];
+        shader.uSpeed.value = [waveSpeed];
         return v;
     }
 
     function set_Enabled(v:Bool):Bool
     {
         Enabled = v;
-        shader.data.uEnabled.value = [Enabled];
+        shader.uEnabled.value = [Enabled];
         return v;
     }
     
     function set_waveFrequency(v:Float):Float
     {
         waveFrequency = v;
-        shader.data.uFrequency.value = [waveFrequency];
+        shader.uFrequency.value = [waveFrequency];
         return v;
     }
     
     function set_waveAmplitude(v:Float):Float
     {
         waveAmplitude = v;
-        shader.data.uWaveAmplitude.value = [waveAmplitude];
+        shader.uWaveAmplitude.value = [waveAmplitude];
         return v;
     }
 
@@ -974,15 +1139,15 @@ class InvertColorsEffect extends Effect
 {
     public var shader:InvertShader = new InvertShader();
 	public function new(lockAlpha){
-	//	shader.data.lockAlpha.value = [lockAlpha];
+	//	shader.lockAlpha.value = [lockAlpha];
 	}
 
 }
 
 class GlitchShader extends FlxShader
 {
-    public function new(){super('
-    ////pragma header
+    @:glFragmentSource('
+    #pragma header
     //uniform float tx, ty; // x,y waves phase
 
     //modified version of the wave shader to create weird garbled corruption like messes
@@ -1020,13 +1185,18 @@ class GlitchShader extends FlxShader
     {
         vec2 uv = sineWave(openfl_TextureCoordv);
         gl_FragColor = texture2D(bitmap, uv);
-    }');
-	}//
+    }')
+
+    public function new()
+    {
+       super();
+    }
 }
+
 class InvertShader extends FlxShader
 {
-    public function new(){super('
-    ////pragma header
+    @:glFragmentSource('
+    #pragma header
     
     vec4 sineWave(vec4 pt)
     {
@@ -1039,16 +1209,20 @@ class InvertShader extends FlxShader
         vec2 uv = openfl_TextureCoordv;
         gl_FragColor = sineWave(texture2D(bitmap, uv));
 		gl_FragColor.a = 1.0 - gl_FragColor.a;
-    }');
-	}//
+    }')
+
+    public function new()
+    {
+       super();
+    }
 }
 
 
 
 class DistortBGShader extends FlxShader
 {
-    public function new(){super('
-    ////pragma header
+    @:glFragmentSource('
+    #pragma header
     //uniform float tx, ty; // x,y waves phase
 
     //gives the character a glitchy, distorted outline
@@ -1091,16 +1265,19 @@ class DistortBGShader extends FlxShader
     {
         vec2 uv = sineWave(openfl_TextureCoordv);
         gl_FragColor = makeBlack(texture2D(bitmap, uv)) + texture2D(bitmap,openfl_TextureCoordv);
-    }');
-	
-	}//
+    }')
+
+    public function new()
+    {
+       super();
+    }
 }
 
 
 class PulseShader extends FlxShader
 {
-    public function new(){super('
-    ////pragma header
+    @:glFragmentSource('
+    #pragma header
     uniform float uampmul;
 
     //modified version of the wave shader to create weird garbled corruption like messes
@@ -1143,8 +1320,12 @@ class PulseShader extends FlxShader
     {
         vec2 uv = openfl_TextureCoordv;
         gl_FragColor = sineWave(texture2D(bitmap, uv),uv);
-    }');
-    }//
+    }')
+
+    public function new()
+    {
+       super();
+    }
 }
 
 

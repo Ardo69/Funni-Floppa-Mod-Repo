@@ -229,6 +229,7 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
+	public var songTxt:FlxText;
 
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
@@ -779,6 +780,20 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
+
+		songTxt = new FlxText(12, FlxG.height - 24, 0, "", 8);
+		songTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songTxt.scrollFactor.set();
+		songTxt.borderSize = 1;
+		if (!ClientPrefs.hideHud) {
+			songTxt.visible = true;
+		} else {
+			songTxt.visible = false;
+		}
+		add(songTxt);
+		songTxt.text = curSong + " (" + storyDifficultyText + ") " + "| Floppa Engine " + MainMenuState.modVersion;
+
+
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "MINOR SKILL ISSUE", 32);
 		botplayTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
@@ -808,6 +823,7 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+		songTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
