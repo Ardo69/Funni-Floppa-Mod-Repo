@@ -27,7 +27,7 @@ class OpeningState extends MusicBeatState
 		warnText = new FlxText(0, 0, FlxG.width,
 			"Press Escape To Ignore This Message
 			  \n
-			  Press Enter to Join the Discord Server",
+			   Press Enter to Join the Discord Server",
 			  32);
 		  warnText.setFormat("Source Sans Pro Regular", 32, FlxColor.BROWN, CENTER);
 		  warnText.screenCenter(Y);

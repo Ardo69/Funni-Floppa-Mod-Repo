@@ -1,5 +1,6 @@
 package options;
 
+import flixel.addons.display.FlxBackdrop;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -70,7 +71,7 @@ class OptionsState extends MusicBeatState
 	var selectorRight:Alphabet;
 
 	override function create()
-	{
+	{		
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
@@ -86,6 +87,43 @@ class OptionsState extends MusicBeatState
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
+		var barTop = new FlxSprite();
+		barTop.makeGraphic(FlxG.width + 512, 455, 0xFFA2946F);
+		barTop.y = -400;
+		barTop.antialiasing = ClientPrefs.globalAntialiasing;
+		// barTop.angle = 15;
+		add(barTop);
+
+		var barBottom = new FlxSprite();
+		barBottom.makeGraphic(FlxG.width + 512, 455, 0xFFA2946F);
+		barBottom.y = 650;
+		barBottom.antialiasing = ClientPrefs.globalAntialiasing;
+		// barBottom.x = -100;
+		// barBottom.angle = 15;
+		add(barBottom);
+
+		var flopBottom = new FlxBackdrop(Paths.image("flop"), 0, 0, true, false, 5, 0);
+		// flopBottom.y = barBottom.y + flopBottom.height + 5;
+		flopBottom.screenCenter();
+		flopBottom.scale.set(0.6, 0.6);
+		flopBottom.updateHitbox();
+		// flopBottom.angle = 15;
+		flopBottom.velocity.set(100, 0);
+		flopBottom.antialiasing = ClientPrefs.globalAntialiasing;
+		flopBottom.y = 600;
+		add(flopBottom);
+
+		var flopTop = new FlxBackdrop(Paths.image("flop"), 0, 0, true, false, 5, 0);
+		// flopTop.y = barBottom.y + flopTop.height + 5;
+		flopTop.screenCenter();
+		flopTop.scale.set(0.6, 0.6);
+		flopTop.updateHitbox();
+		// flopTop.angle = 15;
+		flopTop.velocity.set(-100, 0);
+		flopTop.y = 55;
+		flopTop.antialiasing = ClientPrefs.globalAntialiasing;
+		add(flopTop);
+		
 		for (i in 0...options.length)
 		{
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true, false);

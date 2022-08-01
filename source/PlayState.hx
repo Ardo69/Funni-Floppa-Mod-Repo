@@ -124,6 +124,9 @@ class PlayState extends MusicBeatState
 	public var GF_X:Float = 400;
 	public var GF_Y:Float = 130;
 
+	var nps:Int = 0;
+	var maxNPS:Int = 0;
+
 	public var songSpeedTween:FlxTween;
 	public var songSpeed(default, set):Float = 1;
 	public var songSpeedType:String = "multiplicative";
@@ -494,7 +497,7 @@ class PlayState extends MusicBeatState
 				midGround.updateHitbox();
 				add(midGround);
 		}
-
+		
 		if (isPixelStage)
 		{
 			introSoundsSuffix = '-pixel';
@@ -812,7 +815,7 @@ class PlayState extends MusicBeatState
 		judgementCounter.borderQuality = 2;
 		judgementCounter.scrollFactor.set();
 		judgementCounter.screenCenter(Y);
-		judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses + "\ndofjdkfjdkjfdj";
+		judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses + "\nCombo: " + combo + "\ndofjdkfjdkjfdj";
 		add(judgementCounter);
 
 		judgementCounter.cameras = [camHUD];//Judgement Counter
@@ -2053,11 +2056,11 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Points: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: ' + ratingName;
+		scoreTxt.text = '$: ' + songScore + ' // Combo Breaks: ' + songMisses + ' //Combo: ' + combo + ' // Accuracy: ' + ratingName;
 		if (ratingName != '?')
 			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
-
-		judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses + "\ndofjdkfjdkjfdj";
+ 
+		judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses + "\nCombo: " + combo + "\ndofjdkfjdkjfdj";
 
 		switch (SONG.song.toLowerCase()) {
 			case 'unknown-crapping' | 'monochrome':

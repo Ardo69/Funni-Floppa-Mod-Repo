@@ -28,7 +28,7 @@ class JumpscareState extends FlxState
         bg.makeGraphic(FlxG.width, FlxG.height);
         add(bg);
 
-        character = new Character(0,0,"flipflop", false);
+        character = new Character(0,0,"ardo", false);
         character.scale.set(0, 0);
         add(character);
 
