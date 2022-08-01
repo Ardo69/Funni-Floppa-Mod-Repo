@@ -59,7 +59,6 @@ class OpeningState extends MusicBeatState
 
 			if(discordShit)
 				{
-					FlxG.sound.play(Paths.sound('cancelMenu'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
 							FlxG.openURL('https://discord.gg/8jt9WBWAQ6', '_blank');
