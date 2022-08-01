@@ -11,10 +11,10 @@ using StringTools;
 
 class Achievements {
 	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Achievement save tag, Hidden achievement
-		["You passed the main week!",		"Yippeee!",				'floppin',		false],
-		["The song sucked, didn't it?",		"...",				'frien',		false],
-		["Wow",		"U are super good",				'extras_passed',		false],
-		["Wowza!",		"U are good",				'extra_passed',		false]
+		["Raised a floppa",		"Beat the main week of the mod.",				'raisedAFloppa',		false],
+		["Random terrible Bambi song",		"Pass frien, how suprising.",				'terribleBambiMod',		false],
+		["Phenominal spamming skills",		"Beat Floppasition and Flopparchy without using practice mode, or botplay.",				'spammingSkills',		false],
+		["Nightmare over",		"Pass Players fate",				'nightmareOver',		false]
 	];
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
 

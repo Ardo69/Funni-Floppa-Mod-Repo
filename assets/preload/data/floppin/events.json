@@ -2,7 +2,7 @@
 	"song": {
 		"speed": 2,
 		"stage": "house",
-		"player1": "bf",
+		"player1": "reanimatedbf",
 		"player2": "flipflop",
 		"events": [
 			[

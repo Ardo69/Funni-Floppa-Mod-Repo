@@ -211,6 +211,7 @@ class FunkinLua {
 		set('buildTarget', 'unknown');
 		#end
 
+
 		Lua_helper.add_callback(lua, "getRunningScripts", function(){
 			var runningScripts:Array<String> = [];
 			for (idx in 0...PlayState.instance.luaArray.length)

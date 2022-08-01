@@ -1,5 +1,6 @@
 package;
 
+import haxe.macro.Expr.Case;
 import flixel.FlxG;
 import flixel.input.FlxInput;
 import flixel.input.actions.FlxAction;
@@ -38,6 +39,7 @@ enum abstract Action(String) to String from String
 	var NOTE_LEFT_R = "note_left-release";
 	var NOTE_RIGHT_R = "note_right-release";
 	var NOTE_DOWN_R = "note_down-release";
+	var BUY_FOOD = "buy_food";
 	var ACCEPT = "accept";
 	var BACK = "back";
 	var PAUSE = "pause";
@@ -71,6 +73,7 @@ abstract Action(String) to String from String
 	var NOTE_LEFT_R = "note_left-release";
 	var NOTE_RIGHT_R = "note_right-release";
 	var NOTE_DOWN_R = "note_down-release";
+	var BUY_FOOD = "buy_food";
 	var ACCEPT = "accept";
 	var BACK = "back";
 	var PAUSE = "pause";
@@ -100,6 +103,7 @@ enum Control
 	NOTE_RIGHT;
 	NOTE_DOWN;
 	RESET;
+	BUY_FOOD;
 	ACCEPT;
 	BACK;
 	PAUSE;
@@ -143,6 +147,7 @@ class Controls extends FlxActionSet
 	var _note_leftR = new FlxActionDigital(Action.NOTE_LEFT_R);
 	var _note_rightR = new FlxActionDigital(Action.NOTE_RIGHT_R);
 	var _note_downR = new FlxActionDigital(Action.NOTE_DOWN_R);
+	var _buy_food = new FlxActionDigital(Action.BUY_FOOD);
 	var _accept = new FlxActionDigital(Action.ACCEPT);
 	var _back = new FlxActionDigital(Action.BACK);
 	var _pause = new FlxActionDigital(Action.PAUSE);
@@ -277,6 +282,11 @@ class Controls extends FlxActionSet
 	inline function get_NOTE_DOWN_R()
 		return _note_downR.check();
 
+	public var BUY_FOOD(get, never):Bool;
+
+	inline function get_BUY_FOOD()
+		return _buy_food.check();
+
 	public var ACCEPT(get, never):Bool;
 
 	inline function get_ACCEPT()
@@ -326,6 +336,7 @@ class Controls extends FlxActionSet
 		add(_note_leftR);
 		add(_note_rightR);
 		add(_note_downR);
+		add(_buy_food);
 		add(_accept);
 		add(_back);
 		add(_pause);
@@ -365,6 +376,7 @@ class Controls extends FlxActionSet
 		add(_note_leftR);
 		add(_note_rightR);
 		add(_note_downR);
+		add(_buy_food);
 		add(_accept);
 		add(_back);
 		add(_pause);
@@ -422,6 +434,7 @@ class Controls extends FlxActionSet
 			case NOTE_DOWN: _note_down;
 			case NOTE_LEFT: _note_left;
 			case NOTE_RIGHT: _note_right;
+			case BUY_FOOD:_buy_food;
 			case ACCEPT: _accept;
 			case BACK: _back;
 			case PAUSE: _pause;
@@ -477,6 +490,8 @@ class Controls extends FlxActionSet
 				func(_note_down, PRESSED);
 				func(_note_downP, JUST_PRESSED);
 				func(_note_downR, JUST_RELEASED);
+			case BUY_FOOD:
+				func(_buy_food, JUST_PRESSED);
 			case ACCEPT:
 				func(_accept, JUST_PRESSED);
 			case BACK:
@@ -649,6 +664,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.NOTE_LEFT, keysMap.get('note_left'));
 				inline bindKeys(Control.NOTE_RIGHT, keysMap.get('note_right'));
 
+				inline bindKeys(Control.BUY_FOOD, keysMap.get('buy_food'));
 				inline bindKeys(Control.ACCEPT, keysMap.get('accept'));
 				inline bindKeys(Control.BACK, keysMap.get('back'));
 				inline bindKeys(Control.PAUSE, keysMap.get('pause'));
@@ -662,6 +678,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.NOTE_DOWN, [S]);
 				inline bindKeys(Control.NOTE_LEFT, [A]);
 				inline bindKeys(Control.NOTE_RIGHT, [D]);
+				inline bindKeys(Control.ACCEPT, [F]);
 				inline bindKeys(Control.ACCEPT, [G, Z]);
 				inline bindKeys(Control.BACK, [H, X]);
 				inline bindKeys(Control.PAUSE, [ONE]);
@@ -675,6 +692,7 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.NOTE_DOWN, [FlxKey.DOWN]);
 				inline bindKeys(Control.NOTE_LEFT, [FlxKey.LEFT]);
 				inline bindKeys(Control.NOTE_RIGHT, [FlxKey.RIGHT]);
+				inline bindKeys(Control.BUY_FOOD, [F]);
 				inline bindKeys(Control.ACCEPT, [O]);
 				inline bindKeys(Control.BACK, [P]);
 				inline bindKeys(Control.PAUSE, [ENTER]);
@@ -694,6 +712,7 @@ class Controls extends FlxActionSet
 				bindKeys(Control.NOTE_DOWN, [S, FlxKey.DOWN]);
 				bindKeys(Control.NOTE_LEFT, [A, FlxKey.LEFT]);
 				bindKeys(Control.NOTE_RIGHT, [D, FlxKey.RIGHT]);
+				bindKeys(Control.BUY_FOOD, [F]);
 				bindKeys(Control.ACCEPT, [Z, SPACE, ENTER]);
 				bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 				bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
@@ -707,6 +726,7 @@ class Controls extends FlxActionSet
 				bindKeys(Control.NOTE_DOWN, [S]);
 				bindKeys(Control.NOTE_LEFT, [A]);
 				bindKeys(Control.NOTE_RIGHT, [D]);
+				bindKeys(Control.BUY_FOOD, [F]);
 				bindKeys(Control.ACCEPT, [G, Z]);
 				bindKeys(Control.BACK, [H, X]);
 				bindKeys(Control.PAUSE, [ONE]);
@@ -720,6 +740,7 @@ class Controls extends FlxActionSet
 				bindKeys(Control.NOTE_DOWN, [FlxKey.DOWN]);
 				bindKeys(Control.NOTE_LEFT, [FlxKey.LEFT]);
 				bindKeys(Control.NOTE_RIGHT, [FlxKey.RIGHT]);
+				bindKeys(Control.BUY_FOOD, [F]);
 				bindKeys(Control.ACCEPT, [O]);
 				bindKeys(Control.BACK, [P]);
 				bindKeys(Control.PAUSE, [ENTER]);
@@ -800,6 +821,7 @@ class Controls extends FlxActionSet
 			Control.NOTE_DOWN => [DPAD_DOWN, LEFT_STICK_DIGITAL_DOWN, RIGHT_STICK_DIGITAL_DOWN, A],
 			Control.NOTE_LEFT => [DPAD_LEFT, LEFT_STICK_DIGITAL_LEFT, RIGHT_STICK_DIGITAL_LEFT, X],
 			Control.NOTE_RIGHT => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT, RIGHT_STICK_DIGITAL_RIGHT, B],
+			Control.BUY_FOOD => [LEFT_STICK_CLICK, RIGHT_STICK_CLICK, LEFT_TRIGGER_BUTTON, RIGHT_TRIGGER_BUTTON],
 			Control.PAUSE => [START],
 			Control.RESET => [8]
 		]);
@@ -816,6 +838,7 @@ class Controls extends FlxActionSet
 			Control.NOTE_DOWN => [DPAD_DOWN, LEFT_STICK_DIGITAL_DOWN, RIGHT_STICK_DIGITAL_DOWN, B],
 			Control.NOTE_LEFT => [DPAD_LEFT, LEFT_STICK_DIGITAL_LEFT, RIGHT_STICK_DIGITAL_LEFT, Y],
 			Control.NOTE_RIGHT => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT, RIGHT_STICK_DIGITAL_RIGHT, A],
+			Control.BUY_FOOD => [LEFT_STICK_CLICK, RIGHT_STICK_CLICK, LEFT_TRIGGER_BUTTON, RIGHT_TRIGGER_BUTTON],
 			Control.PAUSE => [START],
 			Control.RESET => [8],
 		]);
