@@ -38,8 +38,8 @@ class OptionsState extends MusicBeatState
 		// 'Adjust Delay and Combo',
 		'Graphics',
 		'Visuals and UI',
-		'Gameplay'/*,
-		'Gamejolt'*/
+		'Gameplay',
+		'Gamejolt'
 	];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 
