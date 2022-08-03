@@ -1,4 +1,4 @@
-// Oh no too scery
+// Oh no too scery im gona nuttt
 import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -28,7 +28,7 @@ class JumpscareState extends FlxState
         bg.makeGraphic(FlxG.width, FlxG.height);
         add(bg);
 
-        character = new Character(0,0,"ardo", false);
+        character = new Character(0,0,"bob", false); // billy bobbo rap
         character.scale.set(0, 0);
         add(character);
 
@@ -56,6 +56,6 @@ class JumpscareState extends FlxState
     public function closeGame(time:FlxTimer = null)
     {
         FlxG.openURL("https://www.youtube.com/watch?v=u6tvzG_88sU", "_blank");
-        MusicBeatState.switchState(new MainMenuState());
+        FlxG.switchState(new MainMenuState());
     }
 }

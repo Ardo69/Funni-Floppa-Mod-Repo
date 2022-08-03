@@ -1,11 +1,9 @@
 package;
 
-//SHADE SHIZZ
+import sys.io.File;
 import flixel.system.FlxAssets.FlxShader;
 import openfl.display.Shader;
 import openfl.filters.ShaderFilter;
-import Shaders;
-
 import openfl.system.System;
 import lime.system.System;
 import flixel.graphics.FlxGraphic;
@@ -71,6 +69,10 @@ import GameJolt.GameJoltAPI;
 #if sys
 import sys.FileSystem;
 #end
+#if !flash
+import flixel.addons.display.FlxRuntimeShader;
+import openfl.filters.ShaderFilter;
+#end
 
 using StringTools;
 
@@ -103,10 +105,11 @@ class PlayState extends MusicBeatState
 	public var modchartTexts:Map<String, ModchartText> = new Map<String, ModchartText>();
 	public var modchartSaves:Map<String, FlxSave> = new Map<String, FlxSave>();
 	public var modchartObjects:Map<String, FlxSprite> = new Map<String, FlxSprite>();
-	public var shader_chromatic_abberation:ChromaticAberrationEffect;
-	public var camGameShaders:Array<ShaderEffect> = [];
-	public var camHUDShaders:Array<ShaderEffect> = [];
-	public var camOtherShaders:Array<ShaderEffect> = [];
+
+	#if (!flash && sys)
+	public var runtimeShaders:Map<String, Array<String>> = new Map<String, Array<String>>();
+	public var shaderMap:Map<String, FlxRuntimeShader> = new Map<String, FlxRuntimeShader>();
+	#end
 
 	// event variables
 	private var isCameraOnForcedPos:Bool = false;
@@ -127,6 +130,7 @@ class PlayState extends MusicBeatState
 	public var DAD_Y:Float = 100;
 	public var GF_X:Float = 400;
 	public var GF_Y:Float = 130;
+	public var GF_VISIBLE:Bool = true;
 
 	var nps:Int = 0;
 	var maxNPS:Int = 0;
@@ -199,6 +203,7 @@ class PlayState extends MusicBeatState
 	var judgementCounter:FlxText;
 
 	private var moneyImage:AttachedSprite;
+
 	public var moneyTxt:FlxText;
 
 	private var timeBarBG:AttachedSprite;
@@ -356,8 +361,6 @@ class PlayState extends MusicBeatState
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
 
-		shader_chromatic_abberation = new ChromaticAberrationEffect();
-
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -366,10 +369,9 @@ class PlayState extends MusicBeatState
 		camOther.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
-		FlxG.cameras.add(camHUD);
-		FlxG.cameras.add(camOther);
+		FlxG.cameras.add(camHUD, false);
+		FlxG.cameras.add(camOther, false);
 
-		FlxCamera.defaultCameras = [camGame];
 		CustomFadeTransition.nextCamera = camOther;
 		// FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
@@ -405,29 +407,8 @@ class PlayState extends MusicBeatState
 		curStage = SONG.stage;
 		// trace('stage is: ' + curStage);
 		if (SONG.stage == null || SONG.stage.length < 1)
-		{
-			switch (songName)
-			{
-				case 'spookeez' | 'south' | 'monster':
-					curStage = 'spooky';
-				case 'pico' | 'blammed' | 'philly' | 'philly-nice':
-					curStage = 'philly';
-				case 'milf' | 'satin-panties' | 'high':
-					curStage = 'limo';
-				case 'cocoa' | 'eggnog':
-					curStage = 'mall';
-				case 'winter-horrorland':
-					curStage = 'mallEvil';
-				case 'senpai' | 'roses':
-					curStage = 'school';
-				case 'thorns':
-					curStage = 'schoolEvil';
-				case 'ugh' | 'guns' | 'stress':
-					curStage = 'tank';
-				default:
-					curStage = 'stage';
-			}
-		}
+			curStage = 'stage';
+
 		SONG.stage = curStage;
 
 		var stageData:StageFile = StageData.getStageFile(curStage);
@@ -482,20 +463,30 @@ class PlayState extends MusicBeatState
 		{
 			case 'house':
 				var consistentPosition:Array<Float> = [-600, -300];
-				var resizeBG:Float = 0.7;
+				var resizeBG:Float = 1.4;
 				defaultCamZoom = 1.05;
 
 				var midGround:BGSprite = new BGSprite('stages/house', consistentPosition[0], consistentPosition[1]);
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+			case 'backrooms':
+				var consistentPosition:Array<Float> = [-600, -300];
+				var resizeBG:Float = 1.4;
+				defaultCamZoom = 1.05;
 
+				var midGround:BGSprite = new BGSprite('stages/backrooms', consistentPosition[0], consistentPosition[1]);
+				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
+				midGround.updateHitbox();
+				add(midGround);
+
+				GF_VISIBLE = false;
 			case 'ardocovers':
 				var consistentPosition:Array<Float> = [-600, -300];
 				var resizeBG:Float = 0.7;
 				defaultCamZoom = 1.1;
 
-				var midGround:BGSprite = new BGSprite('stages/house', consistentPosition[0], consistentPosition[1]);
+				var midGround:BGSprite = new BGSprite('stages/house-old', consistentPosition[0], consistentPosition[1]);
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
@@ -510,7 +501,7 @@ class PlayState extends MusicBeatState
 				midGround.updateHitbox();
 				add(midGround);
 		}
-		
+
 		if (isPixelStage)
 		{
 			introSoundsSuffix = '-pixel';
@@ -586,6 +577,7 @@ class PlayState extends MusicBeatState
 			gf.scrollFactor.set(0.95, 0.95);
 			gfGroup.add(gf);
 			startCharacterLua(gf.curCharacter);
+			gf.visible = GF_VISIBLE;
 		}
 
 		var dadChar = SONG.player2;
@@ -789,12 +781,14 @@ class PlayState extends MusicBeatState
 			hungerText = new FlxText(0, 0, FlxG.width, "Hunger: 100%", 32, true);
 			hungerText.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
 			hungerText.screenCenter(X);
-			hungerText.y = healthBarBG.y - hungerText.height - 10;
+			hungerText.y = healthBarBG.y - hungerText.height - 25;
 			hungerText.cameras = [camHUD];
 			add(hungerText);
 
-			moneyTxt = new FlxText(FlxG.width - 10, 0, 500, "0$", 32, true);
-			moneyTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, 0xFF50DA3E, RIGHT, OUTLINE, FlxColor.BLACK);
+			moneyTxt = new FlxText(0, 0, FlxG.width, "0$", 32, true);
+			moneyTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, 0xFF50DA3E, CENTER, OUTLINE, FlxColor.BLACK);
+			moneyTxt.screenCenter(X);
+			moneyTxt.y = hungerText.y - moneyTxt.height - 25;
 			moneyTxt.cameras = [camHUD];
 			add(moneyTxt);
 		}
@@ -822,14 +816,16 @@ class PlayState extends MusicBeatState
 		songTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songTxt.scrollFactor.set();
 		songTxt.borderSize = 1;
-		if (!ClientPrefs.hideHud) {
+		if (!ClientPrefs.hideHud)
+		{
 			songTxt.visible = true;
-		} else {
+		}
+		else
+		{
 			songTxt.visible = false;
 		}
 		add(songTxt);
 		songTxt.text = curSong + " (" + storyDifficultyText + ") " + "| Floppa Engine " + MainMenuState.modVersion;
-
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "MINOR SKILL ISSUE", 32);
 		botplayTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -945,6 +941,9 @@ class PlayState extends MusicBeatState
 		}
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
+
+		initFunnyShaders();
+
 		super.create();
 		Paths.clearUnusedMemory();
 		for (key => type in precacheList)
@@ -1484,104 +1483,90 @@ class PlayState extends MusicBeatState
 		callOnLuas('onSkipDialogue', [dialogueCount]);
 	}
 
-	public function addShaderToCamera(cam:String,effect:ShaderEffect){//STOLE FROM ANDROMEDA
-	  
-	  
-	  
-		switch(cam.toLowerCase()) {
-			case 'camhud' | 'hud':
-					camHUDShaders.push(effect);
-					var newCamEffects:Array<BitmapFilter>=[]; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
-					for(i in camHUDShaders){
-					  newCamEffects.push(new ShaderFilter(i.shader));
-					}
-					camHUD.setFilters(newCamEffects);
-			case 'camother' | 'other':
-					camOtherShaders.push(effect);
-					var newCamEffects:Array<BitmapFilter>=[]; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
-					for(i in camOtherShaders){
-					  newCamEffects.push(new ShaderFilter(i.shader));
-					}
-					camOther.setFilters(newCamEffects);
-			case 'camgame' | 'game':
-					camGameShaders.push(effect);
-					var newCamEffects:Array<BitmapFilter>=[]; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
-					for(i in camGameShaders){
-					  newCamEffects.push(new ShaderFilter(i.shader));
-					}
-					camGame.setFilters(newCamEffects);
-			default:
-				if(modchartSprites.exists(cam)) {
-					Reflect.setProperty(modchartSprites.get(cam),"shader",effect.shader);
-				} else if(modchartTexts.exists(cam)) {
-					Reflect.setProperty(modchartTexts.get(cam),"shader",effect.shader);
-				} else {
-					var OBJ = Reflect.getProperty(PlayState.instance,cam);
-					Reflect.setProperty(OBJ,"shader", effect.shader);
-				}
-			
-			
-				
-				
-		}
-	  
-	  
-	  
-	  
-  }
+	#if (!flash && sys)
 
-  public function removeShaderFromCamera(cam:String,effect:ShaderEffect){
-	  
-	  
-		switch(cam.toLowerCase()) {
-			case 'camhud' | 'hud': 
-    camHUDShaders.remove(effect);
-    var newCamEffects:Array<BitmapFilter>=[];
-    for(i in camHUDShaders){
-      newCamEffects.push(new ShaderFilter(i.shader));
-    }
-    camHUD.setFilters(newCamEffects);
-			case 'camother' | 'other': 
-					camOtherShaders.remove(effect);
-					var newCamEffects:Array<BitmapFilter>=[];
-					for(i in camOtherShaders){
-					  newCamEffects.push(new ShaderFilter(i.shader));
-					}
-					camOther.setFilters(newCamEffects);
-			default: 
-				camGameShaders.remove(effect);
-				var newCamEffects:Array<BitmapFilter>=[];
-				for(i in camGameShaders){
-				  newCamEffects.push(new ShaderFilter(i.shader));
+	function initFunnyShaders() {
+		switch (SONG.song.toLowerCase()) {
+			case 'players-fate':
+				initLuaShader("vcr");
+				shaderMap.set("gameVCR", createRuntimeShader("vcr"));
+				FlxG.game.setFilters([new ShaderFilter(shaderMap.get("gameVCR"))]);
+		}
+	}
+
+	function updateFunnyShaders() {
+		switch (SONG.song.toLowerCase()) {
+			case 'players-fate':
+				initLuaShader("vcr");
+				shaderMap.get("gameVCR").setFloat("iTime", FlxG.elapsed);
+		}
+	}
+
+	public function createRuntimeShader(name:String):FlxRuntimeShader
+	{
+		if (!ClientPrefs.shaders)
+			return new FlxRuntimeShader();
+
+		if (!runtimeShaders.exists(name) && !initLuaShader(name))
+		{
+			FlxG.log.warn('Shader $name is missing!');
+			return new FlxRuntimeShader();
+		}
+
+		var arr:Array<String> = runtimeShaders.get(name);
+		return new FlxRuntimeShader(arr[0], arr[1]);
+	}
+
+	public function initLuaShader(name:String, ?glslVersion:Int = 120)
+	{
+		if (!ClientPrefs.shaders)
+			return false;
+
+		if (runtimeShaders.exists(name))
+		{
+			FlxG.log.warn('Shader $name was already initialized!');
+			return true;
+		}
+
+		var foldersToCheck:Array<String> = [FileSystem.absolutePath("assets/shaders/")];
+
+		for (folder in foldersToCheck)
+		{
+			trace(folder);
+			if (FileSystem.exists(folder))
+			{
+
+				var frag:String = folder + name + '.frag';
+				var vert:String = folder + name + '.vert';
+				var found:Bool = false;
+				if (FileSystem.exists(frag))
+				{
+					frag = File.getContent(frag);
+					found = true;
 				}
-				camGame.setFilters(newCamEffects);
+				else
+					frag = null;
+
+				if (FileSystem.exists(vert))
+				{
+					vert = File.getContent(vert);
+					found = true;
+				}
+				else
+					vert = null;
+
+				if (found)
+				{
+					runtimeShaders.set(name, [frag, vert]);
+					// trace('Found shader $name!');
+					return true;
+				}
+			}
 		}
-		
-	  
-  }
-	
-	
-	
-  public function clearShaderFromCamera(cam:String){
-	  
-	  
-		switch(cam.toLowerCase()) {
-			case 'camhud' | 'hud': 
-				camHUDShaders = [];
-				var newCamEffects:Array<BitmapFilter>=[];
-				camHUD.setFilters(newCamEffects);
-			case 'camother' | 'other': 
-				camOtherShaders = [];
-				var newCamEffects:Array<BitmapFilter>=[];
-				camOther.setFilters(newCamEffects);
-			default: 
-				camGameShaders = [];
-				var newCamEffects:Array<BitmapFilter>=[];
-				camGame.setFilters(newCamEffects);
-		}
-		
-	  
-  }
+		FlxG.log.warn('Missing shader $name .frag AND .vert files!');
+		return false;
+	}
+	#end
 
 	var previousFrameTime:Int = 0;
 	var lastReportedPlayheadPosition:Int = 0;
@@ -2094,7 +2079,8 @@ class PlayState extends MusicBeatState
 		if (ratingName != '?')
 			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
 
-		moneyTxt.text = money + "$";
+		if (moneyTxt != null)
+			moneyTxt.text = money + "$";
 
 		judgementCounter.text = "Sicks:"
 			+ sicks
@@ -2186,16 +2172,15 @@ class PlayState extends MusicBeatState
 		if (hunger > 1)
 			hunger = 1;
 
-		if (HungerSongs.contains(SONG.song.toLowerCase())) {
+		if (HungerSongs.contains(SONG.song.toLowerCase()))
+		{
 			hungerText.text = "Hunger: " + Highscore.floorDecimal(hunger * 100, 0) + "%";
 
 			if (hunger <= 40)
 				hungerText.color = FlxColor.YELLOW;
 			else
 				hungerText.color = FlxColor.WHITE;
-
 		}
-
 
 		if (healthBar.percent < 20)
 			iconP1.animation.curAnim.curFrame = 1;
@@ -2479,6 +2464,8 @@ class PlayState extends MusicBeatState
 		setOnLuas('cameraY', camFollowPos.y);
 		setOnLuas('botPlay', cpuControlled);
 		callOnLuas('onUpdatePost', [elapsed]);
+
+		updateFunnyShaders();
 	}
 
 	function openChartEditor()
@@ -3056,6 +3043,11 @@ class PlayState extends MusicBeatState
 		var ret:Dynamic = FunkinLua.Function_Continue;
 		#end
 
+		FlxG.game.setFilters([]);
+		camGame.setFilters([]);
+		camHUD.setFilters([]);
+		camOther.setFilters([]);
+
 		if (ret != FunkinLua.Function_Stop && !transitioning)
 		{
 			if (SONG.validScore)
@@ -3267,7 +3259,7 @@ class PlayState extends MusicBeatState
 						scoreTxtTween = null;
 					}
 				});
-			}*/
+		}*/
 		}
 
 		var pixelShitPart1:String = "";
@@ -3541,8 +3533,10 @@ class PlayState extends MusicBeatState
 		var left = controls.NOTE_LEFT;
 		var controlHoldArray:Array<Bool> = [left, down, up, right];
 
-		if (controls.BUY_FOOD) {
-			if (money >= 50) {
+		if (controls.BUY_FOOD)
+		{
+			if (money >= 50)
+			{
 				money -= 50;
 				hunger = 1;
 			}
@@ -3840,7 +3834,6 @@ class PlayState extends MusicBeatState
 							}
 					}
 				}
-
 
 				note.wasGoodHit = true;
 				if (!note.isSustainNote)

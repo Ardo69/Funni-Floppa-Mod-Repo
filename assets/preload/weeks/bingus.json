@@ -1,0 +1,41 @@
+{
+	"songs": [
+		[
+			"Backrooms",
+			"bingus",
+			[
+				153,
+				136,
+				139
+			]
+		],
+		[
+			"fnfgf",
+			"kingbingus",
+			[
+				153,
+				136,
+				139
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"difficulties": "",
+	"weekCharacters": [
+		"flop",
+		"bf",
+		"gf"
+	],
+	"storyName": "Stupid bingus",
+	"weekName": "Bingus Week",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}
