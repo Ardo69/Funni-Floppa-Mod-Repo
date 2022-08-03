@@ -1497,7 +1497,6 @@ class PlayState extends MusicBeatState
 	function updateFunnyShaders() {
 		switch (SONG.song.toLowerCase()) {
 			case 'players-fate':
-				initLuaShader("vcr");
 				shaderMap.get("gameVCR").setFloat("iTime", FlxG.elapsed);
 		}
 	}
@@ -1532,12 +1531,11 @@ class PlayState extends MusicBeatState
 
 		for (folder in foldersToCheck)
 		{
-			trace(folder);
 			if (FileSystem.exists(folder))
 			{
 
-				var frag:String = folder + name + '.frag';
-				var vert:String = folder + name + '.vert';
+				var frag:String = folder + "/" + name + '.frag';
+				var vert:String = folder + "/" + name + '.vert';
 				var found:Bool = false;
 				if (FileSystem.exists(frag))
 				{
