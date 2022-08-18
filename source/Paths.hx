@@ -46,6 +46,7 @@ class Paths
 		'assets/music/title.$SOUND_EXT',
 		'assets/shared/music/breakfast.$SOUND_EXT',
 		'assets/shared/music/tea-time.$SOUND_EXT',
+		'assets/shared/music/floppa-time.$SOUND_EXT',
 	];
 
 	/// haya I love you for the base cache dump I took to the max

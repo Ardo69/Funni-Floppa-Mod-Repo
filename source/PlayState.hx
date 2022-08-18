@@ -94,7 +94,7 @@ class PlayState extends MusicBeatState
 		['', 1] // The value on this one isn't used actually, since Perfect is always "1"
 	];
 
-	public static var HungerSongs:Array<String> = ["floppin", "flop-dont-stop"];
+	public static var HungerSongs:Array<String> = ["floppin", "flop-dont-stop", "nite"];
 
 	var scoreDancinLeft = false;
 
@@ -118,10 +118,12 @@ class PlayState extends MusicBeatState
 	public var boyfriendMap:Map<String, Boyfriend> = new Map();
 	public var dadMap:Map<String, Character> = new Map();
 	public var gfMap:Map<String, Character> = new Map();
+	public var variables:Map<String, Dynamic> = new Map();
 	#else
 	public var boyfriendMap:Map<String, Boyfriend> = new Map<String, Boyfriend>();
 	public var dadMap:Map<String, Character> = new Map<String, Character>();
 	public var gfMap:Map<String, Character> = new Map<String, Character>();
+	public var variables:Map<String, Dynamic> = new Map<String, Dynamic>();
 	#end
 
 	public var BF_X:Float = 770;
@@ -463,10 +465,25 @@ class PlayState extends MusicBeatState
 		{
 			case 'house':
 				var consistentPosition:Array<Float> = [-600, -300];
-				var resizeBG:Float = 1.4;
-				defaultCamZoom = 1.05;
+				var resizeBG:Float = 1;
 
 				var midGround:BGSprite = new BGSprite('stages/house', consistentPosition[0], consistentPosition[1]);
+				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
+				midGround.updateHitbox();
+				add(midGround);
+			case 'house-sunset':
+				var consistentPosition:Array<Float> = [-600, -300];
+				var resizeBG:Float = 1;
+
+				var midGround:BGSprite = new BGSprite('stages/house-sunset', consistentPosition[0], consistentPosition[1]);
+				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
+				midGround.updateHitbox();
+				add(midGround);
+			case 'house-night':
+				var consistentPosition:Array<Float> = [-600, -300];
+				var resizeBG:Float = 1;
+
+				var midGround:BGSprite = new BGSprite('stages/house-night', consistentPosition[0], consistentPosition[1]);
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
@@ -941,6 +958,7 @@ class PlayState extends MusicBeatState
 		}
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
+		callOnLuas('onAss', []);
 
 		initFunnyShaders();
 
@@ -1484,21 +1502,50 @@ class PlayState extends MusicBeatState
 	}
 
 	#if (!flash && sys)
-
-	function initFunnyShaders() {
-		switch (SONG.song.toLowerCase()) {
+	function initFunnyShaders()
+	{
+		switch (SONG.song.toLowerCase())
+		{
 			case 'players-fate':
 				initLuaShader("vcr");
 				shaderMap.set("gameVCR", createRuntimeShader("vcr"));
-				FlxG.game.setFilters([new ShaderFilter(shaderMap.get("gameVCR"))]);
+				shaderMap.get("gameVCR").setBool('vignetteOn', true);
+				shaderMap.get("gameVCR").setBool('perspectiveOn', true);
+				shaderMap.get("gameVCR").setBool('scanlinesOn', true);
+				shaderMap.get("gameVCR").setBool('vignetteMoving', true);
+				shaderMap.get("gameVCR").setFloat('glitchModifier', 1.5);
+				FlxG.game.setFilters([
+					new ShaderFilter(shaderMap.get("gameVCR")),
+				]);
 		}
 	}
 
-	function updateFunnyShaders() {
-		switch (SONG.song.toLowerCase()) {
+	function updateFunnyShaders()
+	{
+		switch (SONG.song.toLowerCase())
+		{
 			case 'players-fate':
 				shaderMap.get("gameVCR").setFloat("iTime", FlxG.elapsed);
 		}
+	}
+
+	function BeatFunnyShaders()
+	{
+		switch (SONG.song.toLowerCase())
+		{
+			case 'players-fate':
+				// if (curBeat % 4 == 0)
+					// shaderMap.get("gameRadialBlur").setFloat("blurWidth", 0.1);
+		}
+	}
+
+	public function clearShaders()
+	{
+		FlxG.game.setFilters([]);
+		FlxG.camera.setFilters([]);
+		instance.camGame.setFilters([]);
+		instance.camHUD.setFilters([]);
+		instance.camOther.setFilters([]);
 	}
 
 	public function createRuntimeShader(name:String):FlxRuntimeShader
@@ -1533,7 +1580,6 @@ class PlayState extends MusicBeatState
 		{
 			if (FileSystem.exists(folder))
 			{
-
 				var frag:String = folder + "/" + name + '.frag';
 				var vert:String = folder + "/" + name + '.vert';
 				var found:Bool = false;
@@ -2517,6 +2563,12 @@ class PlayState extends MusicBeatState
 				{
 					timer.active = true;
 				}
+
+				FlxG.game.setFilters([]);
+				camGame.setFilters([]);
+				camHUD.setFilters([]);
+				camOther.setFilters([]);
+
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0],
 					boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
 
@@ -2551,6 +2603,12 @@ class PlayState extends MusicBeatState
 			{
 				timer.active = true;
 			}
+
+			FlxG.game.setFilters([]);
+			camGame.setFilters([]);
+			camHUD.setFilters([]);
+			camOther.setFilters([]);
+
 			openSubState(new GameOverSubstate(dad.getScreenPosition().x - dad.positionArray[0], dad.getScreenPosition().y - dad.positionArray[1],
 				camFollowPos.x,
 				camFollowPos.y));
@@ -3778,6 +3836,7 @@ class PlayState extends MusicBeatState
 			note.isSustainNote,
 			note.ID
 		]);
+		callOnLuas('onOppentAssHit', []);
 
 		if (HungerSongs.contains(SONG.song.toLowerCase()))
 			hunger -= 0.005;
@@ -4074,7 +4133,7 @@ class PlayState extends MusicBeatState
 
 		lastBeatHit = curBeat;
 
-		setOnLuas('curBeat', curBeat); // DAWGG?????
+		setOnLuas('curBeat', curBeat); // what da dawg doin?
 		callOnLuas('onBeatHit', []);
 	}
 

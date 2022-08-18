@@ -104,7 +104,7 @@ class CreditsState extends MusicBeatState
 			[''],
 			["Raise A Funky Floppa Team"],
 			['ardo',    'ardo',     "The owner and the side coder",     'https://www.youtube.com/channel/UCQgUiJpyjkqWmk8KtZ4nvHw',  'FF0000'],
-			['plank',   'plank',    "The co-owner, the main coder, musician and the artist of the mod(I didn't force him lol)",   'https://www.youtube.com/channel/UCl2WddlfDqo2vH-Pf78SnhQ',     '644917']
+			['plank',   'plank',    "The co-owner, the main coder, musician and the artist of the mod (I didn't force him lol)",   'https://www.youtube.com/channel/UCl2WddlfDqo2vH-Pf78SnhQ',     '644917']
 		];
 		
 		for(i in pisspoop){

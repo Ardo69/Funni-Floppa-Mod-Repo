@@ -1,0 +1,28 @@
+{
+	"song": {
+		"speed": 2.7,
+		"stage": "house",
+		"player1": "reanimatedbf",
+		"player2": "flipflop",
+		"events": [
+			[
+				121500,
+				[
+					[
+						"Hey!",
+						"",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "gf",
+		"bpm": 160,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "Nite"
+	}
+}
