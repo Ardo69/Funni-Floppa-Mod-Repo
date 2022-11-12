@@ -836,6 +836,7 @@ class EditorPlayState extends MusicBeatState
 		if (noteDiff > Conductor.safeZoneOffset * 0.75)
 		{
 			daRating = 'shit';
+			//songMisses += 1; //it no work :(
 			// score = 50;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.5)

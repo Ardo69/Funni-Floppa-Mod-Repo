@@ -150,6 +150,19 @@ class Note extends FlxSprite
 						missHealth = 0.6;
 					}
 					hitCausesMiss = true;
+					case 'Warning Note':
+						ignoreNote = mustPress;
+						reloadNote('WARNING');
+						noteSplashTexture = 'noteSplashes';
+						colorSwap.hue = 0;
+						colorSwap.saturation = 0;
+						colorSwap.brightness = 0;
+						if(isSustainNote) {
+							hitHealth = 0.23;
+						} else {
+							hitHealth = 0.23;
+						}
+						hitCausesMiss = false;
 				case 'Parry note':
 					reloadNote('PARRY');
 					noteSplashTexture = 'noteSplashes';
