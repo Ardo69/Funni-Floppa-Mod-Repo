@@ -2,5 +2,8 @@
     "Lua.diagnostics.disable": [
         "lowercase-global",
         "undefined-global"
-    ]
+    ],
+    "editor.codeActionsOnSave": {
+        "source.sortImports": false
+    }
 }

@@ -799,6 +799,9 @@ class PlayState extends MusicBeatState
 			hungerText.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
 			hungerText.screenCenter(X);
 			hungerText.y = healthBarBG.y - hungerText.height - 25;
+			if (ClientPrefs.downScroll) {
+				hungerText.y = healthBarBG.y + hungerText.height + 25;
+			}
 			hungerText.cameras = [camHUD];
 			add(hungerText);
 
@@ -806,6 +809,9 @@ class PlayState extends MusicBeatState
 			moneyTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, 0xFF50DA3E, CENTER, OUTLINE, FlxColor.BLACK);
 			moneyTxt.screenCenter(X);
 			moneyTxt.y = hungerText.y - moneyTxt.height - 25;
+			if (ClientPrefs.downScroll) {
+				moneyTxt.y = hungerText.y + moneyTxt.height + 25;
+			}
 			moneyTxt.cameras = [camHUD];
 			add(moneyTxt);
 		}
