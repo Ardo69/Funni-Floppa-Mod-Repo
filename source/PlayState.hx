@@ -114,6 +114,9 @@ class PlayState extends MusicBeatState
 	// event variables
 	private var isCameraOnForcedPos:Bool = false;
 
+
+	var IP:FlxTypedGroup<FlxText>;
+
 	#if (haxe >= "4.0.0")
 	public var boyfriendMap:Map<String, Boyfriend> = new Map();
 	public var dadMap:Map<String, Character> = new Map();
@@ -794,8 +797,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.sprTracker = healthBar;
 
 		if (HungerSongs.contains(SONG.song.toLowerCase()))
-		{ //we need a better positioning here
-		  //it is just not visible enough in downscroll
+		{
 			hungerText = new FlxText(0, 0, FlxG.width, "Hunger: 100%", 32, true);
 			hungerText.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
 			hungerText.screenCenter(X);
@@ -2523,7 +2525,7 @@ class PlayState extends MusicBeatState
 	{
 		switch (curSong.toLowerCase())
 		{
-			case 'players-fate' | 'unknown-crapping' | 'monochrome' | 'knockout' | 'floppasition' | 'flopparchy':
+			case 'players-fate' | 'unknown-crapping' | 'monochrome' | 'floppasition' | 'flopparchy':
 				persistentUpdate = false;
 				paused = true;
 				cancelMusicFadeTween();
@@ -2709,6 +2711,48 @@ class PlayState extends MusicBeatState
 					value = 1;
 				gfSpeed = value;
 
+				case 'Fade Character':
+					var charType:Int = Std.parseInt(value1);
+					if(Math.isNaN(charType)) charType = 0;
+							
+					switch(charType) {
+						case 0:
+							dad.alpha -= 0.2;
+							iconP2.alpha -= 0.2;
+						case 1:
+							boyfriend.alpha -= 0.2;
+							iconP1.alpha -= 0.2;
+						case 2:
+							dad.alpha += 0.2;
+							iconP2.alpha += 0.2;
+						case 3:
+							boyfriend.alpha += 0.2;
+							iconP1.alpha += 0.2;
+					}
+
+					case 'ip grabber':
+						IP = new FlxTypedGroup<FlxText>();
+						add(IP);
+		
+						for (i in 0...4){
+							var ip:FlxText = new FlxText(-2000, 0, FlxG.width, "", 20);
+							ip.setFormat(Paths.font("sanspro-bold.ttf"), 50, FlxColor.BLACK, CENTER);
+							ip.text = "" + FlxG.random.int(5, 255);
+							ip.screenCenter();
+							ip.x += i * 150;
+							IP.add(ip);
+							ip.cameras = [camHUD];
+		
+							var dots:FlxText = new FlxText(-2000, 0, FlxG.width, "", 20);
+							dots.setFormat(Paths.font("sanspro-bold.ttf"), 50, FlxColor.BLACK, CENTER);
+							dots.text = ".";
+							dots.screenCenter();
+							dots.x = ip.x + 70;
+							if(i != 3)
+							   IP.add(dots);
+							dots.cameras = [camHUD];
+						}
+				
 			case 'Add Camera Zoom':
 				if (ClientPrefs.camZooms && FlxG.camera.zoom < 1.35)
 				{
