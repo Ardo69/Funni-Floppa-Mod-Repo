@@ -794,7 +794,8 @@ class PlayState extends MusicBeatState
 		healthBarBG.sprTracker = healthBar;
 
 		if (HungerSongs.contains(SONG.song.toLowerCase()))
-		{
+		{ //we need a better positioning here
+		  //it is just not visible enough in downscroll
 			hungerText = new FlxText(0, 0, FlxG.width, "Hunger: 100%", 32, true);
 			hungerText.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
 			hungerText.screenCenter(X);
