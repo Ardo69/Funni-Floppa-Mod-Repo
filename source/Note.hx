@@ -150,7 +150,7 @@ class Note extends FlxSprite
 						missHealth = 0.6;
 					}
 					hitCausesMiss = true;
-					case 'Warning Note':
+					case 'Warning note':
 						ignoreNote = mustPress;
 						reloadNote('WARNING');
 						noteSplashTexture = 'noteSplashes';
