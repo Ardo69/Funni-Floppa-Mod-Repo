@@ -10,7 +10,7 @@ import flixel.util.FlxColor;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import WeekData;
-//input handler
+// input handler
 import flixel.input.FlxInput;
 import flixel.input.actions.FlxAction;
 import flixel.input.actions.FlxActionInput;
@@ -24,20 +24,21 @@ import Controls;
 
 using StringTools;
 
-class Shop extends FlxState {
-    public function new()
-        {
-            super();
-        }
-       override public function create()
-        {
-            FlxG.sound.playMusic(Paths.music("bwomp"));
-        }
-        override function update(elapsed:Float) {
-            //it can't static access to UI_RIGHT_P bruh
-            var downP = Controls.UI_RIGHT_P;
+class ShopState extends MusicBeatState
+{
 
-            if (Controls.UI_RIGHT_P)
-                FlxG.switchState(new FreeplayState());
-        }
+	override public function create()
+	{
+		FlxG.sound.playMusic(Paths.music("bwomp")); // bwomp
+
+
+	}
+
+	override function update(elapsed:Float)
+	{
+		var back = controls.BACK;
+
+		if (back)
+			FlxG.switchState(new FreeplayState());
+	}
 }
