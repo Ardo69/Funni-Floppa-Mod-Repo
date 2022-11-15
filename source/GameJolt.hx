@@ -636,7 +636,6 @@ class GameJoltLogin extends MusicBeatSubstate
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			FlxG.save.flush();
-			FlxG.mouse.visible = false;
 			FlxG.switchState(GameJoltInfo.changeState);
 		}
 
