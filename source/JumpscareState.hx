@@ -28,7 +28,7 @@ class JumpscareState extends FlxState
         bg.makeGraphic(FlxG.width, FlxG.height);
         add(bg);
 
-        character = new Character(0,0,"bob", false); // billy bobbo rap
+        character = new Character(0,0,"flipflop", false); // billy bobbo rap
         character.scale.set(0, 0);
         add(character);
 

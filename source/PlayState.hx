@@ -1516,7 +1516,9 @@ class PlayState extends MusicBeatState
 		{
 			case 'players-fate':
 				initLuaShader("vcr");
+				initLuaShader("chromaticAbbertion");
 				shaderMap.set("gameVCR", createRuntimeShader("vcr"));
+				shaderMap.set("gameVCR", createRuntimeShader("chromaticAbbertion"));
 				shaderMap.get("gameVCR").setBool('vignetteOn', true);
 				shaderMap.get("gameVCR").setBool('perspectiveOn', true);
 				shaderMap.get("gameVCR").setBool('scanlinesOn', true);
@@ -1524,6 +1526,7 @@ class PlayState extends MusicBeatState
 				shaderMap.get("gameVCR").setFloat('glitchModifier', 1.5);
 				FlxG.game.setFilters([
 					new ShaderFilter(shaderMap.get("gameVCR")),
+					new ShaderFilter(shaderMap.get("chromaticAbberation"))
 				]);
 		}
 	}
