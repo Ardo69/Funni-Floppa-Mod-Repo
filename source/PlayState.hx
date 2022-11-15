@@ -1516,9 +1516,9 @@ class PlayState extends MusicBeatState
 		{
 			case 'players-fate':
 				initLuaShader("vcr");
-				initLuaShader("chromaticAbbertion");
+				initLuaShader("chromaticAbberation");
 				shaderMap.set("gameVCR", createRuntimeShader("vcr"));
-				shaderMap.set("gameAbberation", createRuntimeShader("chromaticAbbertion"));
+				shaderMap.set("gameAbberation", createRuntimeShader("chromaticAbberation"));
 				shaderMap.get("gameVCR").setBool('vignetteOn', true);
 				shaderMap.get("gameVCR").setBool('perspectiveOn', true);
 				shaderMap.get("gameVCR").setBool('scanlinesOn', true);
@@ -1540,6 +1540,7 @@ class PlayState extends MusicBeatState
 		{
 			case 'players-fate':
 				shaderMap.get("gameVCR").setFloat("iTime", FlxG.elapsed);
+				shaderMap.get("gameAbberation").setFloat("iTime", FlxG.elapsed);
 		}
 	}
 
