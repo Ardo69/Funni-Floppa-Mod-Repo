@@ -2144,8 +2144,7 @@ class PlayState extends MusicBeatState
 			+ "\nShits: "
 			+ shits
 			+ "\nMisses: "
-			+ songMisses
-			+ "\ndofjdkfjdkjfdj";
+			+ songMisses;
 
 		switch (SONG.song.toLowerCase())
 		{
