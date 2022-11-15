@@ -1518,15 +1518,18 @@ class PlayState extends MusicBeatState
 				initLuaShader("vcr");
 				initLuaShader("chromaticAbbertion");
 				shaderMap.set("gameVCR", createRuntimeShader("vcr"));
-				shaderMap.set("gameVCR", createRuntimeShader("chromaticAbbertion"));
+				shaderMap.set("gameAbberation", createRuntimeShader("chromaticAbbertion"));
 				shaderMap.get("gameVCR").setBool('vignetteOn', true);
 				shaderMap.get("gameVCR").setBool('perspectiveOn', true);
 				shaderMap.get("gameVCR").setBool('scanlinesOn', true);
 				shaderMap.get("gameVCR").setBool('vignetteMoving', true);
 				shaderMap.get("gameVCR").setFloat('glitchModifier', 1.5);
+				shaderMap.get("gameAbberation").setFloat('rOffset', 10);
+				shaderMap.get("gameAbberation").setFloat('gOffset', 10);
+				shaderMap.get("gameAbberation").setFloat('bOffset', 10);
 				FlxG.game.setFilters([
 					new ShaderFilter(shaderMap.get("gameVCR")),
-					new ShaderFilter(shaderMap.get("chromaticAbberation"))
+					new ShaderFilter(shaderMap.get("gameAbberation"))
 				]);
 		}
 	}
