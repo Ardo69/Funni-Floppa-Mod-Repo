@@ -4,68 +4,7 @@
 		"stage": "house",
 		"player1": "reanimatedbf",
 		"player2": "flipflop",
-		"events": [
-			[
-				0,
-				[
-					[
-						"Set GF Speed",
-						"4",
-						""
-					]
-				]
-			],
-			[
-				24000,
-				[
-					[
-						"Set GF Speed",
-						"2",
-						""
-					]
-				]
-			],
-			[
-				48000,
-				[
-					[
-						"Set GF Speed",
-						"4",
-						""
-					]
-				]
-			],
-			[
-				72000,
-				[
-					[
-						"Set GF Speed",
-						"1",
-						""
-					]
-				]
-			],
-			[
-				96000,
-				[
-					[
-						"Add Camera Zoom",
-						"0.2",
-						"0.1"
-					]
-				]
-			],
-			[
-				96093.75,
-				[
-					[
-						"Set GF Speed",
-						"4",
-						""
-					]
-				]
-			]
-		],
+		"events": [],
 		"notes": [],
 		"splashSkin": null,
 		"validScore": false,

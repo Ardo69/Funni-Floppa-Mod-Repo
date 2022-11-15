@@ -439,7 +439,7 @@ class GameJoltLogin extends MusicBeatSubstate
 		}
 
 		trace(GJApi.initialized);
-		FlxG.mouse.visible = true;
+		// FlxG.mouse.visible = true;
 
 		Conductor.changeBPM(102);
 
@@ -636,7 +636,7 @@ class GameJoltLogin extends MusicBeatSubstate
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			FlxG.save.flush();
-			FlxG.mouse.visible = false;
+			// FlxG.mouse.visible = false;
 			FlxG.switchState(GameJoltInfo.changeState);
 		}
 

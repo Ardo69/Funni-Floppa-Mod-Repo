@@ -1620,7 +1620,7 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.justPressed.ENTER)
 			{
 				autosaveSong();
-				FlxG.mouse.visible = false;
+				// FlxG.mouse.visible = false;
 				PlayState.SONG = _song;
 				FlxG.sound.music.stop();
 				if(vocals != null) vocals.stop();
@@ -1647,7 +1647,7 @@ class ChartingState extends MusicBeatState
 					MusicBeatState.switchState(new editors.MasterEditorMenu());
 					FlxG.sound.playMusic(Paths.music('title'));
 				//}
-				FlxG.mouse.visible = false;
+				// FlxG.mouse.visible = false;
 				return;
 			}
 
