@@ -970,6 +970,10 @@ class PlayState extends MusicBeatState
 
 		initFunnyShaders();
 
+		FlxG.signals.preStateSwitch.addOnce(function() {
+			clearShaders();
+		});
+
 		super.create();
 		Paths.clearUnusedMemory();
 		for (key => type in precacheList)
@@ -1524,12 +1528,12 @@ class PlayState extends MusicBeatState
 				shaderMap.get("gameVCR").setBool('scanlinesOn', true);
 				shaderMap.get("gameVCR").setBool('vignetteMoving', true);
 				shaderMap.get("gameVCR").setFloat('glitchModifier', 1.5);
-				shaderMap.get("gameAbberation").setFloat('rOffset', 10);
-				shaderMap.get("gameAbberation").setFloat('gOffset', 10);
-				shaderMap.get("gameAbberation").setFloat('bOffset', 10);
+				shaderMap.get("gameAbberation").setFloat('rOffset', 2);
+				shaderMap.get("gameAbberation").setFloat('gOffset', 2);
+				shaderMap.get("gameAbberation").setFloat('bOffset', 2);
 				FlxG.game.setFilters([
 					new ShaderFilter(shaderMap.get("gameVCR")),
-					new ShaderFilter(shaderMap.get("gameAbberation"))
+					// new ShaderFilter(shaderMap.get("gameAbberation"))
 				]);
 		}
 	}
@@ -4375,6 +4379,7 @@ class PlayState extends MusicBeatState
 		return null;
 	}
 	#end
+
 
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;

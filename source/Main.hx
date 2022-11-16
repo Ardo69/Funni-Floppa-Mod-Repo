@@ -1,5 +1,7 @@
 package;
 
+import sys.FileSystem;
+import haxe.SysTools;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -75,6 +77,11 @@ class Main extends Sprite
 		#if !debug
 		initialState = TitleState;
 		#end
+
+		// TF2 refrence
+		if (!FileSystem.exists(FileSystem.absolutePath("assets/images/cow.png")))
+			Paths.purpleAndBlackMess = true;
+
 
 		ClientPrefs.loadDefaultKeys();
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));

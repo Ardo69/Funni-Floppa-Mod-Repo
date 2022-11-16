@@ -1,5 +1,6 @@
 package;
 
+import Transparency.BOOL;
 import animateatlas.AtlasFrameMaker;
 import flixel.math.FlxPoint;
 import flixel.graphics.frames.FlxFrame.FlxFrameAngle;
@@ -232,10 +233,13 @@ class Paths
 		return inst;
 	}
 
+	public static var purpleAndBlackMess:Bool = false;
 	inline static public function image(key:String, ?library:String):FlxGraphic
 	{
 		// streamlined the assets process more
 		var returnAsset:FlxGraphic = returnGraphic(key, library);
+		if (purpleAndBlackMess)
+			returnAsset = FlxGraphic.fromBitmapData(OpenFlAssets.getBitmapData("art/missingTexture.png"));
 		return returnAsset;
 	}
 

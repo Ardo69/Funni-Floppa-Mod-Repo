@@ -1,4 +1,4 @@
-		////pragma header
+		#pragma header
 
 		uniform float rOffset;
 		uniform float gOffset;
