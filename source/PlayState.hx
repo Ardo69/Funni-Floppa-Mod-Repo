@@ -474,6 +474,14 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+			case 'ardosvoid':
+				var consistentPosition:Array<Float> = [-600, -300];
+				var resizeBG:Float = 1;
+
+				var midGround:BGSprite = new BGSprite('stages/ardosvoid', consistentPosition[0], consistentPosition[1]);
+				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
+				midGround.updateHitbox();
+				add(midGround);
 			case 'house-sunset':
 				var consistentPosition:Array<Float> = [-600, -300];
 				var resizeBG:Float = 1;
@@ -2534,7 +2542,7 @@ class PlayState extends MusicBeatState
 	{
 		switch (curSong.toLowerCase())
 		{
-			case 'players-fate' | 'unknown-crapping' | 'monochrome' | 'floppasition' | 'flopparchy':
+			case 'players-fate' | 'floppasition' | 'flopparchy':  // | 'unknown-crapping' | 'monochrome' 
 				persistentUpdate = false;
 				paused = true;
 				cancelMusicFadeTween();
