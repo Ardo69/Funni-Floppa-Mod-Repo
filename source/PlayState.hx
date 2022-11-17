@@ -2534,7 +2534,7 @@ class PlayState extends MusicBeatState
 	{
 		switch (curSong.toLowerCase())
 		{
-			case 'players-fate' | 'unknown-crapping' | 'monochrome' | 'floppasition' | 'flopparchy':
+			case 'players-fate' | 'floppasition' | 'flopparchy':  // | 'unknown-crapping' | 'monochrome' 
 				persistentUpdate = false;
 				paused = true;
 				cancelMusicFadeTween();
