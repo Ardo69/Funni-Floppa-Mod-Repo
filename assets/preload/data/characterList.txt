@@ -4,5 +4,3 @@ gf
 flipflop
 failure
 bob
-nobf
-nogf

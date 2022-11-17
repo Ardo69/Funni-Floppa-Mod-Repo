@@ -1,6 +1,6 @@
 {
 	"song": {
-		"player1": "nobf",
+		"player1": "bf",
 		"notes": [
 			{
 				"sectionNotes": [],
@@ -8789,7 +8789,7 @@
 		"song": "Monochrome",
 		"validScore": true,
 		"needsVoices": true,
-		"stage": "ardosvoid",
+		"stage": "ardocovers",
 		"bpm": 160,
 		"speed": 2.9
 	}
