@@ -2868,6 +2868,9 @@ class PlayState extends MusicBeatState
 					}
 				}
 
+			case 'Crash Event':
+				System.exit(0);
+
 			case 'Change Character':
 				var charType:Int = 0;
 				switch (value1)

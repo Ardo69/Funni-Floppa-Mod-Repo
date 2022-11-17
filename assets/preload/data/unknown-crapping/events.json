@@ -3,8 +3,7 @@
 		"speed": 3.4,
 		"stage": "ardocovers",
 		"player1": "bf",
-		"player2": "ardo",
-		"player3": "null",
+		"player2": "bob",
 		"events": [
 			[
 				225,
@@ -81,7 +80,7 @@
 				[
 					[
 						"Play Animation",
-						"risaSingle",
+						"up",
 						"dad"
 					]
 				]
@@ -91,7 +90,7 @@
 				[
 					[
 						"Play Animation",
-						"risaSingle",
+						"right",
 						"dad"
 					]
 				]
@@ -101,7 +100,7 @@
 				[
 					[
 						"Play Animation",
-						"risaSingle",
+						"left",
 						"dad"
 					]
 				]
@@ -111,7 +110,7 @@
 				[
 					[
 						"Play Animation",
-						"risaSingle",
+						"up",
 						"dad"
 					]
 				]
@@ -121,7 +120,7 @@
 				[
 					[
 						"Play Animation",
-						"risaSingle",
+						"left",
 						"dad"
 					]
 				]
@@ -131,7 +130,7 @@
 				[
 					[
 						"Play Animation",
-						"risaSingle",
+						"right",
 						"dad"
 					]
 				]
@@ -141,43 +140,8 @@
 				[
 					[
 						"Play Animation",
-						"risaSingle",
+						"up",
 						"dad"
-					]
-				]
-			],
-			[
-				19200,
-				[
-					[
-						"Change Character",
-						"dad",
-						"smileeeeer"
-					],
-					[
-						"Flash Black",
-						"",
-						""
-					]
-				]
-			],
-			[
-				28794.375,
-				[
-					[
-						"Change Character",
-						"dad",
-						"suicide"
-					]
-				]
-			],
-			[
-				28796.25,
-				[
-					[
-						"Flash Black",
-						"",
-						""
 					]
 				]
 			],
@@ -475,7 +439,7 @@
 		"notes": [],
 		"splashSkin": null,
 		"validScore": false,
-		"gfVersion": "gf-invisible",
+		"gfVersion": "gf",
 		"bpm": 200,
 		"arrowSkin": "",
 		"needsVoices": true,
