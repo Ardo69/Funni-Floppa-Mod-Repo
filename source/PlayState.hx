@@ -114,7 +114,6 @@ class PlayState extends MusicBeatState
 	// event variables
 	private var isCameraOnForcedPos:Bool = false;
 
-
 	var IP:FlxTypedGroup<FlxText>;
 
 	#if (haxe >= "4.0.0")
@@ -802,7 +801,8 @@ class PlayState extends MusicBeatState
 			hungerText.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
 			hungerText.screenCenter(X);
 			hungerText.y = healthBarBG.y - hungerText.height - 25;
-			if (ClientPrefs.downScroll) {
+			if (ClientPrefs.downScroll)
+			{
 				hungerText.y = healthBarBG.y + hungerText.height + 25;
 			}
 			hungerText.cameras = [camHUD];
@@ -812,7 +812,8 @@ class PlayState extends MusicBeatState
 			moneyTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, 0xFF50DA3E, CENTER, OUTLINE, FlxColor.BLACK);
 			moneyTxt.screenCenter(X);
 			moneyTxt.y = hungerText.y - moneyTxt.height - 25;
-			if (ClientPrefs.downScroll) {
+			if (ClientPrefs.downScroll)
+			{
 				moneyTxt.y = hungerText.y + moneyTxt.height + 25;
 			}
 			moneyTxt.cameras = [camHUD];
@@ -970,7 +971,8 @@ class PlayState extends MusicBeatState
 
 		initFunnyShaders();
 
-		FlxG.signals.preStateSwitch.addOnce(function() {
+		FlxG.signals.preStateSwitch.addOnce(function()
+		{
 			clearShaders();
 		});
 
@@ -1520,17 +1522,17 @@ class PlayState extends MusicBeatState
 		{
 			case 'players-fate':
 				initLuaShader("vcr");
-				//initLuaShader("chromaticAbberation2");
+				// initLuaShader("chromaticAbberation2");
 				shaderMap.set("gameVCR", createRuntimeShader("vcr"));
-				//shaderMap.set("gameAbberation", createRuntimeShader("chromaticAbberation2"));
+				// shaderMap.set("gameAbberation", createRuntimeShader("chromaticAbberation2"));
 				shaderMap.get("gameVCR").setBool('vignetteOn', true);
 				shaderMap.get("gameVCR").setBool('perspectiveOn', true);
 				shaderMap.get("gameVCR").setBool('scanlinesOn', true);
 				shaderMap.get("gameVCR").setBool('vignetteMoving', true);
 				shaderMap.get("gameVCR").setFloat('glitchModifier', 1.5);
-				//shaderMap.get("gameAbberation2").setFloat('rOffset', 10);
-				//shaderMap.get("gameAbberation2").setFloat('gOffset', 10);
-				//shaderMap.get("gameAbberation2").setFloat('bOffset', 10);
+				// shaderMap.get("gameAbberation2").setFloat('rOffset', 10);
+				// shaderMap.get("gameAbberation2").setFloat('gOffset', 10);
+				// shaderMap.get("gameAbberation2").setFloat('bOffset', 10);
 				FlxG.game.setFilters([
 					new ShaderFilter(shaderMap.get("gameVCR")),
 					//new ShaderFilter(shaderMap.get("gameAbberation2"))
@@ -1544,7 +1546,7 @@ class PlayState extends MusicBeatState
 		{
 			case 'players-fate':
 				shaderMap.get("gameVCR").setFloat("iTime", FlxG.elapsed);
-				//shaderMap.get("gameAbberation2").setFloat("iTime", FlxG.elapsed);
+				// shaderMap.get("gameAbberation2").setFloat("iTime", FlxG.elapsed);
 		}
 	}
 
@@ -1554,7 +1556,7 @@ class PlayState extends MusicBeatState
 		{
 			case 'players-fate':
 				// if (curBeat % 4 == 0)
-					// shaderMap.get("gameRadialBlur").setFloat("blurWidth", 0.1);
+				// shaderMap.get("gameRadialBlur").setFloat("blurWidth", 0.1);
 		}
 	}
 
@@ -2145,16 +2147,7 @@ class PlayState extends MusicBeatState
 		if (moneyTxt != null)
 			moneyTxt.text = money + "$";
 
-		judgementCounter.text = "Sicks:"
-			+ sicks
-			+ "\nGoods:"
-			+ goods
-			+ "\nBads: "
-			+ bads
-			+ "\nShits: "
-			+ shits
-			+ "\nMisses: "
-			+ songMisses;
+		judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses;
 
 		switch (SONG.song.toLowerCase())
 		{
@@ -2534,7 +2527,7 @@ class PlayState extends MusicBeatState
 	{
 		switch (curSong.toLowerCase())
 		{
-			case 'players-fate' | 'floppasition' | 'flopparchy':  // | 'unknown-crapping' | 'monochrome' 
+			case 'players-fate' | 'floppasition' | 'flopparchy': // | 'unknown-crapping' | 'monochrome'
 				persistentUpdate = false;
 				paused = true;
 				cancelMusicFadeTween();
@@ -2720,48 +2713,51 @@ class PlayState extends MusicBeatState
 					value = 1;
 				gfSpeed = value;
 
-				case 'Fade Character':
-					var charType:Int = Std.parseInt(value1);
-					if(Math.isNaN(charType)) charType = 0;
-							
-					switch(charType) {
-						case 0:
-							dad.alpha -= 0.2;
-							iconP2.alpha -= 0.2;
-						case 1:
-							boyfriend.alpha -= 0.2;
-							iconP1.alpha -= 0.2;
-						case 2:
-							dad.alpha += 0.2;
-							iconP2.alpha += 0.2;
-						case 3:
-							boyfriend.alpha += 0.2;
-							iconP1.alpha += 0.2;
-					}
+			case 'Fade Character':
+				var charType:Int = Std.parseInt(value1);
+				if (Math.isNaN(charType))
+					charType = 0;
 
-					case 'ip grabber':
-						IP = new FlxTypedGroup<FlxText>();
-						add(IP);
-		
-						for (i in 0...4){
-							var ip:FlxText = new FlxText(-2000, 0, FlxG.width, "", 20);
-							ip.setFormat(Paths.font("sanspro-bold.ttf"), 50, FlxColor.BLACK, CENTER);
-							ip.text = "" + FlxG.random.int(5, 255);
-							ip.screenCenter();
-							ip.x += i * 150;
-							IP.add(ip);
-							ip.cameras = [camHUD];
-		
-							var dots:FlxText = new FlxText(-2000, 0, FlxG.width, "", 20);
-							dots.setFormat(Paths.font("sanspro-bold.ttf"), 50, FlxColor.BLACK, CENTER);
-							dots.text = ".";
-							dots.screenCenter();
-							dots.x = ip.x + 70;
-							if(i != 3)
-							   IP.add(dots);
-							dots.cameras = [camHUD];
-						}
-				
+				switch (charType)
+				{
+					case 0:
+						dad.alpha -= 0.2;
+						iconP2.alpha -= 0.2;
+					case 1:
+						boyfriend.alpha -= 0.2;
+						iconP1.alpha -= 0.2;
+					case 2:
+						dad.alpha += 0.2;
+						iconP2.alpha += 0.2;
+					case 3:
+						boyfriend.alpha += 0.2;
+						iconP1.alpha += 0.2;
+				}
+
+			case 'ip grabber':
+				IP = new FlxTypedGroup<FlxText>();
+				add(IP);
+
+				for (i in 0...4)
+				{
+					var ip:FlxText = new FlxText(-2000, 0, FlxG.width, "", 20);
+					ip.setFormat(Paths.font("sanspro-bold.ttf"), 50, FlxColor.BLACK, CENTER);
+					ip.text = "" + FlxG.random.int(5, 255);
+					ip.screenCenter();
+					ip.x += i * 150;
+					IP.add(ip);
+					ip.cameras = [camHUD];
+
+					var dots:FlxText = new FlxText(-2000, 0, FlxG.width, "", 20);
+					dots.setFormat(Paths.font("sanspro-bold.ttf"), 50, FlxColor.BLACK, CENTER);
+					dots.text = ".";
+					dots.screenCenter();
+					dots.x = ip.x + 70;
+					if (i != 3)
+						IP.add(dots);
+					dots.cameras = [camHUD];
+				}
+
 			case 'Add Camera Zoom':
 				if (ClientPrefs.camZooms && FlxG.camera.zoom < 1.35)
 				{
@@ -3140,20 +3136,13 @@ class PlayState extends MusicBeatState
 		seenCutscene = false;
 
 		#if ACHIEVEMENTS_ALLOWED
-		if (achievementObj != null)
-		{
-			return;
-		}
-		else
-		{
-			var achieve:String = checkForAchievement(['floppin', 'extras_passed', 'extra_passed', 'frien']);
+		var achieve:String = checkForWeekAchievement();
 
-			if (achieve != null)
-			{
-				startAchievement(achieve);
-				return;
-			}
-		}
+		// if (achieve != null)
+		// {
+		// 	startAchievement(achieve);
+		// 	return;
+		// }
 		#end
 
 		#if LUA_ALLOWED
@@ -3291,7 +3280,7 @@ class PlayState extends MusicBeatState
 	function achievementEnd():Void
 	{
 		achievementObj = null;
-		if (endingSong && !inCutscene)
+		if (endingSong)
 		{
 			endSong();
 		}
@@ -3695,13 +3684,13 @@ class PlayState extends MusicBeatState
 
 			if (controlHoldArray.contains(true) && !endingSong)
 			{
-				#if ACHIEVEMENTS_ALLOWED
-				var achieve:String = checkForAchievement(['oversinging']);
-				if (achieve != null)
-				{
-					startAchievement(achieve);
-				}
-				#end
+				// #if ACHIEVEMENTS_ALLOWED
+				// var achieve:String = checkForAchievement(['oversinging']);
+				// if (achieve != null)
+				// {
+				// 	startAchievement(achieve);
+				// }
+				// #end
 			}
 			else if (boyfriend.holdTimer > Conductor.stepCrochet * 0.0011 * boyfriend.singDuration
 				&& boyfriend.animation.curAnim.name.startsWith('sing')
@@ -4332,58 +4321,37 @@ class PlayState extends MusicBeatState
 		setOnLuas('ratingFC', ratingFC);
 	}
 
+	public static var weekMap:Map<String, String> = [
+		"floppa" => "RaisedAFloppa",
+		"extra" => "nightmareOver",
+		"extras" => "spammingSkills",
+		"him" => "terribleBambiMod"
+	];
+
 	#if ACHIEVEMENTS_ALLOWED
-	private function checkForAchievement(achievesToCheck:Array<String> = null):String
+	private function checkForWeekAchievement():String
 	{
 		if (chartingMode)
 			return null;
 
 		var usedPractice:Bool = (ClientPrefs.getGameplaySetting('practice', false) || ClientPrefs.getGameplaySetting('botplay', false));
-		for (i in 0...achievesToCheck.length)
-		{
-			var achievementName:String = achievesToCheck[i];
-			if (!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled)
-			{
-				var unlock:Bool = false;
-				switch (achievementName)
-				{
-					case 'floppin', 'extras_passed' | 'extra_passed' | 'frien':
-						if (isStoryMode && CoolUtil.difficultyString() == 'HARD' && !usedPractice)
-						{
-							var weekName:String = WeekData.getWeekFileName();
-							switch (weekName) // I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
-							{
-								case 'floppa':
-									if (achievementName == 'floppin')
-										unlock = true;
-									GameJoltAPI.getTrophy(167434);
-								case 'extras':
-									if (achievementName == 'extras_passed')
-										unlock = true;
-									GameJoltAPI.getTrophy(165207);
-								case 'extra':
-									if (achievementName == 'extra_passed')
-										unlock = true;
-									GameJoltAPI.getTrophy(164208);
-								case 'him':
-									if (achievementName == 'frien')
-										unlock = true;
-									GameJoltAPI.getTrophy(165209);
-							}
-						}
-				}
+		if (usedPractice || cpuControlled || !isStoryMode || storyPlaylist.length != 1)
+			return null;
 
-				if (unlock)
-				{
-					Achievements.unlockAchievement(achievementName);
-					return achievementName;
-				}
-			}
+		var weekFileName:String = WeekData.getWeekFileName();
+
+		if (weekMap.exists(weekFileName))
+		{
+			var hasAchievement:Null<Bool> = Achievements.achievementUnlockedMap.get(weekMap.get(weekFileName));
+			if (hasAchievement || hasAchievement == true)
+				return null;
+			Achievements.unlockAchievement(weekMap.get(weekFileName));
+			return weekMap.get(weekFileName);
 		}
+
 		return null;
 	}
 	#end
-
 
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
