@@ -1533,7 +1533,7 @@ class PlayState extends MusicBeatState
 				//shaderMap.get("gameAbberation2").setFloat('bOffset', 10);
 				FlxG.game.setFilters([
 					new ShaderFilter(shaderMap.get("gameVCR")),
-					new ShaderFilter(shaderMap.get("gameAbberation"))
+					//new ShaderFilter(shaderMap.get("gameAbberation2"))
 				]);
 		}
 	}
