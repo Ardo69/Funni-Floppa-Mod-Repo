@@ -510,13 +510,21 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
-
 			case 'funnistage':
 				var consistentPosition:Array<Float> = [-600, -300];
 				var resizeBG:Float = 0.7;
 				defaultCamZoom = 1.1;
 
 				var midGround:BGSprite = new BGSprite('badurbad', consistentPosition[0], consistentPosition[1]);
+				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
+				midGround.updateHitbox();
+				add(midGround);
+			case 'pixel':
+				var consistentPosition:Array<Float> = [-600, -300];
+				var resizeBG:Float = 0.7;
+				defaultCamZoom = 1.1;
+
+				var midGround:BGSprite = new BGSprite('stages/pixel', consistentPosition[0], consistentPosition[1]);
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
@@ -3402,7 +3410,7 @@ class PlayState extends MusicBeatState
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
 
-		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
+		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image('combo'));
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x;
@@ -3416,7 +3424,7 @@ class PlayState extends MusicBeatState
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
 		insert(members.indexOf(strumLineNotes), rating);
 
-		if (!PlayState.isPixelStage)
+		/*if (!PlayState.isPixelStage)
 		{
 			rating.setGraphicSize(Std.int(rating.width * 0.7));
 			rating.antialiasing = ClientPrefs.globalAntialiasing;
@@ -3427,7 +3435,7 @@ class PlayState extends MusicBeatState
 		{
 			rating.setGraphicSize(Std.int(rating.width * daPixelZoom * 0.85));
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * daPixelZoom * 0.85));
-		}
+		}*/
 
 		comboSpr.updateHitbox();
 		rating.updateHitbox();
