@@ -86,13 +86,6 @@ class Main extends Sprite
 		ClientPrefs.loadDefaultKeys();
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
-		/// gonna do this soon
-		// var topbar = new Topbar("Roblox", true);
-		// FlxG.addChildBelowMouse(topbar);
-		// FlxG.signals.postStateSwitch.add(function() {
-		// 	FlxG.addChildBelowMouse(topbar);
-		// });
-
 		FlxG.mouse.load(Paths.image("cursor"));
 
 		#if !mobile

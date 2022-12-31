@@ -16,16 +16,15 @@ import flixel.FlxSubState;
 import Achievements;
 
 using StringTools;
-using Lambda;
 
 class AchievementsMenuState extends MusicBeatState
 {
 	#if ACHIEVEMENTS_ALLOWED
-	var options:Map<String, Dynamic> = [];
+	var options:Array<String> = [];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	private var achievementArray:Array<AttachedAchievement> = [];
-	private var achievementIndex:Array<String> = [];
+	private var achievementIndex:Array<Int> = [];
 	private var descText:FlxText;
 
 	override function create() {
@@ -44,31 +43,27 @@ class AchievementsMenuState extends MusicBeatState
 		add(grpOptions);
 
 		Achievements.loadAchievements();
-		options = Achievements.achievementMap.copy();
+		for (i in 0...Achievements.achievementsStuff.length) {
+			if(!Achievements.achievementsStuff[i][3] || Achievements.achievementsMap.exists(Achievements.achievementsStuff[i][2])) {
+				options.push(Achievements.achievementsStuff[i]);
+				achievementIndex.push(i);
+			}
+		}
 
-		var index = 0;
-		/// just to remind:
-		// Achievement save tag => [Real Name, Description, gamejolt ID, Hidden achievement]
-		for (achievement in options.keys()) {
-			var achievementData = options.get(achievement);
-			// var index = Lambda.findIndex(options, achievement);  // ayo half life refrenceλ???
-			// nevermind lamda dumb >:((((
-			var achieveName:String = achievementData[0];
-			var optionText:Alphabet = new Alphabet(0, (100 * index) + 210, Achievements.isAchievementUnlocked(achieveName) ? achievementData[0] : '?', false, false);
+		for (i in 0...options.length) {
+			var achieveName:String = Achievements.achievementsStuff[achievementIndex[i]][2];
+			var optionText:Alphabet = new Alphabet(0, (100 * i) + 210, Achievements.isAchievementUnlocked(achieveName) ? Achievements.achievementsStuff[achievementIndex[i]][0] : '?', false, false);
 			optionText.isMenuItem = true;
 			optionText.x += 280;
 			optionText.xAdd = 200;
-			optionText.targetY = index;
+			optionText.targetY = i;
 			grpOptions.add(optionText);
 
 			var icon:AttachedAchievement = new AttachedAchievement(optionText.x - 105, optionText.y, achieveName);
 			icon.sprTracker = optionText;
 			achievementArray.push(icon);
 			add(icon);
-
-			index += 1;
 		}
-		index = 0;
 
 		descText = new FlxText(150, 600, 980, "", 32);
 		descText.setFormat(Paths.font("sanspro-regular.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -99,8 +94,8 @@ class AchievementsMenuState extends MusicBeatState
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)
-			curSelected = Achievements.totalAchievements - 1;
-		if (curSelected >= Achievements.totalAchievements)
+			curSelected = options.length - 1;
+		if (curSelected >= options.length)
 			curSelected = 0;
 
 		var bullShit:Int = 0;
@@ -121,7 +116,7 @@ class AchievementsMenuState extends MusicBeatState
 				achievementArray[i].alpha = 1;
 			}
 		}
-		descText.text = options.array()[curSelected][1];
+		descText.text = Achievements.achievementsStuff[achievementIndex[curSelected]][1];
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 	}
 	#end
