@@ -178,7 +178,7 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.antialiasing = ClientPrefs.globalAntialiasing;
 		//difficultySelectors.add(rightArrow);
 
-		var flopRight = new FlxBackdrop(Paths.image("flopSideways"), 0, 0, false, true, 0, 5);
+		var flopRight = new FlxBackdrop(Paths.image("flopSideways"), Y, 0, 5);
 		// flopTop.y = barBottom.y + flopTop.height + 5;
 		flopRight.screenCenter();
 		flopRight.scale.set(0.6, 0.6);
@@ -196,7 +196,7 @@ class StoryMenuState extends MusicBeatState
 		// barRight.angle = 90;
 		add(barRight);
 
-		var flopLeft = new FlxBackdrop(Paths.image("flopSideways"), 0, 0, false, true, 0, 5);
+		var flopLeft = new FlxBackdrop(Paths.image("flopSideways"), Y, 0, 5);
 		// flopTop.y = barBottom.y + flopTop.height + 5;
 		flopLeft.screenCenter();
 		flopLeft.scale.set(0.6, 0.6);
