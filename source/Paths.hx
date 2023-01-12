@@ -45,6 +45,7 @@ class Paths
 	public static var dumpExclusions:Array<String> = [
 		'assets/music/title.$SOUND_EXT',
 		'assets/shared/music/breakfast.$SOUND_EXT',
+		'assets/shared/music/bwomp.$SOUND_EXT',
 		'assets/shared/music/tea-time.$SOUND_EXT',
 		'assets/shared/music/floppa-time.$SOUND_EXT',
 	];

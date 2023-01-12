@@ -10,6 +10,7 @@ import flixel.util.FlxColor;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import WeekData;
+import Paths;
 // input handler
 import flixel.input.FlxInput;
 import flixel.input.actions.FlxAction;
