@@ -102,7 +102,7 @@ class OptionsState extends MusicBeatState
 		// barBottom.angle = 15;
 		add(barBottom);
 
-		var flopBottom = new FlxBackdrop(Paths.image("flop"), 0, 0, true, false, 5, 0);
+		var flopBottom = new FlxBackdrop(Paths.image("flop"), X, 5, 0);
 		// flopBottom.y = barBottom.y + flopBottom.height + 5;
 		flopBottom.screenCenter();
 		flopBottom.scale.set(0.6, 0.6);
@@ -113,7 +113,7 @@ class OptionsState extends MusicBeatState
 		flopBottom.y = 600;
 		add(flopBottom);
 
-		var flopTop = new FlxBackdrop(Paths.image("flop"), 0, 0, true, false, 5, 0);
+		var flopTop = new FlxBackdrop(Paths.image("flop"), X, 5, 0);
 		// flopTop.y = barBottom.y + flopTop.height + 5;
 		flopTop.screenCenter();
 		flopTop.scale.set(0.6, 0.6);

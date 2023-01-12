@@ -1532,6 +1532,10 @@ class FunkinLua {
 			var cam:FlxCamera = cameraFromString(camera);
 			return FlxG.mouse.getScreenPosition(cam).y;
 		});
+		
+		Lua_helper.add_callback(lua, "getMyBalls", function() {
+			return 2;
+		});
 
 		Lua_helper.add_callback(lua, "getMidpointX", function(variable:String) {
 			var killMe:Array<String> = variable.split('.');
