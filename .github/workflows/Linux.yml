@@ -33,7 +33,7 @@ jobs:
       - name: Uploading artifact (entire build)
         uses: actions/upload-artifact@v2
         with:
-          name: Raise  a Funky Floppa
+          name: Raise A Funky Floppa
           path: export/release/linux/bin
       - name: Uploading artifact (executable)
         uses: actions/upload-artifact@v2
