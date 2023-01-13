@@ -30,9 +30,7 @@ class ShopState extends MusicBeatState
 
 	override public function create()
 	{
-		FlxG.sound.playMusic(Paths.music("bwomp")); // bwomp
-
-
+		FlxG.sound.playMusic(Paths.music('bwomp'), 0); // bwomp
 	}
 
 	override function update(elapsed:Float)
