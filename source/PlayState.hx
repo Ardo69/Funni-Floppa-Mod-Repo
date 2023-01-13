@@ -473,6 +473,8 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+
+				FlxG.save.data.ohnopixel = false;
 			case 'house-sunset':
 				var consistentPosition:Array<Float> = [-600, -300];
 				var resizeBG:Float = 1;
@@ -481,6 +483,8 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+
+				FlxG.save.data.ohnopixel = false;
 			case 'house-night':
 				var consistentPosition:Array<Float> = [-600, -300];
 				var resizeBG:Float = 1;
@@ -489,6 +493,8 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+
+				FlxG.save.data.ohnopixel = false;
 			case 'backrooms':
 				var consistentPosition:Array<Float> = [-600, -300];
 				var resizeBG:Float = 1.4;
@@ -498,6 +504,8 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+
+				FlxG.save.data.ohnopixel = false;
 
 				GF_VISIBLE = false;
 			case 'ardocovers':
@@ -509,6 +517,8 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+
+				FlxG.save.data.ohnopixel = false;
 			case 'funnistage':
 				var consistentPosition:Array<Float> = [-600, -300];
 				var resizeBG:Float = 0.7;
@@ -518,6 +528,8 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+
+				FlxG.save.data.ohnopixel = false;
 			case 'pixel':
 				var consistentPosition:Array<Float> = [-600, -300];
 				var resizeBG:Float = 0.7;
@@ -527,6 +539,8 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * resizeBG));
 				midGround.updateHitbox();
 				add(midGround);
+
+				FlxG.save.data.ohnopixel = true;
 		}
 
 		if (isPixelStage)
@@ -698,6 +712,12 @@ class PlayState extends MusicBeatState
 			timeTxt.size = 24;
 			timeTxt.y += 3;
 		}
+
+		if (FlxG.save.data.ohnopixel ==true){
+			timeBarBG.visible = false;
+			timeBar.visible = false;
+			timeTxt.visible = false;
+		}
 		opponentStrums = new FlxTypedGroup<StrumNote>();
 		playerStrums = new FlxTypedGroup<StrumNote>();
 		// startCountdown();
@@ -781,6 +801,7 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection(0);
 
+        if (FlxG.save.data.ohnopixel == false){
 		healthBarBG = new AttachedSprite('healthBar');
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
@@ -802,6 +823,30 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		healthBarBG.sprTracker = healthBar;
+        }
+		else
+		{
+			healthBarBG = new AttachedSprite('healthBar');
+			healthBarBG.y = FlxG.height * 0.89;
+			healthBarBG.screenCenter(X);
+			healthBarBG.scrollFactor.set();
+			healthBarBG.visible = !ClientPrefs.hideHud;
+			healthBarBG.xAdd = -4;
+			healthBarBG.yAdd = -4;
+	
+			if (ClientPrefs.downScroll)
+				healthBarBG.y = 0.11 * FlxG.height;
+	
+			healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+				'health', 0, 2);
+			healthBar.scrollFactor.set();
+			// healthBar
+			healthBar.visible = !ClientPrefs.hideHud;
+			healthBar.alpha = ClientPrefs.healthBarAlpha;
+	
+			healthBarBG.sprTracker = healthBar;
+          //a123
+		}
 
 		if (HungerSongs.contains(SONG.song.toLowerCase()))
 		{
@@ -826,6 +871,7 @@ class PlayState extends MusicBeatState
 			add(moneyTxt);
 		}
 
+		if (FlxG.save.data.ohnopixel == false){
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
 		iconP1.visible = !ClientPrefs.hideHud;
@@ -837,16 +883,31 @@ class PlayState extends MusicBeatState
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
 		add(iconP2);
 		reloadHealthBarColors();
+		}
+		else
+		{
+			//sex
+		}
 
+        if (FlxG.save.data.ohnopixel == false){
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
 		scoreTxt.setFormat(Paths.font("sanspro-regular.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
+		}
+		else {
+			scoreTxt = new FlxText(0, healthBarBG.y, FlxG.width, "", 20);
+			scoreTxt.setFormat(Paths.font("pixel.otf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.scrollFactor.set();
+			scoreTxt.borderSize = 1.25;
+			scoreTxt.visible = !ClientPrefs.hideHud;
+			add(scoreTxt);
+		}
 
 		songTxt = new FlxText(12, FlxG.height - 24, 0, "", 8);
-		songTxt.setFormat(Paths.font("sanspro.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songTxt.setFormat(Paths.font("sanspro-regular.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songTxt.scrollFactor.set();
 		songTxt.borderSize = 1;
 		if (!ClientPrefs.hideHud)
