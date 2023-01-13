@@ -26,7 +26,7 @@ using StringTools;
 class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
-	public static var buildNo:String = '109'; //This is also used for Discord RPC
+	public static var buildNo:String = '113'; //This is also used for Discord RPC
 	public static var modVersion:String = 'v1.0'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
@@ -138,7 +138,7 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 1250, "Build Number: " + buildNo, 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 1250, "Raise A Funky Floppa - Build Number: " + buildNo, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
