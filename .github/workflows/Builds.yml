@@ -25,9 +25,41 @@ jobs:
             cache-build-windows
       - name: Installing/Updating libraries
         run: |
-          haxe -cp ./update -D analyzer-optimize -main Update --interp
+          haxelib setup C:/haxelib
+          haxelib install hxcpp > nul
+          haxelib install lime
+          haxelib install openfl
+          haxelib --never install flixel
+          haxelib run lime setup flixel
+          haxelib run lime setup
+          haxelib install flixel-tools
+          haxelib install flixel-ui
+          haxelib install flixel-addons
+          haxelib install tjson
+          haxelib install hxjsonast
+          haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
+          haxelib install hscript 
+          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib install hxcpp-debug-server
+          haxelib list
+         # updating time!
+          haxelib update lime
+          haxelib update flixel
+          haxelib update flixel-addons
+          haxelib update flixel-ui
+          haxelib updatel openfl
+          haxelib updatel flixel-tools
+          haxelib updatel hxcpp
+          haxelib update tjson
+          haxelib update hxjsonast
+          haxelib update hscript
+          haxelib update hxCodec
+          haxelib update hxcpp-debug-server
+
       - name: Building the game
         run: |
+          haxelib run lime setup flixel
           haxelib run lime build windows
       - name: Uploading artifact (entire build)
         uses: actions/upload-artifact@v2
