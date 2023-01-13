@@ -23,6 +23,9 @@ jobs:
             export/release/windows/obj/
           restore-keys: |
             cache-build-windows
+      - name: Installing/Updating libraries
+        run: |
+          haxe -cp ./update -D analyzer-optimize -main Update --interp
       - name: Building the game
         run: |
           haxelib run lime build windows
@@ -34,7 +37,7 @@ jobs:
       - name: Uploading artifact (executable)
         uses: actions/upload-artifact@v2
         with:
-          name: Update Files
+          name: Update
           path: export/release/windows/bin/CodenameEngine.exe
       - name: Clearing already existing cache
         uses: actions/github-script@v6
