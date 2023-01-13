@@ -65,7 +65,6 @@ import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
 import Conductor.Rating;
-import GameJolt.GameJoltAPI;
 #if sys
 import sys.FileSystem;
 #end
@@ -4364,19 +4363,15 @@ class PlayState extends MusicBeatState
 								case 'floppa':
 									if (achievementName == 'floppin')
 										unlock = true;
-									GameJoltAPI.getTrophy(167434);
 								case 'extras':
 									if (achievementName == 'extras_passed')
 										unlock = true;
-									GameJoltAPI.getTrophy(165207);
 								case 'extra':
 									if (achievementName == 'extra_passed')
 										unlock = true;
-									GameJoltAPI.getTrophy(164208);
 								case 'him':
 									if (achievementName == 'frien')
 										unlock = true;
-									GameJoltAPI.getTrophy(165209);
 							}
 						}
 				}

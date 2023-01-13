@@ -25,9 +25,6 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
-import GameJolt.GameJoltAPI;
-import GameJolt.GameJoltLogin;
-
 using StringTools;
 
 class OptionsState extends MusicBeatState
@@ -39,7 +36,6 @@ class OptionsState extends MusicBeatState
 		'Graphics',
 		'Visuals and UI',
 		'Gameplay',
-		'Gamejolt'
 	];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 
@@ -54,8 +50,6 @@ class OptionsState extends MusicBeatState
 				openSubState(new options.NotesSubState());
 			case 'Controls':
 				openSubState(new options.ControlsSubState());
-			case 'Gamejolt':
-				MusicBeatState.switchState(new GameJoltLogin());
 			case 'Graphics':
 				openSubState(new options.GraphicsSettingsSubState());
 			case 'Visuals and UI':
