@@ -93,7 +93,7 @@
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
 	<haxelib name="linc_luajit" if="LUA_ALLOWED "/>
-	<!--haxelib name="hxCodec" if="cpp"/-->
+	<haxelib name="hxCodec" if="cpp"/>
 	<haxelib name="discord_rpc" if="cpp"/>
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
 
