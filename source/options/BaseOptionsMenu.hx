@@ -56,7 +56,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		if (rpcTitle == null)
 			rpcTitle = 'Options Menu';
 
-		#if desktop
+		#if cpp
 		DiscordClient.changePresence(rpcTitle, null);
 		#end
 

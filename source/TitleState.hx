@@ -1,7 +1,7 @@
 package;
 
 import flixel.addons.display.FlxBackdrop;
-#if desktop
+#if cpp
 #if cpp
 import Discord.DiscordClient;
 import sys.thread.Thread;

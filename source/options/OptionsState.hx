@@ -1,7 +1,7 @@
 package options;
 
 import flixel.addons.display.FlxBackdrop;
-#if desktop
+#if cpp
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
@@ -66,7 +66,7 @@ class OptionsState extends MusicBeatState
 
 	override function create()
 	{		
-		#if desktop
+		#if cpp
 		DiscordClient.changePresence("Options Menu", null);
 		#end
 

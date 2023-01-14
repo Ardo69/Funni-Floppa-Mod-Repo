@@ -1,6 +1,6 @@
 package editors;
 
-#if desktop
+#if cpp
 import Discord.DiscordClient;
 #end
 import flixel.FlxG;
@@ -252,7 +252,7 @@ class DialogueEditorState extends MusicBeatState
 			characterAnimSpeed();
 		}
 
-		#if desktop
+		#if cpp
 		// Updating Discord Rich Presence
 		var rpcText:String = lineInputText.text;
 		if(rpcText == null || rpcText.length < 1) rpcText = '(Empty)';
