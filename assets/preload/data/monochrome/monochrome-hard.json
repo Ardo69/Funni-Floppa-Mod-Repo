@@ -4,6 +4,46 @@
 		"gfVersion": "gf",
 		"events": [
 			[
+				150562.5,
+				[
+					[
+						"Change Character",
+						"dad",
+						"no-more"
+					],
+					[
+						"Play Animation",
+						"fucker",
+						"dad"
+					]
+				]
+			],
+			[
+				153000,
+				[
+					[
+						"Change Character",
+						"dad",
+						"decapitate"
+					],
+					[
+						"Play Animation",
+						"fucker",
+						"dad"
+					]
+				]
+			],
+			[
+				155909.090909091,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gold-head"
+					]
+				]
+			],
+			[
 				202454.545454545,
 				[
 					[
@@ -8788,11 +8828,11 @@
 			},
 			{
 				"gfSection": false,
-				"lengthInSteps": 16,
 				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
 				"bpm": 160,
+				"sectionBeats": 4,
 				"changeBPM": false,
 				"mustHitSection": true
 			}
@@ -8801,7 +8841,7 @@
 		"song": "Monochrome",
 		"validScore": true,
 		"needsVoices": true,
-		"stage": "ardocovers",
+		"stage": "none",
 		"speed": 2.9,
 		"bpm": 160
 	}

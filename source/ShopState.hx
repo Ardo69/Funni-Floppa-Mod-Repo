@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxTimer;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -27,17 +28,24 @@ using StringTools;
 
 class ShopState extends MusicBeatState
 {
+	override public function create():Void
+		{
+			new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					openState();
+				});
+		}
 
-	override public function create()
+	function openState()
 	{
 		FlxG.sound.playMusic(Paths.music('shop'), 0.65); // bwomp
 	}
 
 	override function update(elapsed:Float)
 	{
-		var back = controls.BACK;
+		var enter = controls.ACCEPT;
 
-		if (back)
+		if (enter)
 			FlxG.switchState(new FreeplayState());
 	}
 }
