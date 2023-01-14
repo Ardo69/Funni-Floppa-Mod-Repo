@@ -1,41 +1,39 @@
 {
-	"songs": [
-		[
-			"floppasition",
-			"floppa",
-			[
-				146,
-				113,
-				253
-			]
-		],
-		[
-			"flopparchy",
-			"floppa",
-			[
-				0,
-				0,
-				0
-			]
-		]
-	],
-	"hiddenUntilUnlocked": false,
-	"hideFreeplay": false,
-	"weekBackground": "",
-	"difficulties": "Hard",
-	"weekCharacters": [
-		"flop",
-		"",
-		"bf"
-	],
-	"storyName": "songs from strident crisis",
-	"weekName": "extras",
-	"freeplayColor": [
-		146,
-		113,
-		253
-	],
-	"hideStoryMode": false,
-	"weekBefore": "",
-	"startUnlocked": true
+    "songs": [
+        [
+            "floppasition",
+            "floppa", [
+                146,
+                113,
+                253
+            ]
+        ],
+        [
+            "flopparchy",
+            "floppa", [
+                0,
+                0,
+                0
+            ]
+        ]
+    ],
+    "hiddenUntilUnlocked": false,
+    "hideFreeplay": false,
+    "weekBackground": "",
+    "difficulties": "Hard",
+    "weekCharacters": [
+        "flop",
+        "",
+        "bf"
+    ],
+    "storyName": "songs from strident crisis",
+    "weekName": "extras",
+    "freeplayColor": [
+        146,
+        113,
+        253
+    ],
+    "hideStoryMode": true,
+    "weekBefore": "",
+    "startUnlocked": true
 }

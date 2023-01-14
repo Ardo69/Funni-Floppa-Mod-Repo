@@ -25,7 +25,7 @@ using StringTools;
 class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
-	public static var buildNo:String = '200'; //This is extremenly stupid and unneeded but still
+	public static var buildNo:String = '205'; //This is extremenly stupid and unneeded but still
 	public static var modVersion:String = 'v1.0'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0; //Child porn machine cummin'  partdner!
 
@@ -36,6 +36,7 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
+		'shop',
 		'credits',
 		'options'
 	];
@@ -217,6 +218,8 @@ class MainMenuState extends MusicBeatState
 									case 'story_mode':
 										LoadingState.loadAndSwitchState(new StoryMenuState());
 									case 'freeplay':
+										MusicBeatState.switchState(new FreeplayState());
+									case 'shop':
 										MusicBeatState.switchState(new ShopState());
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
