@@ -1,4 +1,4 @@
-package states;
+package;
 
 #if cpp
 import Discord.DiscordClient;
