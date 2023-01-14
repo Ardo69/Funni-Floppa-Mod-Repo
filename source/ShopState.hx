@@ -36,9 +36,12 @@ class ShopState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		Conductor.songPosition = FlxG.sound.music.time;
 		var enter = controls.ACCEPT;
 
 		if (enter)
 			FlxG.switchState(new FreeplayState());
+
+		super.update(elapsed);
 	}
 }
