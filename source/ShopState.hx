@@ -38,10 +38,7 @@ class ShopState extends MusicBeatState
 
 	function openState()
 	{
-		if (FlxG.sound.music == null) // don't restart the music if it's already playing
-		{
 		FlxG.sound.playMusic(Paths.music('shop'), 0.65); // bwomp
-		}
 	}
 
 	override function update(elapsed:Float)
