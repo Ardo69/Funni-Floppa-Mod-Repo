@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="dollarbag.png">
+	<!-- Created with Adobe Animate version 22.0.3.179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Sembol 20000" x="0" y="424" width="148" height="16" frameX="-4" frameY="-134" frameWidth="152" frameHeight="150"/>
+	<SubTexture name="Sembol 20001" x="175" y="418" width="152" height="23" frameX="0" frameY="-127" frameWidth="152" frameHeight="150"/>
+	<SubTexture name="Sembol 20002" x="175" y="364" width="150" height="29" frameX="-2" frameY="-121" frameWidth="152" frameHeight="150"/>
+	<SubTexture name="Sembol 20003" x="0" y="357" width="150" height="42" frameX="-2" frameY="-108" frameWidth="152" frameHeight="150"/>
+	<SubTexture name="Sembol 20004" x="0" y="281" width="150" height="51" frameX="-2" frameY="-99" frameWidth="152" frameHeight="150"/>
+	<SubTexture name="Sembol 20005" x="175" y="273" width="150" height="66" frameX="-2" frameY="-84" frameWidth="152" frameHeight="150"/>
+	<SubTexture name="Sembol 20006" x="0" y="175" width="150" height="81" frameX="-2" frameY="-69" frameWidth="152" frameHeight="150"/>
+	<SubTexture name="Sembol 20007" x="175" y="149" width="150" height="99" frameX="-2" frameY="-51" frameWidth="152" frameHeight="150"/>
+	<SubTexture name="Sembol 20008" x="175" y="0" width="150" height="124" frameX="-2" frameY="-26" frameWidth="152" frameHeight="150"/>
+	<SubTexture name="Sembol 20009" x="0" y="0" width="150" height="150" frameX="-2" frameY="0" frameWidth="152" frameHeight="150"/>
+</TextureAtlas>

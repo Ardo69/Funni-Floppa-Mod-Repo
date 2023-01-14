@@ -1610,22 +1610,18 @@ class PlayState extends MusicBeatState
 	{
 		switch (SONG.song.toLowerCase())
 		{
-			case 'players-fate':
+			case 'players-fate' | 'monochrome':
 				initLuaShader("vcr");
-				//initLuaShader("chromaticAbberation2");
+				initLuaShader("chromaticAbberation2");
 				shaderMap.set("gameVCR", createRuntimeShader("vcr"));
-				//shaderMap.set("gameAbberation", createRuntimeShader("chromaticAbberation2"));
+				shaderMap.set("gameAbberation", createRuntimeShader("chromaticAbberation2"));
 				shaderMap.get("gameVCR").setBool('vignetteOn', true);
 				shaderMap.get("gameVCR").setBool('perspectiveOn', true);
 				shaderMap.get("gameVCR").setBool('scanlinesOn', true);
 				shaderMap.get("gameVCR").setBool('vignetteMoving', true);
 				shaderMap.get("gameVCR").setFloat('glitchModifier', 1.5);
-				//shaderMap.get("gameAbberation2").setFloat('rOffset', 10);
-				//shaderMap.get("gameAbberation2").setFloat('gOffset', 10);
-				//shaderMap.get("gameAbberation2").setFloat('bOffset', 10);
 				FlxG.game.setFilters([
 					new ShaderFilter(shaderMap.get("gameVCR")),
-					//new ShaderFilter(shaderMap.get("gameAbberation2"))
 				]);
 		}
 	}
@@ -1636,7 +1632,7 @@ class PlayState extends MusicBeatState
 		{
 			case 'players-fate':
 				shaderMap.get("gameVCR").setFloat("iTime", FlxG.elapsed);
-				//shaderMap.get("gameAbberation2").setFloat("iTime", FlxG.elapsed);
+				shaderMap.get("gameAbberation").setFloat("iTime", FlxG.elapsed);
 		}
 	}
 
