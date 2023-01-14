@@ -24,10 +24,10 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
-	public static var buildNo:String = '217'; //This is extremenly stupid and unneeded but still
-	public static var modVersion:String = 'v1.0'; //This is also used for Discord RPC
-	public static var curSelected:Int = 0; //Child porn machine cummin'  partdner!
+	/*public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
+	public static var buildNo:String = '250'; //This is extremenly stupid and unneeded but still
+	public static var modVersion:String = 'v1.0'; //Child porn machine cummin' partdner! */
+	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -129,7 +129,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 1256, "Psych Engine v" + psychEngineVersion, 12);
+		/*var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 1256, "Psych Engine v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -140,7 +140,7 @@ class MainMenuState extends MusicBeatState
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 1250, "Raise A Funky Floppa - Build Number: " + buildNo, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
+		add(versionShit);*/
 
 		// NG.core.calls.event.logEvent('swag').send();
 
