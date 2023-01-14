@@ -24,9 +24,9 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	/*public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
+	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var buildNo:String = '250'; //This is extremenly stupid and unneeded but still
-	public static var modVersion:String = 'v1.0'; //Child porn machine cummin' partdner! */
+	public static var modVersion:String = 'v1.0'; //Child porn machine cummin' partdner!
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -51,17 +51,13 @@ class MainMenuState extends MusicBeatState
 		WeekData.loadTheFirstEnabledMod();
 
 		#if cpp
-		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
 		camGame = new FlxCamera();
-		camAchievement = new FlxCamera();
-		camAchievement.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
-		FlxG.cameras.add(camAchievement);
 		FlxG.cameras.setDefaultDrawTarget(camGame, false);
 
 		transIn = FlxTransitionableState.defaultTransIn;
@@ -92,22 +88,15 @@ class MainMenuState extends MusicBeatState
 		magenta.antialiasing = ClientPrefs.globalAntialiasing;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
-		
-		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		// var scale:Float = 0.5;
 		var scale:Float = 1;
-		/*if(optionShit.length > 6) {
-			scale = 6 / optionShit.length;
-		}*/
 
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			// var menuItem:FlxSprite = new FlxSprite((i * 250)  + offset,  0);
 			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
@@ -116,14 +105,12 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			// menuItem.y = FlxG.height - menuItem.height - 25;
 			menuItem.x = 150;
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 		}
 
@@ -141,8 +128,6 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);*/
-
-		// NG.core.calls.event.logEvent('swag').send();
 
 		changeItem();
 
