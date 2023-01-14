@@ -24,22 +24,16 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
-	public static var buildNo:String = '217'; //This is extremenly stupid and unneeded but still
-	public static var modVersion:String = 'v1.0'; //This is also used for Discord RPC
-	public static var curSelected:Int = 0; 
+	public static var psychEngineVersion:String = '0.5.2h'; // This is also used for Discord RPC
+	public static var buildNo:String = '250'; // This is extremenly stupid and unneeded but still
+	public static var modVersion:String = 'v1.0';
+	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-	
-	var optionShit:Array<String> = [
-		'story_mode',
-		'freeplay',
-		'shop',
-		'credits',
-		'options'
-	];
+
+	var optionShit:Array<String> = ['story_mode', 'freeplay', 'shop', 'credits', 'options'];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -92,7 +86,7 @@ class MainMenuState extends MusicBeatState
 		magenta.antialiasing = ClientPrefs.globalAntialiasing;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
-		
+
 		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
@@ -108,7 +102,7 @@ class MainMenuState extends MusicBeatState
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			// var menuItem:FlxSprite = new FlxSprite((i * 250)  + offset,  0);
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(0, (i * 140) + offset);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -120,27 +114,28 @@ class MainMenuState extends MusicBeatState
 			menuItem.x = 150;
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
-			if(optionShit.length < 6) scr = 0;
+			if (optionShit.length < 6)
+				scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
+			// menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 1256, "Psych Engine v" + psychEngineVersion, 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 1250, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 1250, "Raise A Funky Floppa - Build Number: " + buildNo, 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
+		/*var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 1256, "Psych Engine v" + psychEngineVersion, 12);
+			versionShit.scrollFactor.set();
+			versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			add(versionShit);
+			var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 1250, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+			versionShit.scrollFactor.set();
+			versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			add(versionShit);
+			var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 1250, "Raise A Funky Floppa - Build Number: " + buildNo, 12);
+			versionShit.scrollFactor.set();
+			versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			add(versionShit); */
 
 		// NG.core.calls.event.logEvent('swag').send();
 
@@ -193,7 +188,8 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 
-					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+					if (ClientPrefs.flashing)
+						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
@@ -244,7 +240,6 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			
 		});
 	}
 
@@ -266,7 +261,8 @@ class MainMenuState extends MusicBeatState
 			{
 				spr.animation.play('selected');
 				var add:Float = 0;
-				if(menuItems.length > 4) {
+				if (menuItems.length > 4)
+				{
 					add = menuItems.length * 8;
 				}
 				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
