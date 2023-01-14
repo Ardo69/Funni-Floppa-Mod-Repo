@@ -1,7 +1,9 @@
 package;
 
 import Sys.sleep;
+#if cpp
 import discord_rpc.DiscordRpc;
+#end
 
 #if LUA_ALLOWED
 import llua.Lua;
@@ -10,6 +12,7 @@ import llua.State;
 
 using StringTools;
 
+#if cpp
 class DiscordClient
 {
 	public static var isInitialized:Bool = false;
@@ -100,3 +103,4 @@ class DiscordClient
 	}
 	#end
 }
+#end

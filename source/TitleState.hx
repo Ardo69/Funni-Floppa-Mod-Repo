@@ -2,8 +2,10 @@ package;
 
 import flixel.addons.display.FlxBackdrop;
 #if desktop
+#if cpp
 import Discord.DiscordClient;
 import sys.thread.Thread;
+#end
 #end
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -143,7 +145,7 @@ class TitleState extends MusicBeatState
 		}
 		else
 		{
-			#if desktop
+			#if cpp
 			if (!DiscordClient.isInitialized)
 			{
 				DiscordClient.initialize();

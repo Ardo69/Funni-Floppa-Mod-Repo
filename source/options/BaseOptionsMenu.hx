@@ -1,7 +1,7 @@
 package options;
 
 import flixel.addons.display.FlxBackdrop;
-#if desktop
+#if cpp
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;

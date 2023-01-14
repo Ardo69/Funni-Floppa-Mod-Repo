@@ -1019,8 +1019,10 @@ class PlayState extends MusicBeatState
 		{
 			switch (daSong)
 			{
+				#if VIDEOS_ALLOWED
 				case 'floppin':
 					startVideo('first');
+				#end
 
 				default:
 					startCountdown();
