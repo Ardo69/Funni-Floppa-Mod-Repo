@@ -19,7 +19,7 @@
     {
     	float inside = step(start,y) - step(end,y);
     	float fact = (y-start)/(end-start)*inside;
-    	return (1.-fact) * inside;
+    	return (1.0-fact) * inside;
 
     }
 
@@ -89,7 +89,7 @@
     	uv = scandistort(curUV);
     	vec4 video = getVideo(uv);
       float vigAmt = 1.0;
-      float x =  0.;
+      float x =  0.0;
 
 
       video.r = getVideo(vec2(x+uv.x+0.001,uv.y+0.001)).x+0.05;

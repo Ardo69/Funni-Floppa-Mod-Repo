@@ -2,8 +2,17 @@
     "directory": "",
     "defaultZoom": 1.1,
     "isPixelStage": false,
-
-    "boyfriend": [370, -300],
-    "girlfriend": [-30, -280],
-    "opponent": [-180, -250]
+    "hide_girlfriend": true,
+    "boyfriend": [
+        370,
+        -300
+    ],
+    "girlfriend": [
+        -30,
+        -280
+    ],
+    "opponent": [
+        -180,
+        -250
+    ]
 }
