@@ -28,17 +28,10 @@ using StringTools;
 
 class ShopState extends MusicBeatState
 {
-	override public function create():Void
-		{
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					openState();
-				});
-		}
-
-	function openState()
-	{
-		FlxG.sound.playMusic(Paths.music('shop'), 0.65); // bwomp
+	override public function create():Void {
+		FlxG.sound.playMusic(Paths.music('shop'), 0); // bwomp
+		FlxG.sound.music.fadeIn(0.5, 0, 0.65);
+		Conductor.changeBPM(96);
 	}
 
 	override function update(elapsed:Float)
