@@ -60,7 +60,6 @@ import flixel.effects.particles.FlxEmitter;
 import flixel.effects.particles.FlxParticle;
 import flixel.util.FlxSave;
 import animateatlas.AtlasFrameMaker;
-import Achievements;
 import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
@@ -806,7 +805,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
-		healthBarBG.visible = !ClientPrefs.hideHud;
+		healthBarBG.visible = true;
 		healthBarBG.xAdd = -4;
 		healthBarBG.yAdd = -4;
 		add(healthBarBG);
@@ -818,7 +817,7 @@ class PlayState extends MusicBeatState
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
-		healthBar.visible = !ClientPrefs.hideHud;
+		healthBar.visible = true;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
 		add(healthBar);
 
@@ -830,9 +829,10 @@ class PlayState extends MusicBeatState
 			healthBarBG.y = FlxG.height * 0.89;
 			healthBarBG.screenCenter(X);
 			healthBarBG.scrollFactor.set();
-			healthBarBG.visible = !ClientPrefs.hideHud;
+			healthBarBG.visible = false;
 			healthBarBG.xAdd = -4;
 			healthBarBG.yAdd = -4;
+			add(healthBarBG);
 	
 			if (ClientPrefs.downScroll)
 				healthBarBG.y = 0.11 * FlxG.height;
@@ -841,8 +841,9 @@ class PlayState extends MusicBeatState
 				'health', 0, 2);
 			healthBar.scrollFactor.set();
 			// healthBar
-			healthBar.visible = !ClientPrefs.hideHud;
+			healthBar.visible = false;
 			healthBar.alpha = ClientPrefs.healthBarAlpha;
+			add(healthBar);
 	
 			healthBarBG.sprTracker = healthBar;
           //a123
@@ -874,18 +875,29 @@ class PlayState extends MusicBeatState
 		if (FlxG.save.data.ohnopixel == false){
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
-		iconP1.visible = !ClientPrefs.hideHud;
+		iconP1.visible = true;
 		iconP1.alpha = ClientPrefs.healthBarAlpha;
 		add(iconP1);
 		iconP2 = new HealthIcon(dad.healthIcon, false);
 		iconP2.y = healthBar.y - 75;
-		iconP2.visible = !ClientPrefs.hideHud;
+		iconP2.visible = true;
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
 		add(iconP2);
 		reloadHealthBarColors();
 		}
 		else
 		{
+			iconP1 = new HealthIcon(boyfriend.healthIcon, true);
+			iconP1.y = healthBar.y - 75;
+			iconP1.visible = false;
+			iconP1.alpha = ClientPrefs.healthBarAlpha;
+			add(iconP1);
+			iconP2 = new HealthIcon(dad.healthIcon, false);
+			iconP2.y = healthBar.y - 75;
+			iconP2.visible = false;
+			iconP2.alpha = ClientPrefs.healthBarAlpha;
+			add(iconP2);
+			reloadHealthBarColors();
 			//sex
 		}
 
@@ -894,7 +906,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.setFormat(Paths.font("sanspro-regular.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = !ClientPrefs.hideHud;
+		scoreTxt.visible = true;
 		add(scoreTxt);
 		}
 		else {
@@ -902,7 +914,7 @@ class PlayState extends MusicBeatState
 			scoreTxt.setFormat(Paths.font("pixel.otf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			scoreTxt.scrollFactor.set();
 			scoreTxt.borderSize = 1.25;
-			scoreTxt.visible = !ClientPrefs.hideHud;
+			scoreTxt.visible = true;
 			add(scoreTxt);
 		}
 
@@ -910,7 +922,7 @@ class PlayState extends MusicBeatState
 		songTxt.setFormat(Paths.font("sanspro-regular.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songTxt.scrollFactor.set();
 		songTxt.borderSize = 1;
-		if (!ClientPrefs.hideHud)
+		if (FlxG.save.data.ohnopixel == false)
 		{
 			songTxt.visible = true;
 		}
@@ -932,6 +944,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
+		if (FlxG.save.data.ohnopixel == false){
 		judgementCounter = new FlxText(20, 0, 0, "", 20);
 		judgementCounter.setFormat(Paths.font("sanspro-regular.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		judgementCounter.borderSize = 2;
@@ -940,6 +953,17 @@ class PlayState extends MusicBeatState
 		judgementCounter.screenCenter(Y);
 		judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses;
 		add(judgementCounter);
+		}
+		else {
+			judgementCounter = new FlxText(20, 0, 0, "", 20);
+			judgementCounter.setFormat(Paths.font("sanspro-regular.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			judgementCounter.borderSize = 2;
+			judgementCounter.borderQuality = 2;
+			judgementCounter.scrollFactor.set();
+			judgementCounter.screenCenter(Y);
+			judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses;
+			//haha no judgement counter for you
+		}
 
 		judgementCounter.cameras = [camHUD]; // Judgement Counter
 
@@ -3207,23 +3231,6 @@ class PlayState extends MusicBeatState
 		deathCounter = 0;
 		seenCutscene = false;
 
-		#if ACHIEVEMENTS_ALLOWED
-		if (achievementObj != null)
-		{
-			return;
-		}
-		else
-		{
-			var achieve:String = checkForAchievement(['floppin', 'extras_passed', 'extra_passed', 'frien']);
-
-			if (achieve != null)
-			{
-				startAchievement(achieve);
-				return;
-			}
-		}
-		#end
-
 		#if LUA_ALLOWED
 		var ret:Dynamic = callOnLuas('onEndSong', []);
 		#else
@@ -3345,27 +3352,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	#if ACHIEVEMENTS_ALLOWED
-	var achievementObj:AchievementObject = null;
-
-	function startAchievement(achieve:String)
-	{
-		achievementObj = new AchievementObject(achieve, camOther);
-		achievementObj.onFinish = achievementEnd;
-		add(achievementObj);
-		trace('Giving achievement ' + achieve);
-	}
-
-	function achievementEnd():Void
-	{
-		achievementObj = null;
-		if (endingSong && !inCutscene)
-		{
-			endSong();
-		}
-	}
-	#end
-
 	public function KillNotes()
 	{
 		while (notes.length > 0)
@@ -3466,7 +3452,7 @@ class PlayState extends MusicBeatState
 		rating.acceleration.y = 550;
 		rating.velocity.y -= FlxG.random.int(140, 175);
 		rating.velocity.x -= FlxG.random.int(0, 10);
-		rating.visible = (!ClientPrefs.hideHud && showRating);
+		rating.visible = (true && showRating);
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
 
@@ -3476,7 +3462,7 @@ class PlayState extends MusicBeatState
 		comboSpr.x = coolText.x;
 		comboSpr.acceleration.y = 600;
 		comboSpr.velocity.y -= 150;
-		comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
+		comboSpr.visible = (showCombo);
 		comboSpr.x += ClientPrefs.comboOffset[0];
 		comboSpr.y -= ClientPrefs.comboOffset[1];
 		add(comboSpr); // ADD BACK LATER!
@@ -3536,7 +3522,7 @@ class PlayState extends MusicBeatState
 			numScore.acceleration.y = FlxG.random.int(200, 300);
 			numScore.velocity.y -= FlxG.random.int(140, 160);
 			numScore.velocity.x = FlxG.random.float(-5, 5);
-			numScore.visible = !ClientPrefs.hideHud;
+			numScore.visible = true;
 
 			// if (combo >= 10 || combo == 0)
 			insert(members.indexOf(strumLineNotes), numScore);
@@ -4399,55 +4385,6 @@ class PlayState extends MusicBeatState
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
 	}
-
-	#if ACHIEVEMENTS_ALLOWED
-	private function checkForAchievement(achievesToCheck:Array<String> = null):String
-	{
-		if (chartingMode)
-			return null;
-
-		var usedPractice:Bool = (ClientPrefs.getGameplaySetting('practice', false) || ClientPrefs.getGameplaySetting('botplay', false));
-		for (i in 0...achievesToCheck.length)
-		{
-			var achievementName:String = achievesToCheck[i];
-			if (!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled)
-			{
-				var unlock:Bool = false;
-				switch (achievementName)
-				{
-					case 'floppin', 'extras_passed' | 'extra_passed' | 'frien':
-						if (isStoryMode && CoolUtil.difficultyString() == 'HARD' && !usedPractice)
-						{
-							var weekName:String = WeekData.getWeekFileName();
-							switch (weekName) // I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
-							{
-								case 'floppa':
-									if (achievementName == 'floppin')
-										unlock = true;
-								case 'extras':
-									if (achievementName == 'extras_passed')
-										unlock = true;
-								case 'extra':
-									if (achievementName == 'extra_passed')
-										unlock = true;
-								case 'him':
-									if (achievementName == 'frien')
-										unlock = true;
-							}
-						}
-				}
-
-				if (unlock)
-				{
-					Achievements.unlockAchievement(achievementName);
-					return achievementName;
-				}
-			}
-		}
-		return null;
-	}
-	#end
-
 
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;

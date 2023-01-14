@@ -32,7 +32,7 @@ class Paths
 	#if MODS_ALLOWED
 	public static var ignoreModFolders:Array<String> = [
 		'characters', 'custom_events', 'custom_notetypes', 'data', 'songs', 'music', 'sounds', 'shaders', 'videos', 'images', 'stages', 'weeks', 'fonts',
-		'scripts', 'achievements'
+		'scripts'
 	];
 	#end
 
@@ -444,20 +444,7 @@ class Paths
 	{
 		return modFolders('images/' + key + '.txt');
 	}
-
-	/* Goes unused for now
-
-		inline static public function modsShaderFragment(key:String, ?library:String)
-		{
-			return modFolders('shaders/'+key+'.frag');
-		}
-		inline static public function modsShaderVertex(key:String, ?library:String)
-		{
-			return modFolders('shaders/'+key+'.vert');
-		}
-		inline static public function modsAchievements(key:String) {
-			return modFolders('achievements/' + key + '.json');
-	}*/
+	
 	static public function modFolders(key:String)
 	{
 		if (currentModDirectory != null && currentModDirectory.length > 0)

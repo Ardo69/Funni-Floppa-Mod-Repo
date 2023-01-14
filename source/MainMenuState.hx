@@ -17,7 +17,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
-import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
 
@@ -26,7 +25,7 @@ using StringTools;
 class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
-	public static var buildNo:String = '121'; //This is also used for Discord RPC
+	public static var buildNo:String = '265'; //This is extremenly stupid and unneeded but still
 	public static var modVersion:String = 'v1.0'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0; //Child porn machine cummin'  partdner!
 
@@ -37,7 +36,6 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
-		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
 		'options'
 	];
@@ -147,30 +145,8 @@ class MainMenuState extends MusicBeatState
 
 		changeItem();
 
-		#if ACHIEVEMENTS_ALLOWED
-		Achievements.loadAchievements();
-		// var leDate = Date.now();
-		// if (leDate.getDay() == 5 && leDate.getHours() >= 18) {
-		// 	var achieveID:Int = Achievements.getAchievementIndex('friday_night_play');
-		// 	if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's a friday night. WEEEEEEEEEEEEEEEEEE
-		// 		Achievements.achievementsMap.set(Achievements.achievementsStuff[achieveID][2], true);
-		// 		giveAchievement();
-		// 		ClientPrefs.saveSettings();
-		// 	}
-		// }
-		#end
-
 		super.create();
 	}
-
-	// #if ACHIEVEMENTS_ALLOWED
-	// // Unlocks "Freaky on a Friday Night" achievement
-	// function giveAchievement() {
-	// 	add(new AchievementObject('friday_night_play', camAchievement));
-	// 	FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-	// 	trace('Giving achievement "friday_night_play"');
-	// }
-	// #end
 
 	var selectedSomethin:Bool = false;
 
@@ -242,8 +218,6 @@ class MainMenuState extends MusicBeatState
 										LoadingState.loadAndSwitchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new ShopState());
-									case 'awards':
-										MusicBeatState.switchState(new AchievementsMenuState());
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
