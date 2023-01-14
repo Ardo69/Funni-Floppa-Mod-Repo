@@ -124,7 +124,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		/*var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 1256, "Psych Engine v" + psychEngineVersion, 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 1256, "Psych Engine v" + psychEngineVersion, 12);
 			versionShit.scrollFactor.set();
 			versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			add(versionShit);
@@ -135,9 +135,8 @@ class MainMenuState extends MusicBeatState
 			var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 1250, "Raise A Funky Floppa - Build Number: " + buildNo, 12);
 			versionShit.scrollFactor.set();
 			versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			add(versionShit); */
-
-		// NG.core.calls.event.logEvent('swag').send();
+			add(versionShit); 
+		// NG.core.calls.event.logEvent('wag').send();
 
 		changeItem();
 
