@@ -1630,7 +1630,7 @@ class PlayState extends MusicBeatState
 	{
 		switch (SONG.song.toLowerCase())
 		{
-			case 'players-fate':
+			case 'players-fate' | 'monochrome':
 				shaderMap.get("gameVCR").setFloat("iTime", FlxG.elapsed);
 				shaderMap.get("gameAbberation").setFloat("iTime", FlxG.elapsed);
 		}
