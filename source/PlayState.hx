@@ -1503,14 +1503,16 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function updateFunnyShaders(elapsed:Float)
-	{
-		switch (SONG.song.toLowerCase())
+	function updateFunnyShaders()
 		{
-			case 'players-fate' | 'monochrome':
-				shaderMap.get("gameVCR").setFloat("iTime", shaderMap.get("gameVCR").getFloat("iTime") + elapsed);
+			switch (SONG.song.toLowerCase())
+			{
+				case 'players-fate' | 'monochrome':
+					shaderMap.get("gameVCR").setFloat("iTime", FlxG.elapsed);
+					shaderMap.get("gameAbberation").setFloat("iTime", FlxG.elapsed);
+			}
 		}
-	}
+	
 
 	public function clearShaders()
 	{
@@ -2475,8 +2477,6 @@ class PlayState extends MusicBeatState
 		setOnLuas('cameraY', camFollowPos.y);
 		setOnLuas('botPlay', cpuControlled);
 		callOnLuas('onUpdatePost', [elapsed]);
-
-		updateFunnyShaders(elapsed);
 	}
 
 	function openChartEditor()
