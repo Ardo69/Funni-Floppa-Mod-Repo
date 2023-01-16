@@ -27,7 +27,7 @@ import Controls;
 
 using StringTools;
 
-class ControlsSubState extends states.substates.MusicBeatSubstate {
+class ControlsSubState extends MusicBeatSubstate {
 	private static var curSelected:Int = -1;
 	private static var curAlt:Bool = false;
 

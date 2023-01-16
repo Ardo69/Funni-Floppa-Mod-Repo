@@ -62,7 +62,7 @@ typedef enum
 } vout_display_align_t;
 
 /**
- * Window management states.
+ * Window management state.
  */
 enum {
     VOUT_WINDOW_STATE_NORMAL=0,
@@ -197,7 +197,7 @@ enum {
     VOUT_DISPLAY_EVENT_CLOSE,
     VOUT_DISPLAY_EVENT_KEY,
 
-    /* Full mouse states.
+    /* Full mouse state.
      * You can use it OR use the other mouse events. The core will do
      * the conversion.
      */

@@ -53,7 +53,7 @@ typedef TitleData =
 	bpm:Int
 }
 
-class TitleState extends states.MusicBeatState
+class TitleState extends MusicBeatState
 {
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
 	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
@@ -128,20 +128,20 @@ class TitleState extends states.MusicBeatState
 
 		if (FlxG.save.data.weekCompleted != null)
 		{
-			states.MainMenuState.weekCompleted = FlxG.save.data.weekCompleted;
+			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
 		// FlxG.mouse.visible = false;
 		#if FREEPLAY
-		states.MusicBeatState.switchState(new states.Freestates.PlayState());
+		MusicBeatState.switchState(new FreeplayState());
 		#elseif CHARTING
-		states.MusicBeatState.switchState(new ChartingState());
+		MusicBeatState.switchState(new ChartingState());
 		#else
-		if (FlxG.save.data.flashing == null && !states.FlashingState.leftState)
+		if (FlxG.save.data.flashing == null && !FlashingState.leftState)
 		{
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
-			states.MusicBeatState.switchState(new states.FlashingState());
+			MusicBeatState.switchState(new FlashingState());
 		}
 		else
 		{
@@ -372,7 +372,7 @@ class TitleState extends states.MusicBeatState
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					
-						states.MusicBeatState.switchState(new states.MainMenuState());
+						MusicBeatState.switchState(new MainMenuState());
 					
 					closedState = true;
 				});

@@ -35,7 +35,7 @@ import sys.io.File;
 
 using StringTools;
 
-class DialogueCharacterEditorState extends states.MusicBeatState
+class DialogueCharacterEditorState extends MusicBeatState
 {
 	var box:FlxSprite;
 	var daText:Alphabet = null;
@@ -684,7 +684,7 @@ class DialogueCharacterEditorState extends states.MusicBeatState
 			}
 
 			if(FlxG.keys.justPressed.ESCAPE) {
-				states.MusicBeatState.switchState(new editors.MasterEditorMenu());
+				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('title'), 1);
 				transitioning = true;
 			}

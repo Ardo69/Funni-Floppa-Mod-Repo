@@ -20,7 +20,7 @@ import flixel.math.FlxPoint;
 using StringTools;
 using StringTools;
 
-class NoteOffsetState extends states.MusicBeatState
+class NoteOffsetState extends MusicBeatState
 {
 	var boyfriend:Character;
 	var gf:Character;
@@ -401,7 +401,7 @@ class NoteOffsetState extends states.MusicBeatState
 
 			persistentUpdate = false;
 			CustomFadeTransition.nextCamera = camOther;
-			states.MusicBeatState.switchState(new options.OptionsState());
+			MusicBeatState.switchState(new options.OptionsState());
 			FlxG.sound.playMusic(Paths.music('title'), 1, true);
 			// FlxG.mouse.visible = false;
 		}

@@ -32,7 +32,7 @@ import sys.io.File;
 
 using StringTools;
 
-class MenuCharacterEditorState extends states.MusicBeatState
+class MenuCharacterEditorState extends MusicBeatState
 {
 	var grpWeekCharacters:FlxTypedGroup<MenuCharacter>;
 	var characterFile:MenuCharacterFile = null;
@@ -297,7 +297,7 @@ class MenuCharacterEditorState extends states.MusicBeatState
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
-				states.MusicBeatState.switchState(new editors.MasterEditorMenu());
+				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('title'));
 			}
 

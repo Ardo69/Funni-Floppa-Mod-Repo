@@ -1,4 +1,4 @@
-package states;
+package;
 
 #if cpp
 import Discord.DiscordClient;
@@ -21,7 +21,7 @@ import lime.utils.Assets;
 
 using StringTools;
 
-class CreditsState extends states.MusicBeatState
+class CreditsState extends MusicBeatState
 {
 	var curSelected:Int = -1;
 
@@ -197,7 +197,7 @@ class CreditsState extends states.MusicBeatState
 					colorTween.cancel();
 				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				states.MusicBeatState.switchState(new states.MainMenuState());
+				MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
 			}
 		}

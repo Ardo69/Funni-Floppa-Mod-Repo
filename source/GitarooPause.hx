@@ -4,7 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 
-class GitarooPause extends states.MusicBeatState
+class GitarooPause extends MusicBeatState
 {
 	var replayButton:FlxSprite;
 	var cancelButton:FlxSprite;
@@ -59,16 +59,16 @@ class GitarooPause extends states.MusicBeatState
 		{
 			if (replaySelect)
 			{
-				states.MusicBeatState.switchState(new states.PlayState());
+				MusicBeatState.switchState(new PlayState());
 			}
 			else
 			{
-				states.PlayState.usedPractice = false;
-				states.PlayState.changedDifficulty = false;
-				states.PlayState.seenCutscene = false;
-				states.PlayState.deathCounter = 0;
-				states.PlayState.cpuControlled = false;
-				states.MusicBeatState.switchState(new states.MainMenuState());
+				PlayState.usedPractice = false;
+				PlayState.changedDifficulty = false;
+				PlayState.seenCutscene = false;
+				PlayState.deathCounter = 0;
+				PlayState.cpuControlled = false;
+				MusicBeatState.switchState(new MainMenuState());
 				FlxG.sound.playMusic(Paths.music('title'));
 			}
 		}

@@ -18,7 +18,7 @@ import sys.FileSystem;
 
 using StringTools;
 
-class MasterEditorMenu extends states.MusicBeatState
+class MasterEditorMenu extends MusicBeatState
 {
 	var options:Array<String> = [
 		'Week Editor',
@@ -107,28 +107,28 @@ class MasterEditorMenu extends states.MusicBeatState
 
 		if (controls.BACK)
 		{
-			states.MusicBeatState.switchState(new states.MainMenuState());
+			MusicBeatState.switchState(new MainMenuState());
 		}
 
 		if (controls.ACCEPT)
 		{
 			switch(options[curSelected]) {
 				case 'Character Editor':
-					states.LoadingState.loadAndSwitchState(new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
+					LoadingState.loadAndSwitchState(new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
 				case 'Week Editor':
-					states.MusicBeatState.switchState(new WeekEditorState());
+					MusicBeatState.switchState(new WeekEditorState());
 				case 'Menu Character Editor':
-					states.MusicBeatState.switchState(new MenuCharacterEditorState());
+					MusicBeatState.switchState(new MenuCharacterEditorState());
 				case 'Dialogue Portrait Editor':
-					states.LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
+					LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
 				case 'Dialogue Editor':
-					states.LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
+					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
 				case 'Chart Editor'://felt it would be cool maybe
-					states.LoadingState.loadAndSwitchState(new ChartingState(), false);
+					LoadingState.loadAndSwitchState(new ChartingState(), false);
 			}
 			FlxG.sound.music.volume = 0;
 			#if PRELOAD_ALL
-			states.Freestates.PlayState.destroyFreeplayVocals();
+			FreeplayState.destroyFreeplayVocals();
 			#end
 		}
 		

@@ -1,4 +1,4 @@
-package states.substates;
+package;
 
 import options.OptionsState;
 import Controls.Control;
@@ -17,7 +17,7 @@ import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
 import flash.system.System;
 
-class PauseSubState extends states.substates.MusicBeatSubstate
+class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
@@ -66,7 +66,7 @@ class PauseSubState extends states.substates.MusicBeatSubstate
 		add(bg);
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
-		levelInfo.text += states.PlayState.SONG.song;
+		levelInfo.text += PlayState.SONG.song;
 		levelInfo.scrollFactor.set();
 		levelInfo.setFormat(Paths.font("sanspro-regular.ttf"), 32);
 		levelInfo.updateHitbox();
@@ -80,7 +80,7 @@ class PauseSubState extends states.substates.MusicBeatSubstate
 		add(levelDifficulty);
 
 		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		blueballedTxt.text = "Blueballed: " + states.PlayState.deathCounter;
+		blueballedTxt.text = "Blueballed: " + PlayState.deathCounter;
 		blueballedTxt.scrollFactor.set();
 		blueballedTxt.setFormat(Paths.font('sanspro-regular.ttf'), 32);
 		blueballedTxt.updateHitbox();
@@ -91,7 +91,7 @@ class PauseSubState extends states.substates.MusicBeatSubstate
 		practiceText.setFormat(Paths.font('sanspro-regular.ttf'), 32);
 		practiceText.x = FlxG.width - (practiceText.width + 20);
 		practiceText.updateHitbox();
-		practiceText.visible = states.PlayState.instance.practiceMode;
+		practiceText.visible = PlayState.instance.practiceMode;
 		add(practiceText);
 
 		var chartingText:FlxText = new FlxText(20, 15 + 101, 0, "CHARTING MODE", 32);
@@ -100,7 +100,7 @@ class PauseSubState extends states.substates.MusicBeatSubstate
 		chartingText.x = FlxG.width - (chartingText.width + 20);
 		chartingText.y = FlxG.height - (chartingText.height + 20);
 		chartingText.updateHitbox();
-		chartingText.visible = states.PlayState.chartingMode;
+		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
 
 		blueballedTxt.alpha = 0;
@@ -181,14 +181,14 @@ class PauseSubState extends states.substates.MusicBeatSubstate
 			if (menuItems == difficultyChoices)
 			{
 				if(menuItems.length - 1 != curSelected && difficultyChoices.contains(daSelected)) {
-					var name:String = states.PlayState.SONG.song;
+					var name:String = PlayState.SONG.song;
 					var poop = Highscore.formatSong(name, curSelected);
-					states.PlayState.SONG = Song.loadFromJson(poop, name);
-					states.PlayState.storyDifficulty = curSelected;
-					states.MusicBeatState.resetState();
+					PlayState.SONG = Song.loadFromJson(poop, name);
+					PlayState.storyDifficulty = curSelected;
+					MusicBeatState.resetState();
 					FlxG.sound.music.volume = 0;
-					states.PlayState.changedDifficulty = true;
-					states.PlayState.chartingMode = false;
+					PlayState.changedDifficulty = true;
+					PlayState.chartingMode = false;
 					skipTimeTracker = null;
 
 					if(skipTimeText != null)
@@ -213,52 +213,52 @@ class PauseSubState extends states.substates.MusicBeatSubstate
 					menuItems = difficultyChoices;
 					regenMenu();
 				case 'Toggle Practice Mode':
-					states.PlayState.instance.practiceMode = !states.PlayState.instance.practiceMode;
-					states.PlayState.changedDifficulty = true;
-					practiceText.visible = states.PlayState.instance.practiceMode;
+					PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
+					PlayState.changedDifficulty = true;
+					practiceText.visible = PlayState.instance.practiceMode;
 				case "Restart Song":
 					restartSong();
 				case 'Options':
-					states.MusicBeatState.switchState(new OptionsState());
+					MusicBeatState.switchState(new OptionsState());
 				case "Leave Charting Mode":
 					restartSong();
-					states.PlayState.chartingMode = false;
+					PlayState.chartingMode = false;
 				case 'Skip Time':
 					if(curTime < Conductor.songPosition)
 					{
-						states.PlayState.startOnTime = curTime;
+						PlayState.startOnTime = curTime;
 						restartSong(true);
 					}
 					else
 					{
 						if (curTime != Conductor.songPosition)
 						{
-							states.PlayState.instance.clearNotesBefore(curTime);
-							states.PlayState.instance.setSongTime(curTime);
+							PlayState.instance.clearNotesBefore(curTime);
+							PlayState.instance.setSongTime(curTime);
 						}
 						close();
 					}
 				case "End Song":
 					close();
-					states.PlayState.instance.finishSong(true);
+					PlayState.instance.finishSong(true);
 				case 'Toggle Botplay':
-					states.PlayState.instance.cpuControlled = !states.PlayState.instance.cpuControlled;
-					states.PlayState.changedDifficulty = true;
-					states.PlayState.instance.botplayTxt.visible = states.PlayState.instance.cpuControlled;
-					states.PlayState.instance.botplayTxt.alpha = 1;
-					states.PlayState.instance.botplaySine = 0;
+					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
+					PlayState.changedDifficulty = true;
+					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
+					PlayState.instance.botplayTxt.alpha = 1;
+					PlayState.instance.botplaySine = 0;
 				case "Exit to menu":
-					states.PlayState.deathCounter = 0;
-					states.PlayState.seenCutscene = false;
-					if(states.PlayState.isStoryMode) {
-						states.MusicBeatState.switchState(new states.MainMenuState());
+					PlayState.deathCounter = 0;
+					PlayState.seenCutscene = false;
+					if(PlayState.isStoryMode) {
+						MusicBeatState.switchState(new StoryMenuState());
 					} else {
-						states.MusicBeatState.switchState(new states.Freestates.PlayState());
+						MusicBeatState.switchState(new FreeplayState());
 					}
-					states.PlayState.cancelMusicFadeTween();
+					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('title'));
-					states.PlayState.changedDifficulty = false;
-					states.PlayState.chartingMode = false;
+					PlayState.changedDifficulty = false;
+					PlayState.chartingMode = false;
 				case 'Close Game':
 					System.exit(0);
 			}
@@ -267,9 +267,9 @@ class PauseSubState extends states.substates.MusicBeatSubstate
 
 	public static function restartSong(noTrans:Bool = false)
 	{
-		states.PlayState.instance.paused = true; // For lua
+		PlayState.instance.paused = true; // For lua
 		FlxG.sound.music.volume = 0;
-		states.PlayState.instance.vocals.volume = 0;
+		PlayState.instance.vocals.volume = 0;
 
 		if(noTrans)
 		{
@@ -278,7 +278,7 @@ class PauseSubState extends states.substates.MusicBeatSubstate
 		}
 		else
 		{
-			states.MusicBeatState.resetState();
+			MusicBeatState.resetState();
 		}
 	}
 

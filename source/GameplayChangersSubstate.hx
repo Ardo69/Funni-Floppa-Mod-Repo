@@ -1,4 +1,4 @@
-package states.substates;
+package;
 
 #if cpp
 import Discord.DiscordClient;
@@ -27,7 +27,7 @@ import Controls;
 
 using StringTools;
 
-class GameplayChangersSubstate extends states.substates.MusicBeatSubstate
+class GameplayChangersSubstate extends MusicBeatSubstate
 {
 	private var curOption:GameplayOption = null;
 	private var curSelected:Int = 0;

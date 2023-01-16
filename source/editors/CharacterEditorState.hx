@@ -43,7 +43,7 @@ using StringTools;
 /**
 	*DEBUG MODE
  */
-class CharacterEditorState extends states.MusicBeatState
+class CharacterEditorState extends MusicBeatState
 {
 	var char:Character;
 	var ghostChar:Character;
@@ -1123,9 +1123,13 @@ class CharacterEditorState extends states.MusicBeatState
 		if(!charDropDown.dropPanel.visible) {
 			if (FlxG.keys.justPressed.ESCAPE) {
 				if(goToPlayState) {
+<<<<<<< HEAD
 					states.MusicBeatState.switchState(new states.PlayState());
+=======
+					MusicBeatState.switchState(new PlayState());
+>>>>>>> parent of 6d07065 (reorganization :tm:)
 				} else {
-					states.MusicBeatState.switchState(new editors.MasterEditorMenu());
+					MusicBeatState.switchState(new editors.MasterEditorMenu());
 					FlxG.sound.playMusic(Paths.music('title'));
 				}
 				// FlxG.mouse.visible = false;

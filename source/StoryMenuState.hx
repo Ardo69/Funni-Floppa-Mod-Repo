@@ -1,4 +1,4 @@
-package states;
+package;
 
 import flixel.math.FlxPoint;
 #if cpp
@@ -23,7 +23,7 @@ import WeekData;
 
 using StringTools;
 
-class MainMenuState extends states.MusicBeatState
+class StoryMenuState extends MusicBeatState
 {
 	public static var weekCompleted:Map<String, Bool> = new Map<String, Bool>();
 
@@ -57,7 +57,7 @@ class MainMenuState extends states.MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		states.PlayState.isStoryMode = true;
+		PlayState.isStoryMode = true;
 		WeekData.reloadWeekFiles(true);
 		if (curWeek >= WeekData.weeksList.length)
 			curWeek = 0;
@@ -292,12 +292,12 @@ class MainMenuState extends states.MusicBeatState
 			if (FlxG.keys.justPressed.CONTROL)
 			{
 				persistentUpdate = false;
-				openSubState(new states.substates.GameplayChangersSubstate());
+				openSubState(new GameplayChangersSubstate());
 			}
 			else if (controls.RESET)
 			{
 				persistentUpdate = false;
-				openSubState(new states.substate.ResetScoreState('', curDifficulty, '', curWeek));
+				openSubState(new ResetScoreSubState('', curDifficulty, '', curWeek));
 				// FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
 			else if (controls.ACCEPT)
@@ -310,7 +310,7 @@ class MainMenuState extends states.MusicBeatState
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;
-			states.MusicBeatState.switchState(new states.MainMenuState());
+			MusicBeatState.switchState(new MainMenuState());
 		}
 
 		super.update(elapsed);
@@ -351,23 +351,23 @@ class MainMenuState extends states.MusicBeatState
 			}
 
 			// Nevermind that's stupid lmao
-			states.PlayState.storyPlaylist = songArray;
-			states.PlayState.isStoryMode = true;
+			PlayState.storyPlaylist = songArray;
+			PlayState.isStoryMode = true;
 			selectedWeek = true;
 
 			var diffic = CoolUtil.getDifficultyFilePath(curDifficulty);
 			if (diffic == null)
 				diffic = '';
 
-			states.PlayState.storyDifficulty = curDifficulty;
+			PlayState.storyDifficulty = curDifficulty;
 
-			states.PlayState.SONG = Song.loadFromJson(states.PlayState.storyPlaylist[0].toLowerCase() + diffic, states.PlayState.storyPlaylist[0].toLowerCase());
-			states.PlayState.campaignScore = 0;
-			states.PlayState.campaignMisses = 0;
+			PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
+			PlayState.campaignScore = 0;
+			PlayState.campaignMisses = 0;
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				states.LoadingState.loadAndSwitchState(new states.PlayState(), true);
-				states.Freestates.PlayState.destroyFreeplayVocals();
+				LoadingState.loadAndSwitchState(new PlayState(), true);
+				FreeplayState.destroyFreeplayVocals();
 			});
 		}
 		else
@@ -456,7 +456,7 @@ class MainMenuState extends states.MusicBeatState
 		// } else {
 		// bgSprite.loadGraphic(Paths.image('menubackgrounds/menu_' + assetName));
 		// }
-		states.PlayState.storyWeek = curWeek;
+		PlayState.storyWeek = curWeek;
 
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
 		var diffStr:String = WeekData.getCurrentWeek().difficulties;

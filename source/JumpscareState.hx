@@ -1,4 +1,4 @@
-package states;
+// Oh no too scery im gona nuttt
 import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -56,6 +56,6 @@ class JumpscareState extends FlxState
     public function closeGame(time:FlxTimer = null)
     {
         FlxG.openURL("https://www.youtube.com/watch?v=u6tvzG_88sU", "_blank");
-        FlxG.switchState(new states.MainMenuState());
+        FlxG.switchState(new MainMenuState());
     }
 }

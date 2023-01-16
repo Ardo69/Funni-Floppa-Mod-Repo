@@ -1,4 +1,4 @@
-package states;
+package;
 
 import lime.app.Promise;
 import lime.app.Future;
@@ -16,7 +16,7 @@ import lime.utils.AssetManifest;
 
 import haxe.io.Path;
 
-class LoadingState extends states.MusicBeatState
+class LoadingState extends MusicBeatState
 {
 	inline static var MIN_TIME = 1.0;
 
@@ -65,9 +65,9 @@ class LoadingState extends states.MusicBeatState
 			{
 				callbacks = new MultiCallback(onLoad);
 				var introComplete = callbacks.add("introComplete");
-				/*if (states.PlayState.SONG != null) {
+				/*if (PlayState.SONG != null) {
 					checkLoadSong(getSongPath());
-					if (states.PlayState.SONG.needsVoices)
+					if (PlayState.SONG.needsVoices)
 						checkLoadSong(getVocalPath());
 				}*/
 				checkLibrary("shared");
@@ -132,22 +132,22 @@ class LoadingState extends states.MusicBeatState
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		
-		states.MusicBeatState.switchState(target);
+		MusicBeatState.switchState(target);
 	}
 	
 	static function getSongPath()
 	{
-		return Paths.inst(states.PlayState.SONG.song);
+		return Paths.inst(PlayState.SONG.song);
 	}
 	
 	static function getVocalPath()
 	{
-		return Paths.voices(states.PlayState.SONG.song);
+		return Paths.voices(PlayState.SONG.song);
 	}
 	
 	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)
 	{
-		states.MusicBeatState.switchState(getNextState(target, stopMusic));
+		MusicBeatState.switchState(getNextState(target, stopMusic));
 	}
 	
 	static function getNextState(target:FlxState, stopMusic = false):FlxState
@@ -163,12 +163,12 @@ class LoadingState extends states.MusicBeatState
 
 		#if NO_PRELOAD_ALL
 		var loaded:Bool = false;
-		if (states.PlayState.SONG != null) {
-			loaded = isSoundLoaded(getSongPath()) && (!states.PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded("shared") && isLibraryLoaded(directory);
+		if (PlayState.SONG != null) {
+			loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded("shared") && isLibraryLoaded(directory);
 		}
 		
 		if (!loaded)
-			return new states.LoadingState(target, stopMusic, directory);
+			return new LoadingState(target, stopMusic, directory);
 		#end
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();

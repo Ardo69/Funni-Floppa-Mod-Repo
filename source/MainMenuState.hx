@@ -1,4 +1,4 @@
-package states;
+package;
 
 #if cpp
 import Discord.DiscordClient;
@@ -22,7 +22,7 @@ import flixel.input.keyboard.FlxKey;
 
 using StringTools;
 
-class MainMenuState extends states.MusicBeatState
+class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.5.2h'; // This is also used for Discord RPC
 	public static var buildNo:String = '250'; // This is extremenly stupid and unneeded but still
@@ -132,11 +132,10 @@ class MainMenuState extends states.MusicBeatState
 			versionShit.scrollFactor.set();
 			versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			add(versionShit);
-			/*var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 1250, "Raise A Funky Floppa - Build Number: " + buildNo, 12);
-			/*var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 1250, "Raise A Funky Floppa - Build Number: " + buildNo, 12);
+			var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 1250, "Raise A Funky Floppa - Build Number: " + buildNo, 12);
 			versionShit.scrollFactor.set();
 			versionShit.setFormat("Source Sans Pro Regular", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			add(versionShit); */
+			add(versionShit); 
 		// NG.core.calls.event.logEvent('wag').send();
 
 		changeItem();
@@ -174,7 +173,7 @@ class MainMenuState extends states.MusicBeatState
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				states.MusicBeatState.switchState(new TitleState());
+				MusicBeatState.switchState(new TitleState());
 			}
 
 			if (controls.ACCEPT)
@@ -212,15 +211,15 @@ class MainMenuState extends states.MusicBeatState
 								switch (daChoice)
 								{
 									case 'story_mode':
-										states.LoadingState.loadAndSwitchState(new states.MainMenuState());
+										LoadingState.loadAndSwitchState(new StoryMenuState());
 									case 'freeplay':
-										states.MusicBeatState.switchState(new states.Freestates.PlayState());
+										MusicBeatState.switchState(new FreeplayState());
 									case 'shop':
-										states.MusicBeatState.switchState(new states.ShopState());
+										MusicBeatState.switchState(new ShopState());
 									case 'credits':
-										states.MusicBeatState.switchState(new states.CreditsState());
+										MusicBeatState.switchState(new CreditsState());
 									case 'options':
-										states.LoadingState.loadAndSwitchState(new options.OptionsState());
+										LoadingState.loadAndSwitchState(new options.OptionsState());
 								}
 							});
 						}
@@ -231,7 +230,7 @@ class MainMenuState extends states.MusicBeatState
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
 				selectedSomethin = true;
-				states.MusicBeatState.switchState(new MasterEditorMenu());
+				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 			#end
 		}

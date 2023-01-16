@@ -35,7 +35,7 @@ import WeekData;
 
 using StringTools;
 
-class WeekEditorState extends states.MusicBeatState
+class WeekEditorState extends MusicBeatState
 {
 	var txtWeekTitle:FlxText;
 	var bgSprite:FlxSprite;
@@ -144,7 +144,7 @@ class WeekEditorState extends states.MusicBeatState
 		add(loadWeekButton);
 		
 		var freeplayButton:FlxButton = new FlxButton(0, 650, "Freeplay", function() {
-			states.MusicBeatState.switchState(new WeekEditorstate.Freestates.PlayState(weekFile));
+			MusicBeatState.switchState(new WeekEditorFreeplayState(weekFile));
 			
 		});
 		freeplayButton.screenCenter(X);
@@ -446,7 +446,7 @@ class WeekEditorState extends states.MusicBeatState
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
-				states.MusicBeatState.switchState(new editors.MasterEditorMenu());
+				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('title'));
 			}
 		}
@@ -578,7 +578,7 @@ class WeekEditorState extends states.MusicBeatState
 	}
 }
 
-class WeekEditorstate.Freestates.PlayState extends states.MusicBeatState
+class WeekEditorFreeplayState extends MusicBeatState
 {
 	var weekFile:WeekFile = null;
 	public function new(weekFile:WeekFile = null)
@@ -656,7 +656,7 @@ class WeekEditorstate.Freestates.PlayState extends states.MusicBeatState
 		add(loadWeekButton);
 		
 		var storyModeButton:FlxButton = new FlxButton(0, 685, "Story Mode", function() {
-			states.MusicBeatState.switchState(new WeekEditorState(weekFile));
+			MusicBeatState.switchState(new WeekEditorState(weekFile));
 			
 		});
 		storyModeButton.screenCenter(X);
@@ -791,7 +791,7 @@ class WeekEditorstate.Freestates.PlayState extends states.MusicBeatState
 			super.update(elapsed);
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
-			states.MusicBeatState.switchState(new WeekEditorstate.Freestates.PlayState(WeekEditorState.loadedWeek));
+			MusicBeatState.switchState(new WeekEditorFreeplayState(WeekEditorState.loadedWeek));
 			WeekEditorState.loadedWeek = null;
 			return;
 		}
@@ -808,7 +808,7 @@ class WeekEditorstate.Freestates.PlayState extends states.MusicBeatState
 			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 			if(FlxG.keys.justPressed.ESCAPE) {
-				states.MusicBeatState.switchState(new editors.MasterEditorMenu());
+				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('title'));
 			}
 
