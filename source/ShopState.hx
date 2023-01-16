@@ -22,6 +22,7 @@ class ShopState extends MusicBeatState
 
 	//public var bigBalls:FlxText;
 	var hand:FlxSprite;
+	var back:FlxSprite;
 
 	override public function create(){
 		FlxG.sound.playMusic(Paths.music('shop'), 0); // bwomp
@@ -33,14 +34,22 @@ class ShopState extends MusicBeatState
 		bigBalls.y = FlxG.height * 0.89;
 		add(bigBalls);*/
 
-		hand = new FlxSprite(0, 0);
+		back = new FlxSprite();
+		back.loadGraphic(Paths.image("shopBackground"));
+		back.scale.set(0.7, 0.7);
+		back.updateHitbox();
+		back.antialiasing = ClientPrefs.globalAntialiasing;
+		add(back);
+
+		hand = new FlxSprite(-150, 0);
 		hand.frames = Paths.getSparrowAtlas('hand');
 
 		hand.antialiasing = ClientPrefs.globalAntialiasing;
-		hand.animation.addByPrefix('pointOut', 'hand instance', 24, false);
+		hand.animation.addByPrefix('pointOut', 'hand instance', 24, true);
 		hand.animation.play('pointOut');
 		hand.screenCenter();
 		hand.updateHitbox();
+		hand.scale.set(0.5, 0.5);
 		add(hand);
 	}
 
@@ -54,9 +63,21 @@ class ShopState extends MusicBeatState
 			FlxG.switchState(new FreeplayState());
 		}
 
-		if (controls.NOTE_UP || controls.NOTE_LEFT || controls.NOTE_RIGHT || controls.NOTE_RIGHT){
-		    hand.x += 100;
+		/*if (controls.NOTE_LEFT_P) {
+		    hand.x -= 50;
 		}
+		else if(controls.NOTE_RIGHT_P) {
+			hand.x += 50;
+		}*/
+
+		#if SHOP_ENABLED
+		if (controls.NOTE_UP_P) {
+			hand.y -= 50;
+		}
+		else if (controls.NOTE_DOWN_P) {
+			hand.y += 50;
+		}
+		#end
 
 		super.update(elapsed);
 	}

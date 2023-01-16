@@ -55,6 +55,7 @@
 	<define name="PSYCH_WATERMARKS" /> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE
 	SCREEN -->
 	<define name="RPC" if="cpp"/>
+	<define name="SHOP_ENABLED" if="cpp || hl || debug"/>
 	<assets path="assets/preload" rename="assets" />
 
 	<assets path="art/missingTexture.png" embed="true" />
