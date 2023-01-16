@@ -1123,11 +1123,7 @@ class CharacterEditorState extends MusicBeatState
 		if(!charDropDown.dropPanel.visible) {
 			if (FlxG.keys.justPressed.ESCAPE) {
 				if(goToPlayState) {
-<<<<<<< HEAD
 					states.MusicBeatState.switchState(new states.PlayState());
-=======
-					MusicBeatState.switchState(new PlayState());
->>>>>>> parent of 6d07065 (reorganization :tm:)
 				} else {
 					MusicBeatState.switchState(new editors.MasterEditorMenu());
 					FlxG.sound.playMusic(Paths.music('title'));
