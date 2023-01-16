@@ -15,10 +15,13 @@ using StringTools;
 
 class ShopState extends MusicBeatState
 {
-	override public function create():Void {
+	override public function create(){
 		FlxG.sound.playMusic(Paths.music('shop'), 0); // bwomp
 		FlxG.sound.music.fadeIn(0.5, 0, 0.65);
 		Conductor.changeBPM(96);
+
+		var midGround:BGSprite = new BGSprite('stages/house');
+		add(midGround);
 	}
 
 	override function update(elapsed:Float)
@@ -31,19 +34,7 @@ class ShopState extends MusicBeatState
 			FlxG.switchState(new FreeplayState());
 		}
 
-		if (controls.UI_UP){
-			FlxG.switchState(new JokeSecretState());
-		}
-
-		if (controls.UI_LEFT){
-			FlxG.switchState(new JokeSecretState());
-		}
-
-		if (controls.UI_RIGHT){
-			FlxG.switchState(new JokeSecretState());
-		}
-
-		if (controls.UI_DOWN){
+		if (controls.UI_UP || controls.UI_LEFT || controls.UI_RIGHT || controls.UI_RIGHT){
 			FlxG.switchState(new JokeSecretState());
 		}
 
