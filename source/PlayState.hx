@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.display.FlxBackdrop;
 import sys.io.File;
 import flixel.system.FlxAssets.FlxShader;
 import openfl.display.Shader;
@@ -281,6 +282,10 @@ class PlayState extends MusicBeatState
 	var boyfriendIdleTime:Float = 0.0;
 	var boyfriendIdled:Bool = false;
 
+	var curFont = "sanspro";
+	var curFontSuffix = ".ttf";
+	var hasBoldVersion = true;
+
 	// Lua shit
 	public static var instance:PlayState;
 
@@ -298,6 +303,17 @@ class PlayState extends MusicBeatState
 	private var keysArray:Array<Dynamic>;
 
 	var precacheList:Map<String, String> = new Map<String, String>();
+
+	function getFont(?bold:Bool = false):String { // i don't think this is janky
+		var suffix = "";
+		if (hasBoldVersion) {
+			if (bold)
+				suffix = "-bold";
+			else
+				suffix = "-regular";
+		}
+		return Paths.font(curFont + suffix + curFontSuffix);
+	}
 
 	override public function create()
 	{
@@ -488,6 +504,15 @@ class PlayState extends MusicBeatState
 				midGround.setGraphicSize(Std.int(midGround.width * 0.7));
 				midGround.updateHitbox();
 				add(midGround);
+			case 'missing':
+				var bg:FlxBackdrop = new FlxBackdrop(Paths.imageEmbedded("missingTexture"), XY, 0, 0);
+				bg.velocity.set(100, 100);
+				bg.screenCenter();
+				// bg.alpha = 0.5;
+				add(bg);
+				curFont = "";
+				curFontSuffix = "";
+				hasBoldVersion = false;
 		}
 
 		if (isPixelStage)
@@ -619,7 +644,7 @@ class PlayState extends MusicBeatState
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(getFont(true), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
@@ -773,7 +798,7 @@ class PlayState extends MusicBeatState
 		if (HungerSongs.contains(SONG.song.toLowerCase()))
 		{
 			hungerText = new FlxText(0, 0, FlxG.width, "Hunger: 100%", 32, true);
-			hungerText.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
+			hungerText.setFormat(getFont(true), 32, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
 			hungerText.screenCenter(X);
 			hungerText.y = healthBarBG.y - hungerText.height - 25;
 			if (ClientPrefs.downScroll)
@@ -784,7 +809,7 @@ class PlayState extends MusicBeatState
 			add(hungerText);
 
 			moneyTxt = new FlxText(0, 0, FlxG.width, "0$", 32, true);
-			moneyTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, 0xFF50DA3E, CENTER, OUTLINE, FlxColor.BLACK);
+			moneyTxt.setFormat(getFont(true), 32, 0xFF50DA3E, CENTER, OUTLINE, FlxColor.BLACK);
 			moneyTxt.screenCenter(X);
 			moneyTxt.y = hungerText.y - moneyTxt.height - 25;
 			if (ClientPrefs.downScroll)
@@ -808,21 +833,21 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font((stageData.isPixelStage) ? "pixel.otf" : "sanspro-regular.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,
+		scoreTxt.setFormat(getFont(false), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,
 			FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		add(scoreTxt);
 
 		songTxt = new FlxText(12, FlxG.height - 24, 0, "", 8);
-		songTxt.setFormat(Paths.font("sanspro-regular.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songTxt.setFormat(getFont(false), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songTxt.scrollFactor.set();
 		songTxt.borderSize = 1;
 		add(songTxt);
 		songTxt.text = curSong + " (" + storyDifficultyText + ") " + "| Floppa Engine " + MainMenuState.modVersion;
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "MINOR SKILL ISSUE", 32);
-		botplayTxt.setFormat(Paths.font("sanspro-bold.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.setFormat(getFont(true), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
@@ -833,7 +858,7 @@ class PlayState extends MusicBeatState
 		}
 
 		judgementCounter = new FlxText(20, 0, 0, "", 20);
-		judgementCounter.setFormat(Paths.font("sanspro-regular.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		judgementCounter.setFormat(getFont(false), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		judgementCounter.borderSize = 2;
 		judgementCounter.borderQuality = 2;
 		judgementCounter.scrollFactor.set();

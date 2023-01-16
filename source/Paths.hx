@@ -243,6 +243,10 @@ class Paths
 		return returnAsset;
 	}
 
+	inline static public function imageEmbedded(key:String) {
+		return returnGraphicEmbedded(key);
+	}
+
 	static public function getTextFromFile(key:String, ?ignoreMods:Bool = false):String
 	{
 		#if sys
@@ -341,6 +345,24 @@ class Paths
 
 	// completely rewritten asset loading? fuck!
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
+
+	public static function returnGraphicEmbedded(key:String) {
+		var path:String = 'embeddedAssets/${key}.png';
+
+		if (OpenFlAssets.exists(path, IMAGE))
+			{
+				if (!currentTrackedAssets.exists(path))
+				{
+					var newGraphic:FlxGraphic = FlxG.bitmap.add(path, false, path);
+					newGraphic.persist = true;
+					currentTrackedAssets.set(path, newGraphic);
+				}
+				localTrackedAssets.push(path);
+				return currentTrackedAssets.get(path);
+			}
+			trace('oh no its returning null NOOOO ' + path);
+			return null;
+	}
 
 	public static function returnGraphic(key:String, ?library:String)
 	{

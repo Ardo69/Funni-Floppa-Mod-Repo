@@ -59,6 +59,7 @@
 	<assets path="assets/preload" rename="assets" />
 
 	<assets path="art/missingTexture.png" embed="true" />
+	<assets path="embeddedAssets" embed="true" />
 
 	<!-- DONT ENABLE THIS -->
 	<define name="CHECK_FOR_UPDATES" if="desktop officialBuild" />
