@@ -54,7 +54,7 @@
 	<define name="VIDEOS_ALLOWED" if="cpp || web" unless="32bits || hl" />
 	<define name="PSYCH_WATERMARKS" /> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE
 	SCREEN -->
-	<define name="RPC" if="cpp" unless="hl" />
+	<define name="RPC" if="desktop" unless="hl" />
 	<assets path="assets/preload" rename="assets" />
 
 	<assets path="art/missingTexture.png" embed="true" />
