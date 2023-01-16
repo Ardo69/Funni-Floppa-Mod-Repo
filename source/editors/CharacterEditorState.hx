@@ -54,14 +54,14 @@ class CharacterEditorState extends MusicBeatState
 	//var animList:Array<String> = [];
 	var curAnim:Int = 0;
 	var daAnim:String = 'spooky';
-	var goToPlayState:Bool = true;
+	var goTostates.PlayState:Bool = true;
 	var camFollow:FlxObject;
 
-	public function new(daAnim:String = 'spooky', goToPlayState:Bool = true)
+	public function new(daAnim:String = 'spooky', goTostates.PlayState:Bool = true)
 	{
 		super();
 		this.daAnim = daAnim;
-		this.goToPlayState = goToPlayState;
+		this.goTostates.PlayState = goTostates.PlayState;
 	}
 
 	var UI_box:FlxUITabMenu;
@@ -1122,8 +1122,12 @@ class CharacterEditorState extends MusicBeatState
 
 		if(!charDropDown.dropPanel.visible) {
 			if (FlxG.keys.justPressed.ESCAPE) {
+<<<<<<< HEAD
 				if(goToPlayState) {
 <<<<<<< HEAD
+=======
+				if(goTostates.PlayState) {
+>>>>>>> parent of bda8bb9 (bug fixes)
 					states.MusicBeatState.switchState(new states.PlayState());
 =======
 					MusicBeatState.switchState(new PlayState());
