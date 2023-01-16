@@ -98,7 +98,7 @@ class ChartingState extends states.MusicBeatState
 
 	var UI_box:FlxUITabMenu;
 
-	public static var goTostates.PlayState:Bool = false;
+	public static var goToPlayState:Bool = false;
 	/**
 	 * Array of notes showing when each section STARTS in STEPS
 	 * Usually rounded up??
