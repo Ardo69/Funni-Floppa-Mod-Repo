@@ -23,11 +23,29 @@ class ShopState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		Conductor.songPosition = FlxG.sound.music.time;
-		var enter = controls.ACCEPT;
+		// raf or plank don't delete this pls
 
-		if (enter)
+		Conductor.songPosition = FlxG.sound.music.time;
+
+		if (controls.ACCEPT){
 			FlxG.switchState(new FreeplayState());
+		}
+
+		if (controls.UI_UP){
+			FlxG.switchState(new JokeSecretState());
+		}
+
+		if (controls.UI_LEFT){
+			FlxG.switchState(new JokeSecretState());
+		}
+
+		if (controls.UI_RIGHT){
+			FlxG.switchState(new JokeSecretState());
+		}
+
+		if (controls.UI_DOWN){
+			FlxG.switchState(new JokeSecretState());
+		}
 
 		super.update(elapsed);
 	}
