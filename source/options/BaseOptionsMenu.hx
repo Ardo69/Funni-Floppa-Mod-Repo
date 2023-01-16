@@ -28,7 +28,7 @@ import Controls;
 
 using StringTools;
 
-class BaseOptionsMenu extends MusicBeatSubstate
+class BaseOptionsMenu extends states.substates.MusicBeatSubstate
 {
 	private var curOption:Option = null;
 	private var curSelected:Int = 0;

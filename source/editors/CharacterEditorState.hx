@@ -43,7 +43,7 @@ using StringTools;
 /**
 	*DEBUG MODE
  */
-class CharacterEditorState extends MusicBeatState
+class CharacterEditorState extends states.MusicBeatState
 {
 	var char:Character;
 	var ghostChar:Character;
@@ -54,14 +54,14 @@ class CharacterEditorState extends MusicBeatState
 	//var animList:Array<String> = [];
 	var curAnim:Int = 0;
 	var daAnim:String = 'spooky';
-	var goToPlayState:Bool = true;
+	var goTostates.PlayState:Bool = true;
 	var camFollow:FlxObject;
 
-	public function new(daAnim:String = 'spooky', goToPlayState:Bool = true)
+	public function new(daAnim:String = 'spooky', goTostates.PlayState:Bool = true)
 	{
 		super();
 		this.daAnim = daAnim;
-		this.goToPlayState = goToPlayState;
+		this.goTostates.PlayState = goTostates.PlayState;
 	}
 
 	var UI_box:FlxUITabMenu;
@@ -1122,10 +1122,10 @@ class CharacterEditorState extends MusicBeatState
 
 		if(!charDropDown.dropPanel.visible) {
 			if (FlxG.keys.justPressed.ESCAPE) {
-				if(goToPlayState) {
-					MusicBeatState.switchState(new PlayState());
+				if(goTostates.PlayState) {
+					states.MusicBeatState.switchState(new states.PlayState());
 				} else {
-					MusicBeatState.switchState(new editors.MasterEditorMenu());
+					states.MusicBeatState.switchState(new editors.MasterEditorMenu());
 					FlxG.sound.playMusic(Paths.music('title'));
 				}
 				// FlxG.mouse.visible = false;

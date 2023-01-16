@@ -68,7 +68,7 @@ struct filter_t
             void        (*pf_flush)( filter_t * );
             picture_t * (*pf_buffer_new) ( filter_t * );
             void        (*pf_buffer_del) ( filter_t *, picture_t * );
-            /* Filter mouse state.
+            /* Filter mouse states.
              *
              * If non-NULL, you must convert from output to input formats:
              * - If VLC_SUCCESS is returned, the mouse state is propagated.
@@ -399,7 +399,7 @@ VLC_API void filter_chain_SubSource( filter_chain_t *, mtime_t );
 VLC_API subpicture_t * filter_chain_SubFilter( filter_chain_t *, subpicture_t * );
 
 /**
- * Apply the filter chain to a mouse state.
+ * Apply the filter chain to a mouse states.
  *
  * It will be applied from the output to the input. It makes sense only
  * for a video filter chain.
@@ -409,7 +409,7 @@ VLC_API subpicture_t * filter_chain_SubFilter( filter_chain_t *, subpicture_t * 
 VLC_API int filter_chain_MouseFilter( filter_chain_t *, vlc_mouse_t *, const vlc_mouse_t * );
 
 /**
- * Inform the filter chain of mouse state.
+ * Inform the filter chain of mouse states.
  *
  * It makes sense only for a sub source chain.
  */

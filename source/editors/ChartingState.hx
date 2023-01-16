@@ -56,7 +56,7 @@ using StringTools;
 @:access(flixel.system.FlxSound._sound)
 @:access(openfl.media.Sound.__buffer)
 
-class ChartingState extends MusicBeatState
+class ChartingState extends states.MusicBeatState
 {
 	public static var noteTypeList:Array<String> = //Used for backwards compatibility with 0.1 - 0.3.2 charts, though, you should add your hardcoded custom note types here too.
 	[
@@ -98,7 +98,7 @@ class ChartingState extends MusicBeatState
 
 	var UI_box:FlxUITabMenu;
 
-	public static var goToPlayState:Bool = false;
+	public static var goTostates.PlayState:Bool = false;
 	/**
 	 * Array of notes showing when each section STARTS in STEPS
 	 * Usually rounded up??
@@ -202,8 +202,8 @@ class ChartingState extends MusicBeatState
 	public static var vortex:Bool = false;
 	override function create()
 	{
-		if (PlayState.SONG != null)
-			_song = PlayState.SONG;
+		if (states.PlayState.SONG != null)
+			_song = states.PlayState.SONG;
 		else
 		{
 			_song = {
@@ -222,7 +222,7 @@ class ChartingState extends MusicBeatState
 				validScore: false
 			};
 			addSection();
-			PlayState.SONG = _song;
+			states.PlayState.SONG = _song;
 		}
 
 		// Paths.clearMemory();
@@ -427,8 +427,8 @@ class ChartingState extends MusicBeatState
 
 		var loadAutosaveBtn:FlxButton = new FlxButton(reloadSongJson.x, reloadSongJson.y + 30, 'Load Autosave', function()
 		{
-			PlayState.SONG = Song.parseJSONshit(FlxG.save.data.autosave);
-			MusicBeatState.resetState();
+			states.PlayState.SONG = Song.parseJSONshit(FlxG.save.data.autosave);
+			states.MusicBeatState.resetState();
 		});
 
 		var loadEventJson:FlxButton = new FlxButton(loadAutosaveBtn.x, loadAutosaveBtn.y + 30, 'Load Events', function()
@@ -584,7 +584,7 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
-		var skin = PlayState.SONG.arrowSkin;
+		var skin = states.PlayState.SONG.arrowSkin;
 		if(skin == null) skin = '';
 		noteSkinInputText = new FlxUIInputText(player2DropDown.x, player2DropDown.y + 50, 150, skin, 8);
 		blockPressWhileTypingOn.push(noteSkinInputText);
@@ -1616,19 +1616,19 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.justPressed.ESCAPE)
 			{
 				autosaveSong();
-				LoadingState.loadAndSwitchState(new editors.EditorPlayState(sectionStartTime()));
+				states.LoadingState.loadAndSwitchState(new editors.Editorstates.PlayState(sectionStartTime()));
 			}
 			if (FlxG.keys.justPressed.ENTER)
 			{
 				autosaveSong();
 				// FlxG.mouse.visible = false;
-				PlayState.SONG = _song;
+				states.PlayState.SONG = _song;
 				FlxG.sound.music.stop();
 				if(vocals != null) vocals.stop();
 
 				//if(_song.stage == null) _song.stage = stageDropDown.selectedLabel;
 				StageData.loadDirectory(_song);
-				LoadingState.loadAndSwitchState(new PlayState());
+				states.LoadingState.loadAndSwitchState(new states.PlayState());
 			}
 
 			if(curSelectedNote != null && curSelectedNote[1] > -1) {
@@ -1645,7 +1645,7 @@ class ChartingState extends MusicBeatState
 
 			if (FlxG.keys.justPressed.BACKSPACE) {
 				//if(onMasterEditor) {
-					MusicBeatState.switchState(new editors.MasterEditorMenu());
+					states.MusicBeatState.switchState(new editors.MasterEditorMenu());
 					FlxG.sound.playMusic(Paths.music('title'));
 				//}
 				// FlxG.mouse.visible = false;
@@ -2867,16 +2867,16 @@ class ChartingState extends MusicBeatState
 	function loadJson(song:String):Void
 	{
 		//make it look sexier if possible
-		if (CoolUtil.difficulties[PlayState.storyDifficulty] != "Normal"){
-			if(CoolUtil.difficulties[PlayState.storyDifficulty] == null){
-				PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+		if (CoolUtil.difficulties[states.PlayState.storyDifficulty] != "Normal"){
+			if(CoolUtil.difficulties[states.PlayState.storyDifficulty] == null){
+				states.PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
 			}else{
-				PlayState.SONG = Song.loadFromJson(song.toLowerCase()+"-"+CoolUtil.difficulties[PlayState.storyDifficulty], song.toLowerCase());
+				states.PlayState.SONG = Song.loadFromJson(song.toLowerCase()+"-"+CoolUtil.difficulties[states.PlayState.storyDifficulty], song.toLowerCase());
 			}
 		}else{
-		PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+		states.PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
 		}
-		MusicBeatState.resetState();
+		states.MusicBeatState.resetState();
 	}
 
 	function autosaveSong():Void

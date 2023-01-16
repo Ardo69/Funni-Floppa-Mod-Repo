@@ -1,3 +1,4 @@
+package states.substates;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -5,7 +6,7 @@ import flixel.util.FlxColor;
 
 using StringTools;
 
-class ResetScoreSubState extends MusicBeatSubstate
+class states.substate.ResetScoreState extends states.substates.MusicBeatSubstate
 {
 	var bg:FlxSprite;
 	var alphabetArray:Array<Alphabet> = [];

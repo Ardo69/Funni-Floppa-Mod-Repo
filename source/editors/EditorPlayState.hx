@@ -22,9 +22,9 @@ import FunkinLua;
 
 using StringTools;
 
-class EditorPlayState extends MusicBeatState
+class Editorstates.PlayState extends states.MusicBeatState
 {
-	// Yes, this is mostly a copy of PlayState, it's kinda dumb to make a direct copy of it but... ehhh
+	// Yes, this is mostly a copy of states.PlayState, it's kinda dumb to make a direct copy of it but... ehhh
 	private var strumLine:FlxSprite;
 	private var comboGroup:FlxTypedGroup<FlxSprite>;
 
@@ -61,7 +61,7 @@ class EditorPlayState extends MusicBeatState
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
 
-	public static var instance:EditorPlayState;
+	public static var instance:Editorstates.PlayState;
 
 	override function create()
 	{
@@ -79,7 +79,7 @@ class EditorPlayState extends MusicBeatState
 			ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_right'))
 		];
 
-		strumLine = new FlxSprite(ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X, 50).makeGraphic(FlxG.width, 10);
+		strumLine = new FlxSprite(ClientPrefs.middleScroll ? states.PlayState.STRUM_X_MIDDLESCROLL : states.PlayState.STRUM_X, 50).makeGraphic(FlxG.width, 10);
 		if (ClientPrefs.downScroll)
 			strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
@@ -100,12 +100,12 @@ class EditorPlayState extends MusicBeatState
 			});
 		}*/
 
-		if (PlayState.SONG.needsVoices)
-			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
+		if (states.PlayState.SONG.needsVoices)
+			vocals = new FlxSound().loadEmbedded(Paths.voices(states.PlayState.SONG.song));
 		else
 			vocals = new FlxSound();
 
-		generateSong(PlayState.SONG.song);
+		generateSong(states.PlayState.SONG.song);
 		#if (LUA_ALLOWED && MODS_ALLOWED)
 		for (notetype in noteTypeMap.keys())
 		{
@@ -186,13 +186,13 @@ class EditorPlayState extends MusicBeatState
 
 	private function generateSong(dataPath:String):Void
 	{
-		FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0, false);
+		FlxG.sound.playMusic(Paths.inst(states.PlayState.SONG.song), 0, false);
 		FlxG.sound.music.pause();
 		FlxG.sound.music.onComplete = endSong;
 		vocals.pause();
 		vocals.volume = 0;
 
-		var songData = PlayState.SONG;
+		var songData = states.PlayState.SONG;
 		Conductor.changeBPM(songData.bpm);
 
 		notes = new FlxTypedGroup<Note>();
@@ -253,7 +253,7 @@ class EditorPlayState extends MusicBeatState
 
 								var sustainNote:Note = new Note(daStrumTime
 									+ (Conductor.stepCrochet * susNote)
-									+ (Conductor.stepCrochet / FlxMath.roundDecimal(PlayState.SONG.speed, 2)),
+									+ (Conductor.stepCrochet / FlxMath.roundDecimal(states.PlayState.SONG.speed, 2)),
 									daNoteData, oldNote, true);
 								sustainNote.mustPress = gottaHitNote;
 								sustainNote.noteType = swagNote.noteType;
@@ -320,7 +320,7 @@ class EditorPlayState extends MusicBeatState
 
 	private function endSong()
 	{
-		LoadingState.loadAndSwitchState(new editors.ChartingState());
+		states.LoadingState.loadAndSwitchState(new editors.ChartingState());
 	}
 
 	override function update(elapsed:Float)
@@ -329,7 +329,7 @@ class EditorPlayState extends MusicBeatState
 		{
 			FlxG.sound.music.pause();
 			vocals.pause();
-			LoadingState.loadAndSwitchState(new editors.ChartingState());
+			states.LoadingState.loadAndSwitchState(new editors.ChartingState());
 		}
 
 		if (startingSong)
@@ -346,7 +346,7 @@ class EditorPlayState extends MusicBeatState
 			Conductor.songPosition += elapsed * 1000;
 		}
 
-		var roundedSpeed:Float = FlxMath.roundDecimal(PlayState.SONG.speed, 2);
+		var roundedSpeed:Float = FlxMath.roundDecimal(states.PlayState.SONG.speed, 2);
 		if (unspawnNotes[0] != null)
 		{
 			var time:Float = 1500;
@@ -365,7 +365,7 @@ class EditorPlayState extends MusicBeatState
 
 		if (generatedMusic)
 		{
-			var fakeCrochet:Float = (60 / PlayState.SONG.bpm) * 1000;
+			var fakeCrochet:Float = (60 / states.PlayState.SONG.bpm) * 1000;
 			notes.forEachAlive(function(daNote:Note)
 			{
 				/*if (daNote.y > FlxG.height)
@@ -413,7 +413,7 @@ class EditorPlayState extends MusicBeatState
 							{
 								daNote.y += 10.5 * (fakeCrochet / 400) * 1.5 * roundedSpeed + (46 * (roundedSpeed - 1));
 								daNote.y -= 46 * (1 - (fakeCrochet / 600)) * roundedSpeed;
-								if (PlayState.isPixelStage)
+								if (states.PlayState.isPixelStage)
 								{
 									daNote.y += 8;
 								}
@@ -423,7 +423,7 @@ class EditorPlayState extends MusicBeatState
 								}
 							}
 							daNote.y += (Note.swagWidth / 2) - (60.5 * (roundedSpeed - 1));
-							daNote.y += 27.5 * ((PlayState.SONG.bpm / 100) - 1) * (roundedSpeed - 1);
+							daNote.y += 27.5 * ((states.PlayState.SONG.bpm / 100) - 1) * (roundedSpeed - 1);
 
 							if (daNote.mustPress || !daNote.ignoreNote)
 							{
@@ -461,7 +461,7 @@ class EditorPlayState extends MusicBeatState
 
 				if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 				{
-					if (PlayState.SONG.needsVoices)
+					if (states.PlayState.SONG.needsVoices)
 						vocals.volume = 1;
 
 					var time:Float = 0.15;
@@ -866,7 +866,7 @@ class EditorPlayState extends MusicBeatState
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
 
-		if (PlayState.isPixelStage)
+		if (states.PlayState.isPixelStage)
 		{
 			pixelShitPart1 = 'pixelUI/';
 			pixelShitPart2 = '-pixel';
@@ -896,7 +896,7 @@ class EditorPlayState extends MusicBeatState
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
 		comboGroup.add(rating);
 
-		if (!PlayState.isPixelStage)
+		if (!states.PlayState.isPixelStage)
 		{
 			rating.setGraphicSize(Std.int(rating.width * 0.7));
 			rating.antialiasing = ClientPrefs.globalAntialiasing;
@@ -905,8 +905,8 @@ class EditorPlayState extends MusicBeatState
 		}
 		else
 		{
-			rating.setGraphicSize(Std.int(rating.width * PlayState.daPixelZoom * 0.85));
-			comboSpr.setGraphicSize(Std.int(comboSpr.width * PlayState.daPixelZoom * 0.85));
+			rating.setGraphicSize(Std.int(rating.width * states.PlayState.daPixelZoom * 0.85));
+			comboSpr.setGraphicSize(Std.int(comboSpr.width * states.PlayState.daPixelZoom * 0.85));
 		}
 
 		comboSpr.updateHitbox();
@@ -933,14 +933,14 @@ class EditorPlayState extends MusicBeatState
 			numScore.x += ClientPrefs.comboOffset[2];
 			numScore.y -= ClientPrefs.comboOffset[3];
 
-			if (!PlayState.isPixelStage)
+			if (!states.PlayState.isPixelStage)
 			{
 				numScore.antialiasing = ClientPrefs.globalAntialiasing;
 				numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			}
 			else
 			{
-				numScore.setGraphicSize(Std.int(numScore.width * PlayState.daPixelZoom));
+				numScore.setGraphicSize(Std.int(numScore.width * states.PlayState.daPixelZoom));
 			}
 			numScore.updateHitbox();
 
@@ -997,7 +997,7 @@ class EditorPlayState extends MusicBeatState
 			if (player < 1 && ClientPrefs.middleScroll)
 				targetAlpha = 0.35;
 
-			var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X, strumLine.y, i, player);
+			var babyArrow:StrumNote = new StrumNote(ClientPrefs.middleScroll ? states.PlayState.STRUM_X_MIDDLESCROLL : states.PlayState.STRUM_X, strumLine.y, i, player);
 			babyArrow.alpha = targetAlpha;
 
 			if (player == 1)

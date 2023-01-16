@@ -1,4 +1,4 @@
-package;
+package states;
 
 import Conductor.BPMChangeEvent;
 import flixel.FlxG;
@@ -91,7 +91,7 @@ class MusicBeatState extends FlxUIState
 	public static function switchState(nextState:FlxState) {
 		// Custom made Trans in
 		var curState:Dynamic = FlxG.state;
-		var leState:MusicBeatState = curState;
+		var leState:states.MusicBeatState = curState;
 		if(!FlxTransitionableState.skipNextTransIn) {
 			leState.openSubState(new CustomFadeTransition(0.6, false));
 			if(nextState == FlxG.state) {
@@ -112,12 +112,12 @@ class MusicBeatState extends FlxUIState
 	}
 
 	public static function resetState() {
-		MusicBeatState.switchState(FlxG.state);
+		states.MusicBeatState.switchState(FlxG.state);
 	}
 
-	public static function getState():MusicBeatState {
+	public static function getState():states.MusicBeatState {
 		var curState:Dynamic = FlxG.state;
-		var leState:MusicBeatState = curState;
+		var leState:states.MusicBeatState = curState;
 		return leState;
 	}
 

@@ -66,12 +66,12 @@ class EditorLua {
 		set('inChartEditor', true);
 
 		set('curBpm', Conductor.bpm);
-		set('bpm', PlayState.SONG.bpm);
-		set('scrollSpeed', PlayState.SONG.speed);
+		set('bpm', states.PlayState.SONG.bpm);
+		set('scrollSpeed', states.PlayState.SONG.speed);
 		set('crochet', Conductor.crochet);
 		set('stepCrochet', Conductor.stepCrochet);
 		set('songLength', FlxG.sound.music.length);
-		set('songName', PlayState.SONG.song);
+		set('songName', states.PlayState.SONG.song);
 
 		set('screenWidth', FlxG.width);
 		set('screenHeight', FlxG.height);
@@ -90,33 +90,33 @@ class EditorLua {
 		Lua_helper.add_callback(lua, "getProperty", function(variable:String) {
 			var killMe:Array<String> = variable.split('.');
 			if(killMe.length > 1) {
-				var coverMeInPiss:Dynamic = Reflect.getProperty(EditorPlayState.instance, killMe[0]);
+				var coverMeInPiss:Dynamic = Reflect.getProperty(Editorstates.PlayState.instance, killMe[0]);
 
 				for (i in 1...killMe.length-1) {
 					coverMeInPiss = Reflect.getProperty(coverMeInPiss, killMe[i]);
 				}
 				return Reflect.getProperty(coverMeInPiss, killMe[killMe.length-1]);
 			}
-			return Reflect.getProperty(EditorPlayState.instance, variable);
+			return Reflect.getProperty(Editorstates.PlayState.instance, variable);
 		});
 		Lua_helper.add_callback(lua, "setProperty", function(variable:String, value:Dynamic) {
 			var killMe:Array<String> = variable.split('.');
 			if(killMe.length > 1) {
-				var coverMeInPiss:Dynamic = Reflect.getProperty(EditorPlayState.instance, killMe[0]);
+				var coverMeInPiss:Dynamic = Reflect.getProperty(Editorstates.PlayState.instance, killMe[0]);
 
 				for (i in 1...killMe.length-1) {
 					coverMeInPiss = Reflect.getProperty(coverMeInPiss, killMe[i]);
 				}
 				return Reflect.setProperty(coverMeInPiss, killMe[killMe.length-1], value);
 			}
-			return Reflect.setProperty(EditorPlayState.instance, variable, value);
+			return Reflect.setProperty(Editorstates.PlayState.instance, variable, value);
 		});
 		Lua_helper.add_callback(lua, "getPropertyFromGroup", function(obj:String, index:Int, variable:Dynamic) {
-			if(Std.isOfType(Reflect.getProperty(EditorPlayState.instance, obj), FlxTypedGroup)) {
-				return Reflect.getProperty(Reflect.getProperty(EditorPlayState.instance, obj).members[index], variable);
+			if(Std.isOfType(Reflect.getProperty(Editorstates.PlayState.instance, obj), FlxTypedGroup)) {
+				return Reflect.getProperty(Reflect.getProperty(Editorstates.PlayState.instance, obj).members[index], variable);
 			}
 
-			var leArray:Dynamic = Reflect.getProperty(EditorPlayState.instance, obj)[index];
+			var leArray:Dynamic = Reflect.getProperty(Editorstates.PlayState.instance, obj)[index];
 			if(leArray != null) {
 				if(Type.typeof(variable) == ValueType.TInt) {
 					return leArray[variable];
@@ -126,11 +126,11 @@ class EditorLua {
 			return null;
 		});
 		Lua_helper.add_callback(lua, "setPropertyFromGroup", function(obj:String, index:Int, variable:Dynamic, value:Dynamic) {
-			if(Std.isOfType(Reflect.getProperty(EditorPlayState.instance, obj), FlxTypedGroup)) {
-				return Reflect.setProperty(Reflect.getProperty(EditorPlayState.instance, obj).members[index], variable, value);
+			if(Std.isOfType(Reflect.getProperty(Editorstates.PlayState.instance, obj), FlxTypedGroup)) {
+				return Reflect.setProperty(Reflect.getProperty(Editorstates.PlayState.instance, obj).members[index], variable, value);
 			}
 
-			var leArray:Dynamic = Reflect.getProperty(EditorPlayState.instance, obj)[index];
+			var leArray:Dynamic = Reflect.getProperty(Editorstates.PlayState.instance, obj)[index];
 			if(leArray != null) {
 				if(Type.typeof(variable) == ValueType.TInt) {
 					return leArray[variable] = value;
@@ -139,16 +139,16 @@ class EditorLua {
 			}
 		});
 		Lua_helper.add_callback(lua, "removeFromGroup", function(obj:String, index:Int, dontDestroy:Bool = false) {
-			if(Std.isOfType(Reflect.getProperty(EditorPlayState.instance, obj), FlxTypedGroup)) {
-				var sex = Reflect.getProperty(EditorPlayState.instance, obj).members[index];
+			if(Std.isOfType(Reflect.getProperty(Editorstates.PlayState.instance, obj), FlxTypedGroup)) {
+				var sex = Reflect.getProperty(Editorstates.PlayState.instance, obj).members[index];
 				if(!dontDestroy)
 					sex.kill();
-				Reflect.getProperty(EditorPlayState.instance, obj).remove(sex, true);
+				Reflect.getProperty(Editorstates.PlayState.instance, obj).remove(sex, true);
 				if(!dontDestroy)
 					sex.destroy();
 				return;
 			}
-			Reflect.getProperty(EditorPlayState.instance, obj).remove(Reflect.getProperty(EditorPlayState.instance, obj)[index]);
+			Reflect.getProperty(Editorstates.PlayState.instance, obj).remove(Reflect.getProperty(Editorstates.PlayState.instance, obj)[index]);
 		});
 
 		Lua_helper.add_callback(lua, "getColorFromHex", function(color:String) {
@@ -157,7 +157,7 @@ class EditorLua {
 		});
 
 		Lua_helper.add_callback(lua, "setGraphicSize", function(obj:String, x:Int, y:Int = 0) {
-			var poop:FlxSprite = Reflect.getProperty(EditorPlayState.instance, obj);
+			var poop:FlxSprite = Reflect.getProperty(Editorstates.PlayState.instance, obj);
 			if(poop != null) {
 				poop.setGraphicSize(x, y);
 				poop.updateHitbox();
@@ -165,7 +165,7 @@ class EditorLua {
 			}
 		});
 		Lua_helper.add_callback(lua, "scaleObject", function(obj:String, x:Float, y:Float) {
-			var poop:FlxSprite = Reflect.getProperty(EditorPlayState.instance, obj);
+			var poop:FlxSprite = Reflect.getProperty(Editorstates.PlayState.instance, obj);
 			if(poop != null) {
 				poop.scale.set(x, y);
 				poop.updateHitbox();
@@ -173,7 +173,7 @@ class EditorLua {
 			}
 		});
 		Lua_helper.add_callback(lua, "updateHitbox", function(obj:String) {
-			var poop:FlxSprite = Reflect.getProperty(EditorPlayState.instance, obj);
+			var poop:FlxSprite = Reflect.getProperty(Editorstates.PlayState.instance, obj);
 			if(poop != null) {
 				poop.updateHitbox();
 				return;

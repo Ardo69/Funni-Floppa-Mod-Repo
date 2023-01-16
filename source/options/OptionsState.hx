@@ -27,7 +27,7 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 using StringTools;
 
-class OptionsState extends MusicBeatState
+class OptionsState extends states.MusicBeatState
 {
 	var options:Array<String> = [
 		'Note Colors',
@@ -57,7 +57,7 @@ class OptionsState extends MusicBeatState
 			case 'Gameplay':
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+				states.LoadingState.loadAndSwitchState(new options.NoteOffsetState());
 		}
 	}
 
@@ -159,7 +159,7 @@ class OptionsState extends MusicBeatState
 		if (controls.BACK)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			states.MusicBeatState.switchState(new states.MainMenuState());
 		}
 
 		if (controls.ACCEPT)

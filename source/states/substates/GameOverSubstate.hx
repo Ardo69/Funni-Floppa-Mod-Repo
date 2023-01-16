@@ -1,4 +1,4 @@
-package;
+package states.substates;
 
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -10,7 +10,7 @@ import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 
-class GameOverSubstate extends MusicBeatSubstate
+class GameOverSubstate extends states.substates.MusicBeatSubstate
 {
 	public var boyfriend:Boyfriend;
 	var camFollow:FlxPoint;
@@ -25,7 +25,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	public static var loopSoundName:String = 'gameOver';
 	public static var endSoundName:String = 'gameOverEnd';
 
-	public static var instance:GameOverSubstate;
+	public static var instance:states.substates.GameOverSubstate;
 
 	public static function resetVariables() {
 		characterName = 'bf-dead';
@@ -37,7 +37,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	override function create()
 	{
 		instance = this;
-		PlayState.instance.callOnLuas('onGameOverStart', []);
+		states.PlayState.instance.callOnLuas('onGameOverStart', []);
 
 		super.create();
 	}
@@ -46,7 +46,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super();
 
-		PlayState.instance.setOnLuas('inGameOver', true);
+		states.PlayState.instance.setOnLuas('inGameOver', true);
 
 		Conductor.songPosition = 0;
 
@@ -76,7 +76,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-		PlayState.instance.callOnLuas('onUpdate', [elapsed]);
+		states.PlayState.instance.callOnLuas('onUpdate', [elapsed]);
 		if(updateCamera) {
 			var lerpVal:Float = CoolUtil.boundTo(elapsed * 0.6, 0, 1);
 			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
@@ -90,16 +90,16 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			FlxG.sound.music.stop();
-			PlayState.deathCounter = 0;
-			PlayState.seenCutscene = false;
+			states.PlayState.deathCounter = 0;
+			states.PlayState.seenCutscene = false;
 
-			if (PlayState.isStoryMode)
-				MusicBeatState.switchState(new StoryMenuState());
+			if (states.PlayState.isStoryMode)
+				states.MusicBeatState.switchState(new states.MainMenuState());
 			else
-				MusicBeatState.switchState(new FreeplayState());
+				states.MusicBeatState.switchState(new states.Freestates.PlayState());
 
 			FlxG.sound.playMusic(Paths.music('title'));
-			PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
+			states.PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
 		}
 
 		if (boyfriend.animation.curAnim.name == 'firstDeath')
@@ -113,7 +113,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 			if (boyfriend.animation.curAnim.finished && !playingDeathSound)
 			{
-				if (PlayState.SONG.stage == 'tank')
+				if (states.PlayState.SONG.stage == 'tank')
 				{
 					playingDeathSound = true;
 					coolStartDeath(0.2);
@@ -140,7 +140,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			Conductor.songPosition = FlxG.sound.music.time;
 		}
-		PlayState.instance.callOnLuas('onUpdatePost', [elapsed]);
+		states.PlayState.instance.callOnLuas('onUpdatePost', [elapsed]);
 	}
 
 	override function beatHit()
@@ -169,10 +169,10 @@ class GameOverSubstate extends MusicBeatSubstate
 			{
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
 				{
-					MusicBeatState.resetState();
+					states.MusicBeatState.resetState();
 				});
 			});
-			PlayState.instance.callOnLuas('onGameOverConfirm', [true]);
+			states.PlayState.instance.callOnLuas('onGameOverConfirm', [true]);
 		}
 	}
 }

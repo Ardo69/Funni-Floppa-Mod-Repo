@@ -34,7 +34,7 @@ class Conductor
 
 	public static function judgeNote(note:Note, diff:Float=0):Rating // die
 	{
-		var data:Array<Rating> = PlayState.instance.ratingsData; //shortening cuz fuck u
+		var data:Array<Rating> = states.PlayState.instance.ratingsData; //shortening cuz fuck u
 		for(i in 0...data.length-1) //skips last window (Shit)
 		{
 			if (diff <= data[i].hitWindow)
@@ -105,6 +105,6 @@ class Rating
 
 	public function increase(blah:Int = 1)
 	{
-		Reflect.setField(PlayState.instance, counter, Reflect.field(PlayState.instance, counter) + blah);
+		Reflect.setField(states.PlayState.instance, counter, Reflect.field(states.PlayState.instance, counter) + blah);
 	}
 }
