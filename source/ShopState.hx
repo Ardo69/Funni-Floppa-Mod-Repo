@@ -36,7 +36,6 @@ class ShopState extends MusicBeatState
 
 		back = new FlxSprite();
 		back.loadGraphic(Paths.image("shopBackground"));
-		back.scale.set(0.7, 0.7);
 		back.updateHitbox();
 		back.antialiasing = ClientPrefs.globalAntialiasing;
 		add(back);
