@@ -81,6 +81,8 @@ class ShopState extends MusicBeatState
 		} else if (controls.NOTE_DOWN_P && limit != 0) {
 			hand.y += 50;
 			limit--;
+		} else if (FlxG.keys.justPressed.SEVEN) {
+			FlxG.switchState(new PolishCow());
 		}
 		#end
 
