@@ -1,5 +1,6 @@
 package;
 
+import haxe.Exception;
 import flixel.addons.display.FlxBackdrop;
 import sys.io.File;
 import flixel.system.FlxAssets.FlxShader;
@@ -1520,6 +1521,14 @@ class PlayState extends MusicBeatState
 				shaderMap.get("gameVCR").setFloat('glitchModifier', 1.5);
 				shaderMap.get("gameAbberation").setFloat("offset", 0.005);
 				FlxG.game.setFilters([new ShaderFilter(shaderMap.get("gameVCR"))]);
+			case 'missing':
+				initLuaShader("bloom");
+				shaderMap.set("gameBloom", createRuntimeShader("bloom"));
+				shaderMap.get("gameBloom").setFloat('blurSizeX', 1/1024);
+				shaderMap.get("gameBloom").setFloat('blurSizeY', 1/512);
+				shaderMap.get("gameBloom").setFloat('intensity', 0.5);
+				FlxG.game.setFilters([new ShaderFilter(shaderMap.get("gameBloom"))]);
+
 		}
 	}
 
