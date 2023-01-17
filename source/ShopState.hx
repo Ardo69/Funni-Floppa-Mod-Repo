@@ -23,6 +23,7 @@ class ShopState extends MusicBeatState
 	//public var bigBalls:FlxText;
 	var hand:FlxSprite;
 	var back:FlxSprite;
+	var limit:Int = 0;
 
 	override public function create(){
 		FlxG.sound.playMusic(Paths.music('shop'), 0); // bwomp
@@ -46,7 +47,6 @@ class ShopState extends MusicBeatState
 		hand.antialiasing = ClientPrefs.globalAntialiasing;
 		hand.animation.addByPrefix('pointOut', 'hand instance', 24, true);
 		hand.animation.play('pointOut');
-		hand.screenCenter();
 		hand.updateHitbox();
 		hand.scale.set(0.5, 0.5);
 		add(hand);
@@ -70,12 +70,14 @@ class ShopState extends MusicBeatState
 		}*/
 
 		#if SHOP_ENABLED
-		if (controls.NOTE_UP_P) {
-			hand.y -= 50;
-		}
-		else if (controls.NOTE_DOWN_P) {
-			hand.y += 50;
-		}
+		//jason the art kid wrote this code (this also required a lot of shit, so fuck)
+		if (limit < 5 || limit > 0) {
+
+			if (controls.NOTE_UP_P) {
+				hand.y -= 50;
+				limit++;
+			}
+		} 
 		#end
 
 		super.update(elapsed);

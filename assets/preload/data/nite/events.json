@@ -1,6 +1,6 @@
 {
 	"song": {
-		"speed": 2.7,
+		"speed": 2,
 		"stage": "house",
 		"player1": "reanimatedbf",
 		"player2": "flipflop",
@@ -21,7 +21,7 @@
 		"validScore": false,
 		"gfVersion": "gf",
 		"bpm": 160,
-		"arrowSkin": null,
+		"arrowSkin": "",
 		"needsVoices": true,
 		"song": "Nite"
 	}
