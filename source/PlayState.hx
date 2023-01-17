@@ -2118,7 +2118,7 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.text = 'Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Combo: ' + combo + ' // Accuracy: ' + ratingName;
 		if (ratingName != '?')
-			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
+			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)';
 
 		if (moneyTxt != null)
 			moneyTxt.text = money + "$";
@@ -2130,12 +2130,12 @@ class PlayState extends MusicBeatState
 			case 'unknown-crapping' | 'monochrome':
 				scoreTxt.text = 'Combo Breaks: ' + songMisses + ' // Accuracy: ' + ratingName;
 				if (ratingName != '?')
-					scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
+					scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)';
 			
 			case 'missing':
 				scoreTxt.text = 'Score: ' + songScore;
 				if (ratingName != '?')
-					scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
+					scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)';
         }
 
 		if (botplayTxt.visible)
@@ -4145,7 +4145,6 @@ class PlayState extends MusicBeatState
 
 	public var ratingName:String = '?';
 	public var ratingPercent:Float;
-	public var ratingFC:String;
 
 	public function RecalculateRating()
 	{
@@ -4181,22 +4180,8 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
-
-			// Rating FC
-			ratingFC = "";
-			if (sicks > 0)
-				ratingFC = "";
-			if (goods > 0)
-				ratingFC = "";
-			if (bads > 0 || shits > 0)
-				ratingFC = "";
-			if (songMisses > 0 && songMisses < 10)
-				ratingFC = "";
-			else if (songMisses >= 10)
-				ratingFC = "";
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
-		setOnLuas('ratingFC', ratingFC);
 	}
 }
