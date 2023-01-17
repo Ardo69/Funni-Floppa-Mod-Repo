@@ -41,12 +41,13 @@ class ShopState extends MusicBeatState
 		back.antialiasing = ClientPrefs.globalAntialiasing;
 		add(back);
 
-		hand = new FlxSprite(-150, 0);
+		hand = new FlxSprite(0, 0);
 		hand.frames = Paths.getSparrowAtlas('hand');
 
 		hand.antialiasing = ClientPrefs.globalAntialiasing;
 		hand.animation.addByPrefix('pointOut', 'hand instance', 24, true);
 		hand.animation.play('pointOut');
+		hand.screenCenter(Y);
 		hand.updateHitbox();
 		hand.scale.set(0.5, 0.5);
 		add(hand);
@@ -54,30 +55,33 @@ class ShopState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		// raf or plank don't delete this pls
-
 		Conductor.songPosition = FlxG.sound.music.time;
 
 		if (controls.ACCEPT){
 			FlxG.switchState(new FreeplayState());
 		}
 
-		/*if (controls.NOTE_LEFT_P) {
-		    hand.x -= 50;
-		}
-		else if(controls.NOTE_RIGHT_P) {
-			hand.x += 50;
-		}*/
-
 		#if SHOP_ENABLED
 		//jason the art kid wrote this code (this also required a lot of shit, so fuck)
-		if (limit < 5 || limit > 0) {
+
+		/*if (limit != 5 || limit != 0) {
 
 			if (controls.NOTE_UP_P) {
 				hand.y -= 50;
 				limit++;
 			}
-		} 
+			else if (controls.NOTE_DOWN_P){
+				hand.y += 50;
+				limit--;
+			}
+		} */
+		if (controls.NOTE_UP_P && limit != 4) {
+			hand.y -= 50;
+			limit++;
+		} else if (controls.NOTE_DOWN_P && limit != 0) {
+			hand.y += 50;
+			limit--;
+		}
 		#end
 
 		super.update(elapsed);

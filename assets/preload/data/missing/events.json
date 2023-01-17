@@ -1,0 +1,28 @@
+{
+	"song": {
+		"speed": 3.1,
+		"stage": "missing",
+		"player1": "bf-peink",
+		"player2": "cow",
+		"events": [
+			[
+				193600,
+				[
+					[
+						"Cow Passed",
+						"",
+						""
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "none",
+		"bpm": 150,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "Missing"
+	}
+}

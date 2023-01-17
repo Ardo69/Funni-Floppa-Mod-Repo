@@ -81,16 +81,16 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['', 0.2], // From 0% to 19%
-		['', 0.4], // From 20% to 39%
-		['', 0.5], // From 40% to 49%
-		['', 0.6], // From 50% to 59%
-		['', 0.69], // From 60% to 68%
+		['F', 0.2], // From 0% to 19%
+		['E', 0.4], // From 20% to 39%
+		['D', 0.5], // From 40% to 49%
+		['C', 0.6], // From 50% to 59%
+		['B', 0.69], // From 60% to 68%
 		['FUCK YOU', 0.7], // 69%
-		['', 0.8], // From 70% to 79%
-		['', 0.9], // From 80% to 89%
-		['', 1], // From 90% to 99%
-		['', 1] // The value on this one isn't used actually, since Perfect is always "1"
+		['A', 0.8], // From 70% to 79%
+		['A+', 0.9], // From 80% to 89%
+		['S', 1], // From 90% to 99%
+		['S+', 1] // The value on this one isn't used actually, since Perfect is always "1"
 	];
 
 	public static var HungerSongs:Array<String> = ["floppin", "flop-dont-stop", "nite"];
@@ -823,19 +823,23 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		reloadHealthBarColors();
 
-		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat(getFont(false), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,
-			FlxColor.BLACK);
-		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
-		add(scoreTxt);
+		switch (SONG.song.toLowerCase())
+		{
+		default:
+			scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
+		    scoreTxt.setFormat(getFont(false), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		    scoreTxt.scrollFactor.set();
+		    scoreTxt.borderSize = 1.25;
+		    add(scoreTxt);
+		}
 
 		songTxt = new FlxText(12, FlxG.height - 24, 0, "", 8);
 		songTxt.setFormat(getFont(false), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songTxt.scrollFactor.set();
 		songTxt.borderSize = 1;
 		add(songTxt);
-		songTxt.text = curSong + " (" + storyDifficultyText + ") " + "| Floppa Engine " + MainMenuState.modVersion;
+
+		songTxt.text = curSong + " (" + storyDifficultyText + ") " + "| Floppa Engine: " + MainMenuState.modVersion;
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "MINOR SKILL ISSUE", 32);
 		botplayTxt.setFormat(getFont(true), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -854,7 +858,7 @@ class PlayState extends MusicBeatState
 		judgementCounter.borderQuality = 2;
 		judgementCounter.scrollFactor.set();
 		judgementCounter.screenCenter(Y);
-		judgementCounter.text = "Sick!'s:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses;
+		judgementCounter.text = "Sicks:" + sicks + "\nGoods:" + goods + "\nBads: " + bads + "\nShits: " + shits + "\nMisses: " + songMisses;
 		add(judgementCounter);
 
 		judgementCounter.cameras = [camHUD]; // Judgement Counter
@@ -2127,7 +2131,12 @@ class PlayState extends MusicBeatState
 				scoreTxt.text = 'Combo Breaks: ' + songMisses + ' // Accuracy: ' + ratingName;
 				if (ratingName != '?')
 					scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
-		}
+			
+			case 'missing':
+				scoreTxt.text = 'Score: ' + songScore;
+				if (ratingName != '?')
+					scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
+        }
 
 		if (botplayTxt.visible)
 		{
@@ -2764,6 +2773,9 @@ class PlayState extends MusicBeatState
 			case 'Crash Event':
 				System.exit(0);
 
+			case 'Cow Passed':
+				FlxG.save.data.cowpassed = true;
+			
 			case 'Change Character':
 				var charType:Int = 0;
 				switch (value1)
@@ -4173,15 +4185,15 @@ class PlayState extends MusicBeatState
 			// Rating FC
 			ratingFC = "";
 			if (sicks > 0)
-				ratingFC = "MFC";
+				ratingFC = "";
 			if (goods > 0)
-				ratingFC = "GFC";
+				ratingFC = "";
 			if (bads > 0 || shits > 0)
-				ratingFC = "FC";
+				ratingFC = "";
 			if (songMisses > 0 && songMisses < 10)
-				ratingFC = "SDCB";
+				ratingFC = "";
 			else if (songMisses >= 10)
-				ratingFC = "Clear";
+				ratingFC = "";
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
