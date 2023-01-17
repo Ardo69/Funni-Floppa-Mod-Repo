@@ -21,48 +21,16 @@ class PolishCow extends MusicBeatState
         texty.screenCenter(Y);
         add(texty);
 
-        polishCowy.kill();
-
         polishCow = new FlxSprite(0, 100);
         polishCow.loadGraphic(Paths.image("polish1"));
+        polishCow.scale.set(1.2, 1.2);
         polishCow.updateHitbox();
         polishCow.antialiasing = ClientPrefs.globalAntialiasing;
         add(polishCow);
-
-        new FlxTimer().start(1, cowy);
     }
-
-    public function cowy(bruh:FlxTimer = null) {
-        polishCow.kill();
-
-        polishCowy = new FlxSprite(0, 100);
-        polishCowy.loadGraphic(Paths.image("polish2"));
-        polishCowy.updateHitbox();
-        polishCowy.antialiasing = ClientPrefs.globalAntialiasing;
-        add(polishCow);
-
-        new FlxTimer().start(1, cowyy);
-    }
-    public function cowyy(bruh:FlxTimer = null) {
-
-        polishCowy.kill();
-
-        polishCow = new FlxSprite(0, 100);
-        polishCow.loadGraphic(Paths.image("polish1"));
-        polishCow.updateHitbox();
-        polishCow.antialiasing = ClientPrefs.globalAntialiasing;
-        add(polishCow);
-
-        new FlxTimer().start(1, cowy);
-    }
-
-    override function update(elapsed:Float)
-        {
-            if (controls.BACK) {
-                FlxG.switchState(new MainMenuState());
-            }
-
-            Conductor.songPosition = FlxG.sound.music.time;
-            super.update(elapsed);
+    override function update(elapsed:Float) {
+        if (FlxG.keys.justPressed.SEVEN) {
+			FlxG.switchState(new MainMenuState());
         }
+    }
 }
