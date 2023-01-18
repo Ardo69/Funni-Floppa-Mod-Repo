@@ -58,6 +58,7 @@
 	<define name="SHOP_ENABLED" if="cpp || hl || debug"/>
 	<assets path="assets/preload" rename="assets" />
 
+	<assets path="assets/preload/data/missing" embed="true" />	
 	<assets path="art/missingTexture.png" embed="true" />
 	<assets path="embeddedAssets" embed="true" />
 

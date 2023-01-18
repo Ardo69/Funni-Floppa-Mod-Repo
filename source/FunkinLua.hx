@@ -1527,7 +1527,6 @@ class FunkinLua {
 			var cam:FlxCamera = cameraFromString(camera);
 			return FlxG.mouse.getScreenPosition(cam).y;
 		});
-		
 		Lua_helper.add_callback(lua, "getMyBalls", function() {
 			return 2;
 		});
