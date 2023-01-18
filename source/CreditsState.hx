@@ -83,7 +83,8 @@ class CreditsState extends MusicBeatState
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			["Raise A Funky Floppa Team"],
 			['ardo',    'ardo',     "The owner, coder and side artist.",     'https://www.youtube.com/channel/UCQgUiJpyjkqWmk8KtZ4nvHw',  'FF0000'],
-			['plank',   'plank',    "The co-owner, the coder, musician and the artist.",   'https://www.youtube.com/channel/UCl2WddlfDqo2vH-Pf78SnhQ',     '644917']
+			['plank',   'plank',    "The co-owner, the coder, musician and the artist.",   'https://www.youtube.com/channel/UCl2WddlfDqo2vH-Pf78SnhQ',     '644917'],
+			['raf',        'raf',        "Helped us code some stuff and remade the hunger mechanic.", 'https://www.youtube.com/channel/UCmXh1HTaH_KRwisl0892KLA',    'FF0000']
 		];
 		
 		for(i in pisspoop){

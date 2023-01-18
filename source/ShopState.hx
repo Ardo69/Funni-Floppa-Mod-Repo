@@ -41,7 +41,7 @@ class ShopState extends MusicBeatState
 		back.antialiasing = ClientPrefs.globalAntialiasing;
 		add(back);
 
-		hand = new FlxSprite(0, 0);
+		hand = new FlxSprite(0, 50);
 		hand.frames = Paths.getSparrowAtlas('hand');
 
 		hand.antialiasing = ClientPrefs.globalAntialiasing;
