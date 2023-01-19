@@ -318,10 +318,6 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		/*if (FlxG.save.data.cowSong = false) {
-			PlayState.instance.cpuControlled = false;
-			PlayState.instance.botplayTxt.visible = false;
-		}*/
 		Paths.clearStoredMemory();
 
 		// for lua

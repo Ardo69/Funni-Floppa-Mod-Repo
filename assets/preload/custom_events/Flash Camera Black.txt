@@ -1,0 +1,3 @@
+Flashes camera with black
+
+Value 1: speed

@@ -75,10 +75,10 @@ class ShopState extends MusicBeatState
 				limit--;
 			}
 		} */
-		if (controls.NOTE_UP_P && limit != 4) {
+		if (controls.NOTE_UP_P && limit != 3) {
 			hand.y -= 50;
 			limit++;
-		} else if (controls.NOTE_DOWN_P && limit != 0) {
+		} else if (controls.NOTE_DOWN_P && limit != -3) {
 			hand.y += 50;
 			limit--;
 		} else if (FlxG.keys.justPressed.SEVEN) {
