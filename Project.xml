@@ -35,6 +35,8 @@
 
 	<classpath name="source" />
 
+	<define name="CHECK_FOR_UPDATES" if="desktop officialBuild" />
+	
 	<define name="LUA_ALLOWED" if="cpp" />
 	<define name="VIDEOS_ALLOWED" if="cpp || web" unless="32bits || hl" />
 	<define name="PSYCH_WATERMARKS" />
