@@ -1,3 +1,0 @@
-Value 1: Cam zoom
-
-Value 2: If blank will zoom smoothly, if not fuck you.
