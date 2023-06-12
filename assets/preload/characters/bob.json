@@ -8,71 +8,71 @@
 			],
 			"anim": "idle",
 			"fps": 24,
-			"name": "bob_idle",
+			"name": "idle",
 			"indices": []
 		},
 		{
 			"loop": false,
 			"offsets": [
-				85,
-				50
+				77,
+				54
 			],
 			"anim": "singDOWN",
 			"fps": 24,
-			"name": "bob_DOWN",
+			"name": "down",
 			"indices": []
 		},
 		{
 			"loop": false,
 			"offsets": [
 				80,
-				61
+				158
 			],
 			"anim": "singUP",
 			"fps": 24,
-			"name": "bob_UP",
+			"name": "up",
 			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
-				81,
+				204,
 				49
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "singLEFT",
-			"loop": false,
-			"name": "bob_RIGHT"
+			"fps": 24,
+			"name": "left",
+			"indices": []
 		},
 		{
-			"offsets": [
-				73,
-				49
-			],
-			"indices": [],
-			"fps": 24,
-			"anim": "singRIGHT",
 			"loop": false,
-			"name": "bob_LEFT"
+			"offsets": [
+				76,
+				47
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "right",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/ardo",
+	"image": "characters/funny-sprite",
 	"position": [
 		0,
 		240
 	],
-	"healthicon": "ardo",
-	"flip_x": true,
+	"healthicon": "failure",
+	"flip_x": false,
 	"healthbar_colors": [
 		255,
 		255,
 		255
 	],
 	"camera_position": [
-		-300,
-		-80
+		-110,
+		-50
 	],
 	"sing_duration": 4,
-	"scale": 1
+	"scale": 1.3
 }

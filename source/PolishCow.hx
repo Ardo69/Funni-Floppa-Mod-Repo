@@ -15,7 +15,7 @@ class PolishCow extends MusicBeatState
 
     override function create() {
 
-        FlxG.sound.playMusic(Paths.music('polishcow'), 0.65); // bwomp
+        FlxG.sound.playMusic(Paths.music('polishcow'), 0.65);
 
         texty = new FlxText(0, 0, FlxG.width, "Bruh Moment", 69, true);
         texty.screenCenter(Y);
